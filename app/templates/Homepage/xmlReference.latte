@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
-        <title>Condroid - prohlížejte program na Androidu</title>
-
-        <link rel="stylesheet" media="screen,projection,tv" href="css/style.css" type="text/css" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript">
+{block js}
+<script type="text/javascript">
         
-          $(window).scroll(function() { 
-            if($(window).scrollTop() > 135) $('.sidebar').css({'position' : 'fixed', 'margin-top' : '250px'}); else $('.sidebar').css({'position' : 'relative', 'margin-top' : '120px'});
+          $(window).load(function() { 
+             $('.sidebar').css({'position' : 'fixed', 'margin-top' : '120px'});
           });                                       
           
         </script>
@@ -22,31 +11,9 @@
       	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script>
       	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css"/>
       	<script type="text/javascript">SyntaxHighlighter.all();</script>
-
-
-    </head>
-
-    <body id="top">
-    
-        <div class="header">
-          <div class="header-content">
-            <a id="logo" href="./" title="Na úvod"></a>
-                
-            <div class="menu">
-                <a href="#top">Úvod</a> &middot;
-
-                <a href="#download" rel="download">Stažení</a> &middot;
-
-                <a href="#faq" rel="faq">FAQ</a> &middot;
-
-                <a href="xml-reference.html" class="active">Přidat akci</a>
-          </div>
-        </div>
-                
-        </div>
-    
-        <div class="page">
-            <div class="content">
+        {/block}
+{block content}
+<div class="content">
             
 <div class="c-box" id="add">
               <h2>Jak dostat svou akci do Condroidu?</h2>
@@ -174,24 +141,3 @@
             
             
             </div>
-          
-            
-            <div class="sidebar top-margin">
-                
-                <div class="box donate">
-                    <p class="first">Líbí se vám aplikace?</p>
-                    <p>Přispějte na vývoj</p>
-                    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="donate" />
-                </div>
-                <div class="box donate">
-                    <p class="first">Kontakt</p>
-                    <p><small>Své nápady, náměty a hlášení chyb můžete posílat na e-mail</small><br /><a href="mailto:quinix@quinix.cz">quinix@quinix.cz</a></p>
-                </div>
-
-
-            </div>
-
-
-        </div>
-    </body>
-</html>

@@ -9,9 +9,12 @@
 class HomepagePresenter extends BasePresenter
 {
 
-	public function renderDefault()
-	{
-		$this->template->anyVariable = 'any value';
-	}
+	public function createComponentTwitter($name) {
+            $c = new \Smasty\Components\Twitter\Control(array(
+                'screenName' => 'Condroid_CZ',
+                'tweetCount' => 3,
+            ));
+            return $c;
+        }
 
 }
