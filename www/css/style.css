@@ -1,0 +1,298 @@
+/* 
+  Document: style.css
+  Created on: 2.6.2011, 21:58:04
+  Author: Honza
+  Description: Purpose of the stylesheet follows.
+*/
+
+/*    
+  todo customize this sample style   syntax recommendation http://www.w3.org/tr/rec-css2
+*/
+
+@media screen {
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Open Sans'), local('OpenSans'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+}
+}
+body {
+	font: 16px/1.5 Arial, sans-serif;
+	color: #222;
+	background: #f2f2f2;
+	margin: 0;
+}
+a img {
+	border: none;
+}
+.page {
+	margin: 0 auto;
+	width: 920px;
+	overflow: hidden;
+}
+.header {
+	width: 100%;
+	height: 73px;
+	overflow: hidden;
+	margin: 0 auto;
+	padding-top: 20px;
+	position: fixed;
+	background: #eee url('../img/line.gif') 50% 44px no-repeat fixed;
+	z-index: 100;
+}
+.header-content {
+	width: 920px;
+	margin: 0 auto;
+}
+#logo {
+	width: 360px;
+	height: 53px;
+	float: left;
+	background: url('../img/logo.png');
+	margin-bottom: 30px;
+}
+#logo:hover {
+	background-position: 0 -53px;
+}
+.menu {
+	float: right;
+	font: 1.5em/1.5 'Open Sans', Arial, sans-serif;
+	padding-top: 8px;
+}
+.menu a {
+	color: #222;
+	text-decoration: none;
+	padding: 0 8px;
+}
+.menu a:hover, .menu a.active, a, .blue {
+	color: #2276bb;
+}
+a:hover {
+	text-decoration: none;
+}
+.content {
+	float: right;
+	width: 600px;
+	margin: 95px 50px 0 0;
+}
+.c-box {
+	overflow: hidden;
+	border-radius: 20px;
+	background: #fff url('../img/gradient.jpg') top right repeat-y;
+	padding: 20px;
+	margin: 20px 0 40px;
+        text-align: justify;
+}
+.c-box ul {
+	padding-left: 20px;
+}
+.c-box li {
+	list-style-type: none;
+	background: url('../img/li.png') 0 10px no-repeat;
+	margin: 2px 0;
+	padding: 1px 0 1px 18px;
+}
+.sidebar {
+	float: left;
+	margin: 25px 0 0 50px;
+	width: 200px;
+}
+.box {
+	padding-bottom: 40px;
+	text-align: center;
+}
+.c {
+	text-align: center;
+}
+.top-margin {
+margin-top: 120px;
+}
+.slideshow {
+	float: left;
+	margin: 105px 0 0 50px;
+	width: 200px;
+	background: url('../img/phone.png') no-repeat;
+	height: 418px;
+	position: relative;
+}
+.slideshow ul {
+	margin: 48px 0 0 15px;
+	padding: 0;
+	overflow: hidden;
+	width: 170px;
+	height: 276px;
+}
+.slideshow ul li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+.slideshow .navi {
+	width: 200px;
+	position: absolute;
+	left: 0;
+	bottom: 112px;
+	text-align: center;
+	line-height: 34px;
+	font-size: 34px;
+	font-weight: bold;
+	visibility: hidden;
+}
+.slideshow .navi img {
+	vertical-align: middle;
+}
+.slideshow .navi a {
+	cursor: pointer;
+	color: #2276bb;
+	padding: 0 8px;
+}
+.slideshow .navi a:hover {
+	color: #5998cc;
+}
+.slideshow:hover .navi {
+	visibility: visible;
+}
+.twitter {
+	text-align: center;
+}
+.sidebar p {
+	margin: 0 0 8px 0;
+	padding: 0;
+	font-weight: normal;
+        font-size: 0.9em;
+}
+.sidebar p.first {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-style: normal;
+}
+.content img {
+	padding: 3px;
+}
+h1 {
+	margin: 0px;
+	font-size: 2em;
+	font-family: 'Open Sans', sans-serif;
+}
+h2 {
+	margin: 0px;
+	font-size: 1.5em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: normal;
+}
+h3 {
+	margin: 0px;
+	font-size: 1.3em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: normal;
+}
+div.small {
+	font-size: 0.9em;
+}
+ul.reference {
+	padding-left: 0;
+}
+ul.reference li {
+	padding-left: 0;
+	list-style: outside none;
+	background-image: none;
+}
+ul.types li {
+	background-position: 0 7px;
+}
+code {
+	font-family: Consolas, monospace;
+	white-space: nowrap;
+}
+.reference li code {
+	font-weight: bold;
+}
+p.tweet a {
+	text-decoration: none;
+	font-size: 0.9em;
+}
+p.tweet {
+	margin: 10px 0 0 0;
+	padding: 0 0 10px 0;
+	border-bottom: #f2f2f2 1px dashed;
+}
+p.last {
+	border-bottom: 0;
+}
+p.faq {
+	background: url('../img/quote.png') 0 4px no-repeat;
+	padding: 0 0 0 24px;
+	margin: 0 0 3px 0;
+}
+p.ans {
+	margin: 0;
+	padding: 0 0 30px 24px;
+}
+a[rel=clickable] {
+	font-size: 0.9em;
+	float: right;
+}
+.app-info {
+	clear: both;
+	text-align: right;
+	padding: 8px 0 0 0;
+	margin: 0;
+	font-size: 0.7em;
+}
+.icon {
+	display: block;
+	width: 34px;
+	height: 34px;
+	float: left;
+	margin-right: 8px;
+	border-radius: 6px;
+}
+#download-button {
+	display: block;
+	height: 32px;
+	color: #fff;
+	font-family: 'Open Sans';
+	font-size: 1.2em;
+	text-decoration: none;
+	padding: 4px 15px 0 50px;
+	float: right;
+	background: #ffb138 url('../img/android.png') 16px 3px no-repeat;
+	border-radius: 6px;
+	border: #ff9933 1px solid;
+	box-shadow: #ffc161 0px 1px 0px 0px inset;
+}
+#download-button:hover {
+	background-color: #3387cc;
+	border: #2d79b7 1px solid;
+	box-shadow: #66a5d9 0px 1px 0px 0px inset;
+}
+.list {
+	background: url('../img/list.png');
+}
+.alarm {
+	background: url('../img/alarm.png');
+}
+.favorite {
+	background: url('../img/favorite.png');
+}
+.share {
+	background: url('../img/share.png');
+}
+#home ul {
+	margin: 0;
+	padding: 0 0 25px 24px;
+	overflow: hidden;
+}
+#home li {
+	background-image: none;
+	list-style-type: none;
+	display: block;
+	float: left;
+	width: 50%;
+	margin: 5px 0;
+	padding: 0;
+	line-height: 34px;
+}

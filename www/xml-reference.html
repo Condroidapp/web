@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+        <title>Condroid - prohlížejte program na Androidu</title>
+
+        <link rel="stylesheet" media="screen,projection,tv" href="css/style.css" type="text/css" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        
+          $(window).scroll(function() { 
+            if($(window).scrollTop() > 135) $('.sidebar').css({'position' : 'fixed', 'margin-top' : '250px'}); else $('.sidebar').css({'position' : 'relative', 'margin-top' : '120px'});
+          });                                       
+          
+        </script>
+        
+        <script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script>
+      	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script>
+      	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css"/>
+      	<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+
+    </head>
+
+    <body id="top">
+    
+        <div class="header">
+          <div class="header-content">
+            <a id="logo" href="./" title="Na úvod"></a>
+                
+            <div class="menu">
+                <a href="#top">Úvod</a> &middot;
+
+                <a href="#download" rel="download">Stažení</a> &middot;
+
+                <a href="#faq" rel="faq">FAQ</a> &middot;
+
+                <a href="xml-reference.html" class="active">Přidat akci</a>
+          </div>
+        </div>
+                
+        </div>
+    
+        <div class="page">
+            <div class="content">
+            
+<div class="c-box" id="add">
+              <h2>Jak dostat svou akci do Condroidu?</h2>
+
+              <p>Datovým zdrojem pro Condroid je vždy XML obsahující komplatní program. 
+                  Jeho přesnou strukturu a význam jednotlivých prvků naleznete níže na této stránce.</p>
+              <p>Pokud jste schopni připravit tento XML zdroj (nebo máte nějaký systém, který 
+                  vám ho vygeneruje, což je ta nejlepší varianta), stačí pro přidání do 
+                  Condroidu napsat e-mail na mojí adresu spolu s nějakými základními informacemi o akci.</p>
+              
+              <p>Jesliže zdroj připravit neumíte (nebo dokonce nevíte co je XML :-), můžu ho 
+                  připravit za vás. Nicméně záleží na mých časových možnostech, ale za zeptání nikoho neukousnu. :-) (a volňásky či jiný bonus ochotu zvětšují ;)</p>
+              
+              </div>
+              
+              <div class="c-box">              
+              <h2>Reference XML</h2>
+              <div class="small">
+              <ul class="reference">
+                  <li><code>&lt;annotations&gt;</code> - kořenový element, může být v dokumentu 
+                      maximálně jednou. Může mít atributy <code>count</code> (celkový počet anotací) 
+                      a <code>last-update</code> (poslední aktualizace). Oba jsou nepovinné, ale velmi doporučené.
+                      <ul>
+                          <li><code>&lt;programme&gt;</code> - element obalující jednotlivé pořady
+                              <ul>
+                                  <li><code>&lt;pid&gt;</code> - ID programu. Musí zůstat unikátní i po aktualizacích. Povinné.</li>
+                                  <li><code>&lt;author&gt;</code> - Autor, Jméno, nick, cokoliv. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+                                  <li><code>&lt;title&gt;</code> - Název pořadu. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+                                  <li><code>&lt;type&gt;</code> - Typ pořadu. Viz níže. Povinné.</li>
+                                  <li><code>&lt;program-line&gt;</code> - Název programové linie. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+                                  <li><code>&lt;location&gt;</code> - Umístění pořadu (místnost). Pokud se akce konná ve více budovách nebo chcete zjednodušit navigaci, zadávejte od nejobecnějšího k konkrétnímu (např. KD Junior, Velký sál nebo 1. patro, místnost 20). Nepovinné.</li>
+                                  <li><code>&lt;start-time&gt;</code> - Začátek pořadu. Nepovinné. (pokud je vyplněn, je ale nutné vyplnit i end-time)</li>
+                                  <li><code>&lt;end-time&gt;</code> - Konec pořadu. Nepovinné.</li>
+                                  <li><code>&lt;annotation&gt;</code> - Anotace. Nepovinné, pokud ale nebude uvedená, nezobrazí se detail pořadu. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+              
+              <h3>Časové údaje</h3>
+              <p>Všechny časové údaje (tzn. atribut last-update a elementy start-time a end-time) musí být uvedeny ve formátu podle ISO 8610, tedy <b><code>yyyy-MM-ddThh:mm:ss+HH:00</code></b>. 
+                  Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00 nebo +02:00). Například tedy 2012-01-19T22:10:22+01:00</p>
+              <h3>Typy pořadů</h3>
+              <p>Vychází z typů pořadů používaných na Festivalu fantazie:
+              <ul class="types">
+                  <li><b>B</b> - beseda, diskuzní pořad</li>
+                  <li><b>C</b> - ceremoniál, divadlo</li>
+                  <li><b>D</b> - dokument, bonusový materiál</li>
+                  <li><b>F</b> - film, seriál (promítání)</li>
+                  <li><b>G</b> - herní turnaj</li>
+                  <li><b>H</b> - koncert, diskotéka</li>
+                  <li><b>P</b> - přednáška</li>
+                  <li><b>Q</b> - soutěž</li>
+                  <li><b>W</b> - workshop</li>
+              </ul>
+              <p>Pokud se pořad skládá z více typů, oddělují se znaménkem "+" a první by měl být ten nejvíce zastoupený.</p>
+              </p>
+              <p>Použijte kódování češtiny UTF-8.</p>
+              <p>Aby se v Condroidu zobrazil časový harmonogram, je nutné vyplnit časy začátku a konce aspoň pro čtvrtinu pořadů.</p>
+              <a href="/example.xml">Ukázka XML</a>.
+              <p>Obsah XML zdroje není neměnný a lze nějaké smysluplné informace přidat (ubrat většinou moc ne). V případě dotazů či nesnází napište :-)</p>
+              
+                
+              <a href="#top" rel="top">nahoru &uarr;</a>
+              </div>
+            
+              </div>
+              
+              <div class="c-box">
+              <h2>Ukázka XML</h2>
+              
+<pre class="brush: xml;">
+<annotations count="1365" last-update="2011-07-01T05:55:25+02:00">
+    <programme>
+        <pid>1343</pid>
+        <author><![CDATA[ FF Film "Aiwendil"+ John Erick Dowdle ]]></author>
+        <title><![CDATA[ Ďábel ]]></title>
+        <program-line><![CDATA[ FF filmy ]]></program-line>
+        <type>F</type>
+        <annotation><![CDATA[ Obyčejné ráno naprosto všedního dne. Pět lidí, kteří se navzájem neznají, nastoupí do téhož výtahu, ten se rozjede a nečekaně zastaví mezi patry. Zprvu poklidná atmosféra začne s přibývajícími minutami houstnout. Když jedete ve výtahu, většinou si spolucestující neprohlížíte." ]]></annotation>
+    </programme>
+    <programme>
+        <pid>1344</pid>
+        <author><![CDATA[ FF Film "Aiwendil"+ David Fincher ]]></author>
+        <title><![CDATA[ Social network ]]></title>
+        <program-line><![CDATA[ FF filmy ]]></program-line>
+        <type>F</type>
+        <annotation><![CDATA[The Social Network divákům umožňuje nahlédnout do okamžiků, kdy vznikal Facebook, nejrevolučnější sociální fenomén nového století, prostřednictvím odlišných pohledů hyperinteligentních mladých mužů, kteří svorně tvrdí, že právě oni byli u toho, když Facebook vznikl.]]></annotation>
+    </programme>
+    <programme>
+        <pid>1345</pid>
+        <author><![CDATA[ FF Film "Aiwendil"+ Neil Marshall ]]></author>
+        <title><![CDATA[ Centurion ]]></title>
+        <program-line><![CDATA[ FF filmy ]]></program-line>
+        <type>F</type>
+        <annotation><![CDATA[Léta Páně 117. Římské impérium se rozprostírá od Egypta k Španělsku, na východě sahá až k Černému moři. Jen v severní Británii se nedaří dobýt území obývané divokým a krutým kmenem Piktů, bojujících proti organizovaným římským jednotkám partyzánskými metodami.]]></annotation>
+    </programme>
+    <programme>
+        <pid>1401</pid>
+        <author><![CDATA[ Sebastian Chum "Seb" ]]></author>
+        <title><![CDATA[ Fanoušci už sakra nestačí! ]]></title>
+        <program-line><![CDATA[ MaelströM ]]></program-line>
+        <type>P</type>
+        <length>1h</length>
+        <start-time>2011-07-05T18:00:00+02:00</start-time>
+        <end-time>2011-07-05T19:00+02:00</end-time>
+        <annotation><![CDATA[Všechny ty šílence, fanatiky, fandy a úchyláky je třeba vzít pod krkem a vymáchat jim čumák v realitě. Přičichněte ke svému skutečnému image, hezky zvnější a s hořkosladkou špetkou předsudků a masové xenofobie. Existuje ještě něco jako fandom? Co vlastně má znamenat slovo geek? Nerd? Fan?]]></annotation>
+    </programme>
+    <programme>
+        <pid>1402</pid>
+        <author><![CDATA[ Sebastian Chum "Seb" ]]></author>
+        <title><![CDATA[ Baví vás ještě ateismus? ]]></title>
+        <program-line><![CDATA[ MaelströM ]]></program-line>
+        <type>P</type>
+        <length>1h</length>
+        <start-time>2011-07-03T17:00+02:00</start-time>
+        <end-time>2011-07-03T18:00+02:00</end-time>
+        <annotation><![CDATA[Na vzestupu je náboženská víra i nenáboženství. Schyluje se po desetiletí debat o nové vlně atheismu k nějakému závěru? Jak si obě strany stojí celosvětově? Shrnutí 9 nejčastějších argumentů proti atheismu a odpovědi na ně. Seznámení s nejzásadnějšími publikacemi a zdroji "atheistické dekády".]]></annotation>
+    </programme>
+</annotations>
+</pre>
+              
+              </div>
+            
+            
+            </div>
+          
+            
+            <div class="sidebar top-margin">
+                
+                <div class="box donate">
+                    <p class="first">Líbí se vám aplikace?</p>
+                    <p>Přispějte na vývoj</p>
+                    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="donate" />
+                </div>
+                <div class="box donate">
+                    <p class="first">Kontakt</p>
+                    <p><small>Své nápady, náměty a hlášení chyb můžete posílat na e-mail</small><br /><a href="mailto:quinix@quinix.cz">quinix@quinix.cz</a></p>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </body>
+</html>
