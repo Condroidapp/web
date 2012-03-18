@@ -1,5 +1,6 @@
 <?php
-
+namespace FrontModule;
+use Nette;
 /**
  * Base class for all application presenters.
  *

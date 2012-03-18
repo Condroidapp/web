@@ -1,0 +1,15 @@
+{contentType text/plain; charset=utf-8}
+{!='<' . '?xml version="1.0" encoding="utf-8"?>'}
+<cons>
+    {foreach $cons as $item}
+	<con-info>
+		<cid>{$item->id}</cid>
+		<name>{$item->name}</name>
+		<date>{$item->date}</date>
+		<icon>{$item->icon}</icon>
+		<provides-timetable>{=($item->hasTimetable?'yes':'no')}</provides-timetable>
+		<provides-annotations>{=($item->hasAnnotations?'yes':'no')}</provides-annotations>
+		<message><![CDATA[{$item->message}]]></message>
+	</con-info>
+    {/foreach}
+</cons>

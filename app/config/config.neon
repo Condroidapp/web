@@ -9,8 +9,8 @@ common:
 		database:
 			driver: mysql
 			host: localhost
-			dbname: test
-			user:
+			dbname: condroid
+			user: root
 			password:
 
 
@@ -33,8 +33,6 @@ common:
 
 	services:
 		database: @Nette\Database\Connection
-
-		authenticator: Authenticator( @database::table(users) )
 
 
 	factories:

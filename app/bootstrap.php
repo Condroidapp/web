@@ -29,8 +29,12 @@ $configurator->addConfig(__DIR__ . '/config/config.neon');
 $container = $configurator->createContainer();
 
 // Setup router
-$container->router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
-$container->router[] = new Route('<action>[/<id>]', 'Homepage:default');
+$container->router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
+$container->router[] = new Route('api/2/<presenter>/<action>', array(
+   'module'=>'Api',
+    'presenter' =>'Default', 
+    'action'=> 'default'));
+$container->router[] = new Route('<action>[/<id>]', 'Front:Homepage:default');
 
 
 // Configure and run the application!
