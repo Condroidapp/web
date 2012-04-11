@@ -4,19 +4,19 @@
   Author: Honza
   Description: Purpose of the stylesheet follows.
 */
-
-/*    
-  todo customize this sample style   syntax recommendation http://www.w3.org/tr/rec-css2
-*/
-
 @media screen {
-@font-face {
+/*@font-face {
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 400;
 	src: local('Open Sans'), local('OpenSans'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+}*/
 }
-}
+/*    
+  todo customize this sample style   syntax recommendation http://www.w3.org/tr/rec-css2
+*/
+
+
 body {
 	font: 16px/1.5 Arial, sans-serif;
 	color: #222;
@@ -93,6 +93,10 @@ a:hover {
 	background: url('../img/li.png') 0 10px no-repeat;
 	margin: 2px 0;
 	padding: 1px 0 1px 18px;
+}
+.c-box#cony a.img {
+    margin-left: 45px;
+    display: inline-block;
 }
 .sidebar {
 	float: left;
