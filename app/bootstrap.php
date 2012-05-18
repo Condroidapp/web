@@ -23,18 +23,29 @@ $configurator->createRobotLoader()
 	->addDirectory(APP_DIR)
 	->addDirectory(LIBS_DIR)
 	->register();
-
+if(PHP_SAPI == 'cli') {
+    $configurator->productionMode = FALSE;
+}
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $container = $configurator->createContainer();
-
+if(PHP_SAPI == 'cli') {
+    $container->application->allowedMethods = FALSE;
+    Nette\Diagnostics\Debugger::$productionMode = false;
+    $container->router[] = new FixedCliRouter(array(
+        'module' => 'Cli',
+        'presenter' => 'Import',
+        'action' => 'default',
+    ));
+}
 // Setup router
 $container->router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
-$container->router[] = new Route('api/2/<presenter>/<action>', array(
+$container->router[] = new Route('api/2/<presenter>[/<cid>]', array(
    'module'=>'Api',
     'presenter' =>'Default', 
-    'action'=> 'default'));
-$container->router[] = new Route('<action>[/<id>]', 'Front:Homepage:default');
+    'action'=> 'default',
+    'cid' => null));
+$container->router[] = new Route('[<module>/<presenter>/]<action>[/<id>]', 'Front:Homepage:default');
 
 
 // Configure and run the application!
