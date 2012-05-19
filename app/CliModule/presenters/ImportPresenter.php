@@ -12,6 +12,7 @@ class ImportPresenter extends CliPresenter {
     const TAG = 'Import';
 
     public function actionDefault() {
+        //TODO - perform updates from - until
         foreach ($this->getContext()->database->table('cons')->select('id,dataUrl')->where('active = 1') as $con) {
             try {
                 $this->fetch($con->id, $con->dataUrl);
