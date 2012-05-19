@@ -23,13 +23,13 @@ class ImportPresenter extends CliPresenter {
         if (\Nette\Diagnostics\Debugger::catchError($msg)) {
             throw new \Nette\InvalidStateException('DOM error: ' + $msg);
         }
-        $data = array();
+        $newData = array();
         foreach ($dom->documentElement->childNodes as $node) {
             if ($node->nodeType == XML_ELEMENT_NODE) {
-                $data[] = $this->parseProgramNode($node);
+                $newData[] = $this->parseProgramNode($node);
             }
         } // parse data from xml to array
-        $lines = $this->getLines($data); // gets unique lines array
+        $lines = $this->getLines($newData); // gets unique lines array
 
         $db_lines = $this->getContext()->database->table('lines')->where('cid = ' . $cid); //gets lines from db
 
@@ -41,8 +41,8 @@ class ImportPresenter extends CliPresenter {
         $lines = $this->getContext()->database->table('lines')->where('cid', $cid)->fetchPairs('title', 'id'); //selects lines with theirs db ids
 
         $oldData = $this->getContext()->database->table('annotations')->where('cid', $cid); //selects annotation data in db
-        $data = $this->formatData($data, $lines); //formats XML data to database format
-        $data = $this->dataIntersect($data, $oldData, array('author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime'));
+        $newData = $this->formatData($newData, $lines); //formats XML data to database format
+        $data = $this->dataIntersect($newData, $oldData, array('author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime'));
         //returns only changed or new annotation data
         
         if (count($data)) {
@@ -92,6 +92,22 @@ class ImportPresenter extends CliPresenter {
                     }
                 }
             }
+        }
+        
+        $toDelete = array();
+        $dbData = $this->getContext()->database->table('annotations')->where('cid',$cid)->fetchPairs('pid');
+        
+        foreach($dbData as $pid=>$item) {
+            if(!isset($newData[$pid])) {
+                $toDelete[] = $pid;
+            }
+        }
+        if(count($toDelete)) {
+            $this->getContext()->database->table('annotations')->where(array(
+                'cid'=>$cid,
+                'pid'=>$toDelete,
+                ))
+                ->delete();
         }
         $this->terminate();
     }
