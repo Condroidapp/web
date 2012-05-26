@@ -31,7 +31,8 @@ class Logger extends \Nette\Object {
     }
     
     public function flush() {
-        $this->database->table('logger')->insert($this->msgs);
+        if(count($this->msgs))
+            $this->database->table('logger')->insert($this->msgs);
     }
 
     
