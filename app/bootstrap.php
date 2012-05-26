@@ -45,7 +45,15 @@ $container->router[] = new Route('api/2/<presenter>[/<cid>]', array(
     'presenter' =>'Default', 
     'action'=> 'default',
     'cid' => null));
-$container->router[] = new Route('[<module>/<presenter>/]<action>[/<id>]', 'Front:Homepage:default');
+$container->router[] = new Route('cli/<presenter>/<action>/[<id>]', array(
+    'module'=>'Cli',
+    'presenter'=>'Import',
+    'action'=>'default'));
+
+$container->router[] = new Route('<action>/[<id>]', array(
+    'module'=>'Front',
+    'presenter'=>'Homepage',
+    'action'=>'default'));
 
 
 // Configure and run the application!

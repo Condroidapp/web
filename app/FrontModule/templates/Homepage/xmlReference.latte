@@ -7,9 +7,9 @@
           
         </script>
         
-        <script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script>
-      	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script>
-      	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css"/>
+        <script type="text/javascript" src="/syntaxhighlighter/scripts/shCore.js"></script>
+      	<script type="text/javascript" src="/syntaxhighlighter/scripts/shBrushXml.js"></script>
+      	<link type="text/css" rel="stylesheet" href="/syntaxhighlighter/styles/shCoreDefault.css"/>
       	<script type="text/javascript">SyntaxHighlighter.all();</script>
         {/block}
 {block content}
@@ -34,8 +34,7 @@
               <div class="small">
               <ul class="reference">
                   <li><code>&lt;annotations&gt;</code> - kořenový element, může být v dokumentu 
-                      maximálně jednou. Může mít atributy <code>count</code> (celkový počet anotací) 
-                      a <code>last-update</code> (poslední aktualizace). Oba jsou nepovinné, ale velmi doporučené.
+                      maximálně jednou. Může mít atributy <code>count</code> (celkový počet anotací). Nepovinné, ale velmi doporučené.
                       <ul>
                           <li><code>&lt;programme&gt;</code> - element obalující jednotlivé pořady
                               <ul>
@@ -46,7 +45,7 @@
                                   <li><code>&lt;program-line&gt;</code> - Název programové linie. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
                                   <li><code>&lt;location&gt;</code> - Umístění pořadu (místnost). Pokud se akce konná ve více budovách nebo chcete zjednodušit navigaci, zadávejte od nejobecnějšího k konkrétnímu (např. KD Junior, Velký sál nebo 1. patro, místnost 20). Nepovinné.</li>
                                   <li><code>&lt;start-time&gt;</code> - Začátek pořadu. Nepovinné. (pokud je vyplněn, je ale nutné vyplnit i end-time)</li>
-                                  <li><code>&lt;end-time&gt;</code> - Konec pořadu. Nepovinné.</li>
+                                  <li><code>&lt;end-time&gt;</code> - Konec pořadu. Nepovinné. (pokud je vyplněn, je ale nutné vyplnit i start-time)</li>
                                   <li><code>&lt;annotation&gt;</code> - Anotace. Nepovinné, pokud ale nebude uvedená, nezobrazí se detail pořadu. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
                               </ul>
                           </li>
@@ -55,8 +54,8 @@
               </ul>
               
               <h3>Časové údaje</h3>
-              <p>Všechny časové údaje (tzn. atribut last-update a elementy start-time a end-time) musí být uvedeny ve formátu podle ISO 8610, tedy <b><code>yyyy-MM-ddThh:mm:ss+HH:00</code></b>. 
-                  Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00 nebo +02:00). Například tedy 2012-01-19T22:10:22+01:00</p>
+              <p>Všechny časové údaje (tzn. elementy start-time a end-time) musí být uvedeny ve formátu podle ISO 8610, tedy <b><code>yyyy-MM-ddThh:mm:ss+HH:00</code></b>. 
+                  Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00 nebo +02:00). Například tedy {=date("r")}</p>
               <h3>Typy pořadů</h3>
               <p>Vychází z typů pořadů používaných na Festivalu fantazie:
               <ul class="types">
@@ -74,7 +73,6 @@
               </p>
               <p>Použijte kódování češtiny UTF-8.</p>
               <p>Aby se v Condroidu zobrazil časový harmonogram, je nutné vyplnit časy začátku a konce aspoň pro čtvrtinu pořadů.</p>
-              <a href="/example.xml">Ukázka XML</a>.
               <p>Obsah XML zdroje není neměnný a lze nějaké smysluplné informace přidat (ubrat většinou moc ne). V případě dotazů či nesnází napište :-)</p>
               
                 
