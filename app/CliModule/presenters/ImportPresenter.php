@@ -58,25 +58,30 @@ class ImportPresenter extends CliPresenter {
         
         if (count($data)) {
             //creates multiple INSERT query
-            $sql = "INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`type`,`startTime`,`endTime`, `cid`) VALUES ";
+            
+            $sqlParts = array();
             foreach ($data as $item) {
-                $sql .= "(";
+                $part = "(";
                 foreach (array('pid', 'author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime') as $col) {
                     if (isset($item[$col])) {
-                        $sql.= "'" . mysql_real_escape_string($item[$col]) . "', ";
+                        $part.= "'" . mysql_real_escape_string($item[$col]) . "', ";
                     } else {
-                        $sql .= 'NULL,';
+                        $part .= 'NULL,';
                     }
                 }
-                $sql.= $cid . "), \n";
+                $part.= $cid . ")";
+                $sqlParts[] = $part;
             }
-            $sql = trim($sql, ", \n");
-            
+            //$sql = trim($sql, ", \n");
+            $sqls = array_chunk($sqlParts, 50);
+            $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' begining insert of annotations. '.count($sqls).' chunks.');
+            foreach($sqls as $key => $items) {
+                $sql = "INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`type`,`startTime`,`endTime`, `cid`) VALUES ";
+                $sql.= implode(", \n", $items);
             try {
-                $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' begining insert of annotations.');
                 //execute multiple INSERT
                 $this->getContext()->database->exec($sql);
-                $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' annotations inserted, no updates.');
+                $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' annotations inserted, chuck '.$key.', no updates.');
             } catch (\PDOException $e) {
                 //if fails because multiple PID key, we try ON DUPLICATE UPDATE
                 
@@ -108,7 +113,7 @@ class ImportPresenter extends CliPresenter {
                     }
                     $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' annotations updates completed sucesfully.');
                 }
-            }
+            }}
         } else {
             $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' no inserts/updates.');
         }
