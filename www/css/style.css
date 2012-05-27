@@ -259,7 +259,7 @@ a[rel=clickable] {
 	display: block;
 	height: 32px;
 	color: #fff;
-	font-family: 'Open Sans';
+	font-family: 'Open Sans', sans-serif;
 	font-size: 1.2em;
 	text-decoration: none;
 	padding: 4px 15px 0 50px;
