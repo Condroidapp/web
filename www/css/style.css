@@ -39,7 +39,7 @@ a img {
 	padding-top: 20px;
 	position: fixed;
 	background: #eee url('../img/line.gif') 50% 44px no-repeat fixed;
-	z-index: 100;
+	z-index: 90;
 }
 .header-content {
 	width: 920px;

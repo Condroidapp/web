@@ -1,5 +1,7 @@
 {* This is the welcome page, you can delete it *}
 {block js}
+<script type="text/javascript" src="/js/jquery.lightbox-0.5.min.js"></script>
+<link rel="stylesheet" href="/css/jquery.lightbox-0.5.css">
 <script type="text/javascript" n:syntax="off">
         
           $(window).scroll(function() { 
@@ -25,6 +27,11 @@
               $('.slideshow ul li:last').after($('.slideshow ul li:first'));
               $('#magnify').attr('href', $('.slideshow ul li:first img').attr('src').replace('small-', '') );
             });
+            $("#magnify").click(function(e) {
+                e.preventDefault();
+                $(this).lightBox();
+                
+            })
             
           });
           
