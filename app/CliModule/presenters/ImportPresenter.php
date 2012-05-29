@@ -16,6 +16,7 @@ class ImportPresenter extends CliPresenter {
             try {
                 $this->fetch($con->id, $con->dataUrl);
             } catch (\Exception $e) {
+                throw $e;
                 $this->getContext()->logger->log(self::TAG, \Logger::LOG_ERROR, ' #'.$con->id.' exception during import of - '.$e->getMessage());
             }
         }
@@ -64,7 +65,7 @@ class ImportPresenter extends CliPresenter {
                 $part = "(";
                 foreach (array('pid', 'author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime') as $col) {
                     if (isset($item[$col])) {
-                        $part.= "'" . mysql_real_escape_string($item[$col]) . "', ";
+                        $part.= $this->getContext()->database->quote($item[$col]) . ", ";
                     } else {
                         $part .= 'NULL,';
                     }
@@ -75,6 +76,8 @@ class ImportPresenter extends CliPresenter {
             //$sql = trim($sql, ", \n");
             $sqls = array_chunk($sqlParts, 50);
             $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' begining insert of annotations. '.count($sqls).' chunks.');
+            $this->getContext()->database->beginTransaction();
+            try {
             foreach($sqls as $key => $items) {
                 $sql = "INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`type`,`startTime`,`endTime`, `cid`) VALUES ";
                 $sql.= implode(", \n", $items);
@@ -93,9 +96,9 @@ class ImportPresenter extends CliPresenter {
                         $insert = $update = "";
                         foreach(array('pid', 'author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime') as $col) {
                             if(isset($item[$col])) {
-                            $insert .= "'".mysql_real_escape_string($item[$col])."', ";
+                            $insert .= $this->getContext()->database->quote($item[$col]).", ";
                             if($col != 'pid')
-                                $update .= "`$col`='".mysql_real_escape_string($item[$col])."', ";
+                                $update .= "`$col`=".$this->getContext()->database->quote($item[$col]).", ";
                             } else {
                                 $insert .= 'NULL,';
                                 $update .= "`$col`=NULL, ";
@@ -113,7 +116,16 @@ class ImportPresenter extends CliPresenter {
                     }
                     $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' annotations updates completed sucesfully.');
                 }
+                else {
+                    throw $e;
+                }
             }}
+            $this->getContext()->database->commit();
+            } catch(PDOException $e) {
+                $this->getContext()->database->rollBack();
+                $this->getContext()->logger->log(self::TAG, \Logger::LOG_ERROR, $e->getMessage());
+                throw $e;
+            }
         } else {
             $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' no inserts/updates.');
         }

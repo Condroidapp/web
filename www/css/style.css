@@ -219,6 +219,9 @@ p.tweet a {
 	text-decoration: none;
 	font-size: 0.9em;
 }
+p.tweet a:hover {
+    text-decoration: underline;
+}
 p.tweet {
 	margin: 10px 0 0 0;
 	padding: 0 0 10px 0;
