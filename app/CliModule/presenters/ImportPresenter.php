@@ -53,7 +53,7 @@ class ImportPresenter extends CliPresenter {
 
         $oldData = $this->getContext()->database->table('annotations')->where('cid', $cid); //selects annotation data in db
         $newData = $this->formatData($newData, $lines); //formats XML data to database format
-        $data = $this->dataIntersect($newData, $oldData, array('author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime'));
+        $data = $this->dataIntersect($newData, $oldData, array('author', 'title', 'annotation', 'lid','location', 'type', 'startTime', 'endTime'));
         $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' annotation intersected.');
         //returns only changed or new annotation data
         
@@ -63,7 +63,7 @@ class ImportPresenter extends CliPresenter {
             $sqlParts = array();
             foreach ($data as $item) {
                 $part = "(";
-                foreach (array('pid', 'author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime') as $col) {
+                foreach (array('pid', 'author', 'title', 'annotation', 'lid','location', 'type', 'startTime', 'endTime') as $col) {
                     if (isset($item[$col])) {
                         $part.= $this->getContext()->database->quote($item[$col]) . ", ";
                     } else {
@@ -79,7 +79,7 @@ class ImportPresenter extends CliPresenter {
             $this->getContext()->database->beginTransaction();
             try {
             foreach($sqls as $key => $items) {
-                $sql = "INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`type`,`startTime`,`endTime`, `cid`) VALUES ";
+                $sql = "INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`location`,`type`,`startTime`,`endTime`, `cid`) VALUES ";
                 $sql.= implode(", \n", $items);
             try {
                 //execute multiple INSERT
@@ -94,7 +94,7 @@ class ImportPresenter extends CliPresenter {
                     //creates one-by-one INSERT - ON DUPLICATE KEY UPDATE query
                     foreach($data as $item) {
                         $insert = $update = "";
-                        foreach(array('pid', 'author', 'title', 'annotation', 'lid', 'type', 'startTime', 'endTime') as $col) {
+                        foreach(array('pid', 'author', 'title', 'annotation', 'lid','location', 'type', 'startTime', 'endTime') as $col) {
                             if(isset($item[$col])) {
                             $insert .= $this->getContext()->database->quote($item[$col]).", ";
                             if($col != 'pid')
@@ -109,7 +109,7 @@ class ImportPresenter extends CliPresenter {
                         $update = trim($update,", ");
                         
                         $this->getContext()->database
-                                ->exec("INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`type`,`startTime`,`endTime`, `cid`) VALUES "
+                                ->exec("INSERT INTO `annotations` (`pid`,`author`,`title`,`annotation`,`lid`,`location`,`type`,`startTime`,`endTime`, `cid`) VALUES "
                                         ."($insert,'$cid') "
                                         ."ON DUPLICATE KEY UPDATE $update");
                         
