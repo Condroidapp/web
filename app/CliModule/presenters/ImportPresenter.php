@@ -147,6 +147,7 @@ class ImportPresenter extends CliPresenter {
                 ->delete();
         }
         $this->getContext()->logger->log(self::TAG, \Logger::LOG_INFO, '#'.$cid.' processing completed sucesfully, no errors.');
+        $this->getContext()->database->table("logger")->where("time < ?", microtime(TRUE)-10*24*3600)->delete();
     }
 
     private function parseProgramNode(\DOMNode $node) {
