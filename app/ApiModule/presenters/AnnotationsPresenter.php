@@ -35,7 +35,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-check`) VALUES ('".$model."','".$sn."',1) ON DUPLICATE KEY UPDATE `annotations-check`=`annotations-check`+1");
+                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-check`) VALUES (".$model.",".$sn.",1) ON DUPLICATE KEY UPDATE `annotations-check`=`annotations-check`+1");
             }
             
             $this->terminate();
@@ -54,7 +54,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-update`) VALUES ('".$model."','".$sn."',1) ON DUPLICATE KEY UPDATE `annotations-update`=`annotations-update`+1");
+                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-update`) VALUES (".$model.",".$sn.",1) ON DUPLICATE KEY UPDATE `annotations-update`=`annotations-update`+1");
             }
             
             if($newOnes > 0) {
@@ -69,7 +69,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-full-download`) VALUES ('".$model."','".$sn."',1) ON DUPLICATE KEY UPDATE `annotations-full-download`=`annotations-full-download`+1");
+                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-full-download`) VALUES (".$model.",".$sn.",1) ON DUPLICATE KEY UPDATE `annotations-full-download`=`annotations-full-download`+1");
             }
         }
         
