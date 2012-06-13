@@ -16,5 +16,9 @@ class HomepagePresenter extends BasePresenter
             ));
             return $c;
         }
+        
+        public function actionLog() {
+            $this->template->data = $this->getContext()->database->table("logger")->order("time DESC")->limit(200);
+        }
 
 }
