@@ -47,7 +47,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
             
             $actualCount = $this->getContext()->database->table('annotations')->where('cid',$cid)->count();
             $itemsCount = $this->getContext()->httpRequest->getHeader('X-If-Count-Not-Match',$actualCount);
-            $newOnes = $this->getContext()->database->table('annotations')->where('timestamp > ?',$lastMod)->where('cid',$cid)->count();
+            $newOnes = $this->getContext()->database->table('annotations')->where('timestamp > ?',$date)->where('cid',$cid)->count();
             
             $device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
             if($device != null && trim($device) != "") {
@@ -59,8 +59,10 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
             
             if($newOnes > 0) {
                 $data->where('timestamp > ?',$date);
-            } elseif($actualCount == $itemsCount) {
+            } else if($actualCount == $itemsCount) {
                 $this->terminate();
+            } else {
+                $this->getContext()->httpResponse->setHeader("X-Full-Update", "1");
             }
         }
         else {
