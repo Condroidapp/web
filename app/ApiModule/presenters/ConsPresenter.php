@@ -18,7 +18,9 @@ class ConsPresenter extends \FrontModule\BasePresenter {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`con-list`) VALUES (".$model.",".$sn.",1) ON DUPLICATE KEY UPDATE `con-list`=`con-list`+1");
+                    $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
+                    
+                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`con-list`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `con-list`=`con-list`+1");
                 }
 	}
 }
