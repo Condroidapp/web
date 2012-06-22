@@ -35,6 +35,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
+                    $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
                     $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-check`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `annotations-check`=`annotations-check`+1");
             }
             
@@ -54,6 +55,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
+                    $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
                     $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-update`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `annotations-update`=`annotations-update`+1");
             }
             
@@ -71,6 +73,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
                     $parts = explode(";", $device);
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
+                    $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
                     $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-full-download`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `annotations-full-download`=`annotations-full-download`+1");
             }
         }
