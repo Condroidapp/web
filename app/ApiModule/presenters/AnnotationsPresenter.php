@@ -33,6 +33,11 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
             $device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
             if($device != null && trim($device) != "") {
                     $parts = explode(";", $device);
+                    if(isset($parts[0])) {
+                        if(\Nette\Utils\Strings::startsWith($parts[0], ":")) {
+                            $parts[0] = trim($parts[0], ": ");
+                        }
+                    }
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
                     $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
@@ -53,6 +58,11 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
             $device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
             if($device != null && trim($device) != "") {
                     $parts = explode(";", $device);
+                    if(isset($parts[0])) {
+                        if(\Nette\Utils\Strings::startsWith($parts[0], ":")) {
+                            $parts[0] = trim($parts[0], ": ");
+                        }
+                    }
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
                     $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
@@ -71,6 +81,11 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
             $device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
             if($device != null && trim($device) != "") {
                     $parts = explode(";", $device);
+                    if(isset($parts[0])) {
+                        if(\Nette\Utils\Strings::startsWith($parts[0], ":")) {
+                            $parts[0] = trim($parts[0], ": ");
+                        }
+                    }
                     $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
                     $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
                     $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
