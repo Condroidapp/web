@@ -7,7 +7,7 @@ use Nette\Application\Routers\Route;
 
 
 // Load Nette Framework
-require LIBS_DIR . '/Nette/loader.php';
+require APP_DIR . '/../vendor/autoload.php';
 
 
 // Configure application
