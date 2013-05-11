@@ -12,6 +12,9 @@ common:
 			dbname: condroid
 			user: root
 			password:
+		twitter:
+			consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
+			accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
 
 
 	php:

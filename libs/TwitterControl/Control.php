@@ -75,7 +75,7 @@ class Control extends NetteControl {
 
 		$this->config = $config + $defaults;
 
-		if(!$this->config['userId'] && !$this->config['screenName'])
+		if(!isset($this->config['user_id']) && !isset($this->config['screen_name']))
 			throw new InvalidStateException('No screenName/userId specified.');
 	}
 

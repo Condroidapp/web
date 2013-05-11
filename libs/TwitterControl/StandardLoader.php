@@ -45,7 +45,7 @@ class StandardLoader extends Nette\Object implements ILoader {
             }
 
             try {
-                $cache->save('statuses', Json::decode($content), array(
+                $cache->save('statuses', $content, array(
                 Nette\Caching\Cache::EXPIRATION => "+1h",
                 ));
                     return $this->tweetCache[$path] = $cache['statuses'] ;

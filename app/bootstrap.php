@@ -28,6 +28,7 @@ if(PHP_SAPI == 'cli') {
 }
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
+$configurator->addConfig(__DIR__ .'/config/config.local.neon', \Nette\Config\Configurator::NONE);
 $container = $configurator->createContainer();
 if(PHP_SAPI == 'cli') {
     $container->application->allowedMethods = FALSE;

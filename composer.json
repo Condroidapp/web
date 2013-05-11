@@ -1,6 +1,6 @@
 {
-    "name": "navigator/maps",
-    "description": "map managmenet system fot CTU Navigator",
+    "name": "condroid/server",
+    "description": "Condroid server",
     "minimum-stability": "stable",
     "authors": [
         {
@@ -12,7 +12,8 @@
         "php": ">=5.3",
         "nette/nette": "2.0.*",
         "doctrine/orm": "2.*",
-        "nella/doctrine": "@dev",
-        "nella/console": "@dev"
+        "nella/doctrine": "dev-master",
+        "nella/console": "dev-master",
+        "dg/twitter-php": "dev-master"
     }
 }
