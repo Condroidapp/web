@@ -36,7 +36,7 @@ common:
             namespace: App\Model\Proxy
             autogenerate: true
         debugger: true
-        #repositoryClass: App\Model\Dao
+        repositoryClass: Model\Dao
         #useSimpleAnnotation: true
         console:
             entityManager: default
@@ -44,6 +44,9 @@ common:
 
     services:
         em: @doctrine.entityManager
+        eventRepository: @doctrine.entityManager::getRepository(Model\Event)
+        annotationRepository: @doctrine.entityManager::getRepository(Model\Annotations)
+        lineRepository: @doctrine.entityManager::getRepository(Model\Line)
 #        logger: Logger
 
 #        importer:

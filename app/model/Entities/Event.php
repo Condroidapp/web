@@ -99,5 +99,91 @@ class Event extends BaseEntity {
      */
     private $checkStop;
 
+    /**
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCheckStart() {
+        return $this->checkStart;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCheckStop() {
+        return $this->checkStop;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDataUrl() {
+        return $this->dataurl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate() {
+        return $this->date;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getHasAnnotations() {
+        return $this->hasAnnotations;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getHasTimetable() {
+        return $this->hasTimetable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon() {
+        return $this->icon;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocationsFile() {
+        return $this->locationsFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage() {
+        return $this->message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getYear() {
+        return $this->year;
+    }
+
+
+
 
 }
