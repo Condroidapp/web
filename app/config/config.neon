@@ -5,41 +5,57 @@
 # http://nette.org/security-warning
 #
 common:
-	parameters:
-		database:
-			driver: mysql
-			host: localhost
-			dbname: condroid
-			user: root
-			password:
-		twitter:
-			consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
-			accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
+    parameters:
+        database:
+            driver: mysqli
+            dbname: navigator
+            host: localhost
+            user: root
+            password:
+            charset: utf8
+            collation: utf8_czech_ci
+        twitter:
+            consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
+            accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
 
 
-	php:
-		date.timezone: Europe/Prague
-		# session.save_path: "%tempDir%/sessions"
-		# zlib.output_compression: yes
+    php:
+        date.timezone: Europe/Prague
 
 
-	nette:
-		session:
-			autoStart: smart
+    nette:
+        session:
+            autoStart: smart
 
-		database:
-			default:
-				dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
-				user: %database.user%
-				password: %database.password%
+    doctrine:
+        connection: %database%
+        entityDirs:
+            - %appDir%/model
+        proxy:
+            dir: %tempDir%/proxy
+            namespace: App\Model\Proxy
+            autogenerate: true
+        debugger: true
+        #repositoryClass: App\Model\Dao
+        #useSimpleAnnotation: true
+        console:
+            entityManager: default
 
 
-	services:
-		database: @Nette\Database\Connection
-		logger: Logger
+    services:
+        em: @doctrine.entityManager
+#        logger: Logger
+
+#        importer:
+#            class: App\Model\Importer
+#            tags: [consoleCommand]
+
+#        doctrine_event_cache_subscriber:
+#            class: App\Core\CacheSubscriber
+#            tags: [doctrineEvent]
 
 
-	factories:
+    factories:
 
 
 production < common:

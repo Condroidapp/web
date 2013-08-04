@@ -29,16 +29,11 @@ if(PHP_SAPI == 'cli') {
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ .'/config/config.local.neon', \Nette\Config\Configurator::NONE);
+Nella\Console\Config\Extension::register($configurator);
+Nella\Doctrine\Config\Extension::register($configurator);
+
 $container = $configurator->createContainer();
-if(PHP_SAPI == 'cli') {
-    $container->application->allowedMethods = FALSE;
-    Nette\Diagnostics\Debugger::$productionMode = false;
-    $container->router[] = new FixedCliRouter(array(
-        'module' => 'Cli',
-        'presenter' => 'Import',
-        'action' => 'default',
-    ));
-}
+
 // Setup router
 $container->router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
 $container->router[] = new Route('api/2/<presenter>[/<cid>]', array(
@@ -46,10 +41,12 @@ $container->router[] = new Route('api/2/<presenter>[/<cid>]', array(
     'presenter' =>'Default', 
     'action'=> 'default',
     'cid' => null));
-$container->router[] = new Route('cli/<presenter>/<action>/[<id>]', array(
-    'module'=>'Cli',
-    'presenter'=>'Import',
-    'action'=>'default'));
+
+$container->router[] = new Route('api/3/<presenter>[/<cid>]', array(
+   'module'=>'Api3',
+    'presenter' =>'Default',
+    'action'=> 'default',
+    'cid' => null));
 
 $container->router[] = new Route('<action>/[<id>]', array(
     'module'=>'Front',

@@ -1,5 +1,6 @@
 <?php
 
+use FrontModule\BasePresenter;
 use Nette\Diagnostics\Debugger,
 	Nette\Application as NA;
 
