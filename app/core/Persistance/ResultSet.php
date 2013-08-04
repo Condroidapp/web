@@ -136,7 +136,7 @@ class ResultSet extends Nette\Object implements \Countable, \IteratorAggregate
 
 
     /**
-     * @throws \Maps\QueryException
+     * @throws \App\QueryException
      * @return int
      */
 	public function getTotalCount()
@@ -146,7 +146,7 @@ class ResultSet extends Nette\Object implements \Countable, \IteratorAggregate
 				$this->totalCount = $this->getPaginatedQuery()->count();
 
 			} catch (ORMException $e) {
-				throw new \Maps\QueryException($e, $this->query, $e->getMessage());
+				throw new \App\QueryException($e, $this->query, $e->getMessage());
 			}
 		}
 
@@ -155,7 +155,7 @@ class ResultSet extends Nette\Object implements \Countable, \IteratorAggregate
 
 
     /**
-     * @throws \Maps\QueryException
+     * @throws \App\QueryException
      * @return \ArrayIterator
      */
 	public function getIterator()
@@ -164,7 +164,7 @@ class ResultSet extends Nette\Object implements \Countable, \IteratorAggregate
 			return new \ArrayIterator($this->query->execute());
 
 		} catch (ORMException $e) {
-			throw new \Maps\QueryException($e, $this->query, $e->getMessage());
+			throw new \App\QueryException($e, $this->query, $e->getMessage());
 		}
 	}
 

@@ -29,5 +29,35 @@ class ProgramLine extends BaseEntity {
      */
     private $event;
 
+    /**
+     * @param \Model\Event $event
+     */
+    public function setEvent($event) {
+        $this->event = $event;
+    }
+
+    /**
+     * @return \Model\Event
+     */
+    public function getEvent() {
+        return $this->event;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle() {
+        return $this->title;
+    }
+
+
+
 
 }

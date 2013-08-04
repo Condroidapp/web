@@ -40,4 +40,8 @@ abstract class BaseEntity extends \Nette\Object {
         return array();
     }
 
+    public static function getClassName() {
+        return get_called_class();
+    }
+
 }

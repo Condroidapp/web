@@ -440,16 +440,16 @@ class Dao extends Doctrine\ORM\EntityRepository implements Persistence\IDao, Per
 	 * @param string $message
 	 *
 	 * @throws \Exception
-	 * @throws \Maps\QueryException
+	 * @throws \App\QueryException
 
 	 */
 	private function handleException(\Exception $e, Doctrine\ORM\Query $query = NULL, $message = NULL)
 	{
 		if ($e instanceof Doctrine\ORM\Query\QueryException) {
-			throw new \Maps\QueryException($e, $query, $message);
+			throw new \App\QueryException($e, $query, $message);
 
 		} elseif ($e instanceof \PDOException) {
-			throw new \Maps\QueryException($e, $query, $message);
+			throw new \App\QueryException($e, $query, $message);
 
 		} else {
 			throw $e;

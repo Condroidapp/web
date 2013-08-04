@@ -1,6 +1,6 @@
 {contentType text/xml; charset=utf-8}
 {!='<' . '?xml version="1.0" encoding="utf-8"?>'}
-<annotations count="{=count($annotations)}" last-update="{=($lastMod != ""?date("c",strtotime($lastMod)):"")}">
+<annotations count="{=$count}" last-update="{=($lastMod != NULL?$lastMod->format("r"):"")}">
 	{foreach $annotations as $item}
 	<programme>
 		<pid>{$item->pid}</pid>
@@ -8,9 +8,9 @@
 		<title><![CDATA[{!$item->title}]]></title>
 		<type>{$item->type}</type>
                 <location><![CDATA[{!$item->location}]]></location>
-		<program-line><![CDATA[{!$lines[$item->lid]->title}]]></program-line>
-		<start-time>{=($item->startTime != ""?date("c",strtotime($item->startTime)):"")}</start-time>
-		<end-time>{=($item->endTime != ""?date("c",strtotime($item->endTime)):"")}</end-time>
+		<program-line><![CDATA[{!$item->programLine->title}]]></program-line>
+		<start-time>{=($item->startTime != NULL?$item->startTime->format("c"):"")}</start-time>
+		<end-time>{=($item->endTime != NULL?$item->endTime->format("c"):"")}</end-time>
 		<annotation><![CDATA[{!$item->annotation}]]></annotation>
 	</programme>
 	{/foreach}

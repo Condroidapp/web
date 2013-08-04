@@ -45,8 +45,8 @@ common:
     services:
         em: @doctrine.entityManager
         eventRepository: @doctrine.entityManager::getRepository(Model\Event)
-        annotationRepository: @doctrine.entityManager::getRepository(Model\Annotations)
-        lineRepository: @doctrine.entityManager::getRepository(Model\Line)
+        annotationRepository: @doctrine.entityManager::getRepository(Model\Annotation)
+        lineRepository: @doctrine.entityManager::getRepository(Model\ProgramLine)
 #        logger: Logger
 
 #        importer:
