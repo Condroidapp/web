@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.4",
         "nette/nette": "2.0.*",
         "doctrine/orm": "2.*",
         "nella/doctrine": "dev-master",
