@@ -48,12 +48,12 @@ class OauthLoader implements  ILoader {
                 return $this->tweetCache[$path];
             }
 
-            Debugger::tryError();
+            set_error_handler(function($s, $m) {
+                restore_error_handler();
+                throw new TwitterException($m);
+            });
             $content = $this->generateRequestUrl();
-            if (Debugger::catchError($e)) {
-                throw new TwitterException($e->getMessage(), $e->getCode(), $e);
-                return;
-            }
+            restore_error_handler();
 
             try {
                 $cache->save('statuses', $content, array(

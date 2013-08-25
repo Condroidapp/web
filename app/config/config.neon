@@ -5,6 +5,13 @@
 # http://nette.org/security-warning
 #
 common:
+    extensions:
+        console: Kdyby\Console\DI\ConsoleExtension
+        annotations: Kdyby\Annotations\DI\AnnotationsExtension
+        events: Kdyby\Events\DI\EventsExtension
+        doctrine: Kdyby\Doctrine\DI\OrmExtension
+        newrelic: Mishak\NewRelicLogger\DI\NewRelicLoggerExtension
+
     parameters:
         database:
             driver: mysqli
@@ -28,30 +35,27 @@ common:
             autoStart: smart
 
     doctrine:
-        connection: %database%
-        entityDirs:
-            - %appDir%/model
-        proxy:
-            dir: %tempDir%/proxy
-            namespace: App\Model\Proxy
-            autogenerate: true
-        debugger: true
-        repositoryClass: Model\Dao
-        #useSimpleAnnotation: true
-        console:
-            entityManager: default
-
+        driver: mysqli
+        dbname: condroid
+        host: localhost
+        user: root
+        password:
+        charset: utf8
+        collation: utf8_czech_ci
+        metadata:
+            Model: annotations("%appDir%/model")
 
     services:
-        em: @doctrine.entityManager
-        eventRepository: @doctrine.entityManager::getRepository(Model\Event)
-        annotationRepository: @doctrine.entityManager::getRepository(Model\Annotation)
-        lineRepository: @doctrine.entityManager::getRepository(Model\ProgramLine)
+      #  em: @doctrine.dao
+        eventRepository: @doctrine.dao(Model\Event)
+        annotationRepository: @doctrine.dao(Model\Annotation)
+        lineRepository: @doctrine.dao(Model\ProgramLine)
 #        logger: Logger
 
-#        importer:
-#            class: App\Model\Importer
-#            tags: [consoleCommand]
+        importer:
+            class: Model\Commands\ImportCommand(@eventRepository)
+            tags: [consoleCommand]
+        feedParser: Model\Commands\FeedParser
 
 #        doctrine_event_cache_subscriber:
 #            class: App\Core\CacheSubscriber

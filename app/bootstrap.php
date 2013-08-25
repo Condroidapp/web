@@ -4,6 +4,7 @@
  * My Application bootstrap file.
  */
 use Nette\Application\Routers\Route;
+use Nette\Configurator;
 
 
 // Load Nette Framework
@@ -11,7 +12,7 @@ require APP_DIR . '/../vendor/autoload.php';
 
 
 // Configure application
-$configurator = new Nette\Config\Configurator;
+$configurator = new Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
 //$configurator->setProductionMode($configurator::AUTO);
@@ -28,9 +29,8 @@ if(PHP_SAPI == 'cli') {
 }
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-$configurator->addConfig(__DIR__ .'/config/config.local.neon', \Nette\Config\Configurator::NONE);
-Nella\Console\Config\Extension::register($configurator);
-Nella\Doctrine\Config\Extension::register($configurator);
+$configurator->addConfig(__DIR__ .'/config/config.local.neon', Configurator::NONE);
+
 
 $container = $configurator->createContainer();
 

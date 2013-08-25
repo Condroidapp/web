@@ -1,7 +1,7 @@
 {
     "name": "condroid/server",
     "description": "Condroid server",
-    "minimum-stability": "stable",
+    "minimum-stability": "rc",
     "authors": [
         {
             "name": "Jan Langer",
@@ -10,10 +10,14 @@
     ],
     "require": {
         "php": ">=5.4",
-        "nette/nette": "2.0.*",
-        "doctrine/orm": "2.*",
-        "nella/doctrine": "dev-master",
-        "nella/console": "dev-master",
-        "dg/twitter-php": "dev-master"
+        "nette/nette": "dev-master",
+        "doctrine/orm": "@rc",
+        "kdyby/annotations": "dev-master",
+
+        "kdyby/doctrine": "@rc",
+        "kdyby/console": "dev-master",
+        "dg/twitter-php": "dev-master",
+        "kdyby/events": "dev-master",
+        "mishak/newrelic-nette": "@dev"
     }
 }
