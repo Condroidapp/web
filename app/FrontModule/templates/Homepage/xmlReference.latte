@@ -34,7 +34,7 @@
               <div class="small">
               <ul class="reference">
                   <li><code>&lt;annotations&gt;</code> - kořenový element, může být v dokumentu 
-                      maximálně jednou. Může mít atributy <code>count</code> (celkový počet anotací). Nepovinné, ale velmi doporučené.
+                      maximálně jednou.
                       <ul>
                           <li><code>&lt;programme&gt;</code> - element obalující jednotlivé pořady
                               <ul>
@@ -55,7 +55,7 @@
               
               <h3>Časové údaje</h3>
               <p>Všechny časové údaje (tzn. elementy start-time a end-time) musí být uvedeny ve formátu podle ISO 8610, tedy <b><code>yyyy-MM-ddThh:mm:ss+HH:00</code></b>. 
-                  Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00 nebo +02:00). Například tedy {=date("r")}</p>
+                  Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00 nebo +02:00). Například tedy {=date("c")}</p>
               <h3>Typy pořadů</h3>
               <p>Vychází z typů pořadů používaných na Festivalu fantazie:
               <ul class="types">
@@ -85,54 +85,54 @@
               <h2>Ukázka XML</h2>
               
 <pre class="brush: xml;">
-<annotations count="1365" last-update="2011-07-01T05:55:25+02:00">
-    <programme>
-        <pid>1343</pid>
-        <author><![CDATA[ FF Film "Aiwendil"+ John Erick Dowdle ]]></author>
-        <title><![CDATA[ Ďábel ]]></title>
-        <program-line><![CDATA[ FF filmy ]]></program-line>
-        <type>F</type>
-        <annotation><![CDATA[ Obyčejné ráno naprosto všedního dne. Pět lidí, kteří se navzájem neznají, nastoupí do téhož výtahu, ten se rozjede a nečekaně zastaví mezi patry. Zprvu poklidná atmosféra začne s přibývajícími minutami houstnout. Když jedete ve výtahu, většinou si spolucestující neprohlížíte." ]]></annotation>
-    </programme>
-    <programme>
-        <pid>1344</pid>
-        <author><![CDATA[ FF Film "Aiwendil"+ David Fincher ]]></author>
-        <title><![CDATA[ Social network ]]></title>
-        <program-line><![CDATA[ FF filmy ]]></program-line>
-        <type>F</type>
-        <annotation><![CDATA[The Social Network divákům umožňuje nahlédnout do okamžiků, kdy vznikal Facebook, nejrevolučnější sociální fenomén nového století, prostřednictvím odlišných pohledů hyperinteligentních mladých mužů, kteří svorně tvrdí, že právě oni byli u toho, když Facebook vznikl.]]></annotation>
-    </programme>
-    <programme>
-        <pid>1345</pid>
-        <author><![CDATA[ FF Film "Aiwendil"+ Neil Marshall ]]></author>
-        <title><![CDATA[ Centurion ]]></title>
-        <program-line><![CDATA[ FF filmy ]]></program-line>
-        <type>F</type>
-        <annotation><![CDATA[Léta Páně 117. Římské impérium se rozprostírá od Egypta k Španělsku, na východě sahá až k Černému moři. Jen v severní Británii se nedaří dobýt území obývané divokým a krutým kmenem Piktů, bojujících proti organizovaným římským jednotkám partyzánskými metodami.]]></annotation>
-    </programme>
-    <programme>
-        <pid>1401</pid>
-        <author><![CDATA[ Sebastian Chum "Seb" ]]></author>
-        <title><![CDATA[ Fanoušci už sakra nestačí! ]]></title>
-        <program-line><![CDATA[ MaelströM ]]></program-line>
-        <type>P</type>
-        <length>1h</length>
-        <start-time>2011-07-05T18:00:00+02:00</start-time>
-        <end-time>2011-07-05T19:00+02:00</end-time>
-        <annotation><![CDATA[Všechny ty šílence, fanatiky, fandy a úchyláky je třeba vzít pod krkem a vymáchat jim čumák v realitě. Přičichněte ke svému skutečnému image, hezky zvnější a s hořkosladkou špetkou předsudků a masové xenofobie. Existuje ještě něco jako fandom? Co vlastně má znamenat slovo geek? Nerd? Fan?]]></annotation>
-    </programme>
-    <programme>
-        <pid>1402</pid>
-        <author><![CDATA[ Sebastian Chum "Seb" ]]></author>
-        <title><![CDATA[ Baví vás ještě ateismus? ]]></title>
-        <program-line><![CDATA[ MaelströM ]]></program-line>
-        <type>P</type>
-        <length>1h</length>
-        <start-time>2011-07-03T17:00+02:00</start-time>
-        <end-time>2011-07-03T18:00+02:00</end-time>
-        <annotation><![CDATA[Na vzestupu je náboženská víra i nenáboženství. Schyluje se po desetiletí debat o nové vlně atheismu k nějakému závěru? Jak si obě strany stojí celosvětově? Shrnutí 9 nejčastějších argumentů proti atheismu a odpovědi na ně. Seznámení s nejzásadnějšími publikacemi a zdroji "atheistické dekády".]]></annotation>
-    </programme>
-</annotations>
+&lt;annotations&gt;
+    &lt;programme&gt;
+        &lt;pid&gt;1343&lt;/pid&gt;
+        &lt;author&gt;&lt;![CDATA[ FF Film "Aiwendil"+ John Erick Dowdle ]]&gt;&lt;/author&gt;
+        &lt;title&gt;&lt;![CDATA[ Ďábel ]]&gt;&lt;/title&gt;
+        &lt;program-line&gt;&lt;![CDATA[ FF filmy ]]&gt;&lt;/program-line&gt;
+        &lt;type&gt;F&lt;/type&gt;
+        &lt;annotation&gt;&lt;![CDATA[ Obyčejné ráno naprosto všedního dne. Pět lidí, kteří se navzájem neznají, nastoupí do téhož výtahu, ten se rozjede a nečekaně zastaví mezi patry. Zprvu poklidná atmosféra začne s přibývajícími minutami houstnout. Když jedete ve výtahu, většinou si spolucestující neprohlížíte." ]]&gt;&lt;/annotation&gt;
+    &lt;/programme&gt;
+    &lt;programme&gt;
+        &lt;pid&gt;1344&lt;/pid&gt;
+        &lt;author&gt;&lt;![CDATA[ FF Film "Aiwendil"+ David Fincher ]]&gt;&lt;/author&gt;
+        &lt;title&gt;&lt;![CDATA[ Social network ]]&gt;&lt;/title&gt;
+        &lt;program-line&gt;&lt;![CDATA[ FF filmy ]]&gt;&lt;/program-line&gt;
+        &lt;type&gt;F&lt;/type&gt;
+        &lt;annotation&gt;&lt;![CDATA[The Social Network divákům umožňuje nahlédnout do okamžiků, kdy vznikal Facebook, nejrevolučnější sociální fenomén nového století, prostřednictvím odlišných pohledů hyperinteligentních mladých mužů, kteří svorně tvrdí, že právě oni byli u toho, když Facebook vznikl.]]&gt;&lt;/annotation&gt;
+    &lt;/programme&gt;
+    &lt;programme&gt;
+        &lt;pid&gt;1345&lt;/pid&gt;
+        &lt;author&gt;&lt;![CDATA[ FF Film "Aiwendil"+ Neil Marshall ]]&gt;&lt;/author&gt;
+        &lt;title&gt;&lt;![CDATA[ Centurion ]]&gt;&lt;/title&gt;
+        &lt;program-line&gt;&lt;![CDATA[ FF filmy ]]&gt;&lt;/program-line&gt;
+        &lt;type&gt;F&lt;/type&gt;
+        &lt;annotation&gt;&lt;![CDATA[Léta Páně 117. Římské impérium se rozprostírá od Egypta k Španělsku, na východě sahá až k Černému moři. Jen v severní Británii se nedaří dobýt území obývané divokým a krutým kmenem Piktů, bojujících proti organizovaným římským jednotkám partyzánskými metodami.]]&gt;&lt;/annotation&gt;
+    &lt;/programme&gt;
+    &lt;programme&gt;
+        &lt;pid&gt;1401&lt;/pid&gt;
+        &lt;author&gt;&lt;![CDATA[ Sebastian Chum "Seb" ]]&gt;&lt;/author&gt;
+        &lt;title&gt;&lt;![CDATA[ Fanoušci už sakra nestačí! ]]&gt;&lt;/title&gt;
+        &lt;program-line&gt;&lt;![CDATA[ MaelströM ]]&gt;&lt;/program-line&gt;
+        &lt;type&gt;P&lt;/type&gt;
+        &lt;length&gt;1h&lt;/length&gt;
+        &lt;start-time&gt;2011-07-05T18:00:00+02:00&lt;/start-time&gt;
+        &lt;end-time&gt;2011-07-05T19:00+02:00&lt;/end-time&gt;
+        &lt;annotation&gt;&lt;![CDATA[Všechny ty šílence, fanatiky, fandy a úchyláky je třeba vzít pod krkem a vymáchat jim čumák v realitě. Přičichněte ke svému skutečnému image, hezky zvnější a s hořkosladkou špetkou předsudků a masové xenofobie. Existuje ještě něco jako fandom? Co vlastně má znamenat slovo geek? Nerd? Fan?]]&gt;&lt;/annotation&gt;
+    &lt;/programme&gt;
+    &lt;programme&gt;
+        &lt;pid&gt;1402&lt;/pid&gt;
+        &lt;author&gt;&lt;![CDATA[ Sebastian Chum "Seb" ]]&gt;&lt;/author&gt;
+        &lt;title&gt;&lt;![CDATA[ Baví vás ještě ateismus? ]]&gt;&lt;/title&gt;
+        &lt;program-line&gt;&lt;![CDATA[ MaelströM ]]&gt;&lt;/program-line&gt;
+        &lt;type&gt;P&lt;/type&gt;
+        &lt;length&gt;1h&lt;/length&gt;
+        &lt;start-time&gt;2011-07-03T17:00+02:00&lt;/start-time&gt;
+        &lt;end-time&gt;2011-07-03T18:00+02:00&lt;/end-time&gt;
+        &lt;annotation&gt;&lt;![CDATA[Na vzestupu je náboženská víra i nenáboženství. Schyluje se po desetiletí debat o nové vlně atheismu k nějakému závěru? Jak si obě strany stojí celosvětově? Shrnutí 9 nejčastějších argumentů proti atheismu a odpovědi na ně. Seznámení s nejzásadnějšími publikacemi a zdroji "atheistické dekády".]]&gt;&lt;/annotation&gt;
+    &lt;/programme&gt;
+&lt;/annotations&gt;
 </pre>
               
               </div>
