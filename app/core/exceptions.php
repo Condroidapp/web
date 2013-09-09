@@ -120,3 +120,7 @@ class ShellCommandException extends \RuntimeException {
  */
 class StaticClassException extends \LogicException {
 }
+
+class InvalidProgramNodeException extends InvalidArgumentException {
+
+}

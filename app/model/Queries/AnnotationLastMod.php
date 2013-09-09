@@ -8,11 +8,13 @@
 
 namespace Model\Queries;
 
+use Kdyby\Doctrine\QueryObject;
+use Kdyby\Persistence\Queryable;
 use Model\Annotation;
 use Model\Persistence\IQueryable;
 use Model\Persistence\QueryObjectBase;
 
-class AnnotationLastMod extends QueryObjectBase {
+class AnnotationLastMod extends QueryObject {
 
 
     private $event;
@@ -23,10 +25,10 @@ class AnnotationLastMod extends QueryObjectBase {
 
 
     /**
-     * @param IQueryable $repository
+     * @param Queryable $repository
      * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
      */
-    protected function doCreateQuery(IQueryable $repository) {
+    protected function doCreateQuery(Queryable $repository) {
         return $repository->createQuery("SELECT a.timestamp FROM ".Annotation::getClassName()." a WHERE a.event=:event ORDER by a.timestamp DESC")
                 ->setParameter('event', $this->event)
                 ->setMaxResults(1);

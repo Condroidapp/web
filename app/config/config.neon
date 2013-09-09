@@ -52,10 +52,15 @@ common:
         lineRepository: @doctrine.dao(Model\ProgramLine)
 #        logger: Logger
 
+        echoLogger:
+            class: Model\Commands\EchoLogger
+            autowired: false
+
         importer:
-            class: Model\Commands\ImportCommand(@eventRepository)
-            tags: [consoleCommand]
-        feedParser: Model\Commands\FeedParser
+            class: Model\Commands\ImportCommand(@eventRepository, @echoLogger)
+            tags: [kdyby.console.command]
+        feedParser: Model\Commands\FeedParser(@echoLogger)
+
 
 #        doctrine_event_cache_subscriber:
 #            class: App\Core\CacheSubscriber

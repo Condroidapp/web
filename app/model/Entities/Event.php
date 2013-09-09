@@ -23,6 +23,12 @@ class Event extends BaseEntity {
     private $active;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="process", type="boolean", nullable=false)
+     */
+    private $process = FALSE;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="year", type="integer", nullable=true)

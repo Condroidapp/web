@@ -1,5 +1,7 @@
 <?php
 namespace Model;
+use Kdyby\Doctrine\QueryObject;
+use Kdyby\Persistence\Queryable;
 use Nette\Utils\Strings;
 
 /**
@@ -8,7 +10,7 @@ use Nette\Utils\Strings;
  * @package Maps\Model
  * @author Jan Langer <langeja1@fit.cvut.cz>
  */
-class BasicFetchByQuery extends Persistence\QueryObjectBase {
+class BasicFetchByQuery extends QueryObject {
     /** @var array conditions */
     private $conditions = [];
 
@@ -20,7 +22,7 @@ class BasicFetchByQuery extends Persistence\QueryObjectBase {
     }
 
     /** {@inheritdoc} */
-    protected function doCreateQuery(Persistence\IQueryable $repository) {
+    protected function doCreateQuery(Queryable $repository) {
         
         $where = [];
         $params = [];
