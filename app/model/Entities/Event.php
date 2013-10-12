@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -104,6 +105,20 @@ class Event extends BaseEntity {
      * @ORM\Column(name="checkStop", type="datetime", nullable=true)
      */
     private $checkStop;
+    /**
+     * @ORM\OneToMany(targetEntity="Annotation", mappedBy="event")
+     */
+    private $annotations;
+    /**
+     * @ORM\OneToMany(targetEntity="ProgramLine", mappedBy="event")
+     */
+    private $programLines;
+
+    public function __construct() {
+        $this->annotations = new ArrayCollection();
+        $this->programLines = new ArrayCollection();
+    }
+
 
     /**
      * @return boolean
@@ -189,7 +204,33 @@ class Event extends BaseEntity {
         return $this->year;
     }
 
+    /**
+     * @param mixed $programLines
+     */
+    public function setProgramLines($programLines) {
+        $this->programLines = $programLines;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getProgramLines() {
+        return $this->programLines;
+    }
+
+    /**
+     * @param mixed $annotations
+     */
+    public function setAnnotations($annotations) {
+        $this->annotations = $annotations;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnnotations() {
+        return $this->annotations;
+    }
 
 
 }

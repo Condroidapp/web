@@ -13,6 +13,7 @@ use App\InvalidProgramNodeException;
 use Model\Dao;
 use Nette\Diagnostics\Debugger;
 use Nette\Object;
+use Nette\Utils\Strings;
 
 class FeedParser extends Object {
 
@@ -59,16 +60,17 @@ class FeedParser extends Object {
         $data = array();
         foreach ($node->childNodes as $n) {
             if ($n->nodeType == XML_ELEMENT_NODE) {
-                $value = trim($n->nodeValue);
-                if($this->validate($n->nodeName, $value)) {
+                $value = $this->sanitizeValue($n->nodeValue, $n->nodeName);
+                if($this->validateValue($n->nodeName, $value)) {
                     $data[$n->nodeName] = $value;
                 }
             }
         }
+        $this->validateNode($data);
         return $data;
     }
 
-    private function validate($name, $value) {
+    private function validateValue($name, $value) {
         switch($name) {
             case 'pid':
                 if(!ctype_digit($value)) {
@@ -81,14 +83,57 @@ class FeedParser extends Object {
                 break;
             case 'author':
                 if($value === "") {
-                    $this->onError("Author has to be filled.");
+                    $this->onError("Author has to be filled.", 103);
                 }
+                break;
+            case 'title':
+                if($value === '') {
+                    $this->onError("Title has to be filled.", 104);
+                }
+                break;
+            case 'program-line':
+                if($value === '') {
+                    $this->onError("Program line has to be filled.", 105);
+                }
+                break;
+            case 'start-time':
+            case 'end-time':
+                if($value !== NULL && !strtotime($value)) {
+                    $this->onError('Invalid datetime value '.$value, 106);
+                }
+                break;
+            case 'type':
+            case 'length':
+            case 'location':
+            case 'annotation':
+                break;
+            default:
+                $this->onError('Unknown node '.$name, 110);
         }
         return true;
     }
 
+    private function validateNode($data) {
+        if((isset($data['start-time']) && $data['start-time'] != "") && (isset($data['end-time']) && $data['end-time'] !== "")) {
+
+        } else {
+            $this->onError('When you set start or end time, the other one has to be set too.', 107);
+        }
+    }
+
     private function log($message, $severity = ILogger::INFO) {
         $this->onLog($message, $severity);
+    }
+
+    private function sanitizeValue($nodeValue, $name) {
+        $value = Strings::trim($nodeValue);
+        if($value == "") {
+            return NULL;
+        }
+        if(in_array($name, ['start-time', 'end-time'])) {
+            $value = str_replace([' ', ';', ','], '', $value);
+        }
+        return $value;
     }
 
 } 

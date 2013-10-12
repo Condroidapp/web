@@ -6,6 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Annotations
+ * @property string $pid
+ * @property Event $event
+ * @property string $author
+ * @property string $title
+ * @property string $annotation
+ * @property string $type
+ * @property \DateTime $startTime
+ * @property \DateTime $endTime
+ * @property \DateTime $timestamp
+ * @property ProgramLine $location
+ * @property string $programLine
+ * @property boolean deleted
  *
  * @ORM\Table(name="annotations",
  *   indexes={
@@ -16,6 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      }
  * )
  * @ORM\Entity
+ * @ORM\HasLifeCycleCallbacks
  */
 class Annotation extends BaseEntity {
 
@@ -64,7 +77,7 @@ class Annotation extends BaseEntity {
      *
      * @ORM\Column(name="startTime", type="datetime", nullable=true)
      */
-    private $starttime;
+    private $startTime;
 
     /**
      * @var \DateTime
@@ -92,9 +105,15 @@ class Annotation extends BaseEntity {
     /**
      * @var ProgramLine
      *
-     * @ORM\ManyToOne(targetEntity="ProgramLine", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="ProgramLine", fetch="EAGER", cascade={"persist"})
      */
     private $programLine;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
 
     /**
      * @param string $annotation
@@ -198,14 +217,14 @@ class Annotation extends BaseEntity {
      * @param \DateTime $starttime
      */
     public function setStartTime($starttime) {
-        $this->starttime = $starttime;
+        $this->startTime = $starttime;
     }
 
     /**
      * @return \DateTime
      */
     public function getStartTime() {
-        return $this->starttime;
+        return $this->startTime;
     }
 
     /**
@@ -248,6 +267,29 @@ class Annotation extends BaseEntity {
      */
     public function getType() {
         return $this->type;
+    }
+
+    /**
+     * @param boolean $deleted
+     */
+    public function setDeleted($deleted) {
+        $this->deleted = $deleted;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getDeleted() {
+        return $this->deleted;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamp() {
+        $this->timestamp = new \DateTime();
     }
 
 

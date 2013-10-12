@@ -57,7 +57,7 @@ common:
             autowired: false
 
         importer:
-            class: Model\Commands\ImportCommand(@eventRepository, @echoLogger)
+            class: Model\Commands\ImportCommand(@eventRepository, @annotationRepository, @echoLogger)
             tags: [kdyby.console.command]
         feedParser: Model\Commands\FeedParser(@echoLogger)
 

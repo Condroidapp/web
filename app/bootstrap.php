@@ -24,9 +24,7 @@ $configurator->createRobotLoader()
 	->addDirectory(APP_DIR)
 	->addDirectory(LIBS_DIR)
 	->register();
-if(PHP_SAPI == 'cli') {
-    $configurator->productionMode = FALSE;
-}
+
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ .'/config/config.local.neon', Configurator::NONE);

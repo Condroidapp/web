@@ -5,6 +5,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Lines
+ * @property string $title
+ * @property Event $event
+ *
  *
  * @ORM\Table(name="program_lines",
  *      indexes={
