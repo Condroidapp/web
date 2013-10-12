@@ -117,7 +117,7 @@ class FeedParser extends Object {
         if((isset($data['start-time']) && $data['start-time'] != "") && (isset($data['end-time']) && $data['end-time'] !== "")) {
 
         } else {
-            $this->onError('When you set start or end time, the other one has to be set too.', 107);
+            $this->onError('PID '.$data['pid'].' - When you set start or end time, the other one has to be set too.', 107);
         }
     }
 

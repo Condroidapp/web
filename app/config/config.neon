@@ -4,72 +4,66 @@
 # If you don't protect this directory from direct web access, anybody will be able to see your passwords.
 # http://nette.org/security-warning
 #
-common:
-    extensions:
-        console: Kdyby\Console\DI\ConsoleExtension
-        annotations: Kdyby\Annotations\DI\AnnotationsExtension
-        events: Kdyby\Events\DI\EventsExtension
-        doctrine: Kdyby\Doctrine\DI\OrmExtension
-        newrelic: Mishak\NewRelicLogger\DI\NewRelicLoggerExtension
 
-    parameters:
-        database:
-            driver: mysqli
-            dbname: navigator
-            host: localhost
-            user: root
-            password:
-            charset: utf8
-            collation: utf8_czech_ci
-        twitter:
-            consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
-            accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
+extensions:
+    console: Kdyby\Console\DI\ConsoleExtension
+    annotations: Kdyby\Annotations\DI\AnnotationsExtension
+    events: Kdyby\Events\DI\EventsExtension
+    doctrine: Kdyby\Doctrine\DI\OrmExtension
+    newrelic: Mishak\NewRelicLogger\DI\NewRelicLoggerExtension
 
+console:
+    url: http://condroid.fan-project.com/
 
-    php:
-        date.timezone: Europe/Prague
-
-
-    nette:
-        session:
-            autoStart: smart
-
-    doctrine:
+parameters:
+    database:
         driver: mysqli
-        dbname: condroid
+        dbname: navigator
         host: localhost
         user: root
         password:
         charset: utf8
         collation: utf8_czech_ci
-        metadata:
-            Model: annotations("%appDir%/model")
+    twitter:
+        consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
+        accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
 
-    services:
-      #  em: @doctrine.dao
-        eventRepository: @doctrine.dao(Model\Event)
-        annotationRepository: @doctrine.dao(Model\Annotation)
-        lineRepository: @doctrine.dao(Model\ProgramLine)
+
+php:
+    date.timezone: Europe/Prague
+
+
+nette:
+    session:
+        autoStart: smart
+
+doctrine:
+    driver: mysqli
+    dbname: condroid
+    host: localhost
+    user: root
+    password:
+    charset: utf8
+    collation: utf8_czech_ci
+    metadata:
+        Model: annotations("%appDir%/model")
+
+services:
+  #  em: @doctrine.dao
+    eventRepository: @doctrine.dao(Model\Event)
+    annotationRepository: @doctrine.dao(Model\Annotation)
+    lineRepository: @doctrine.dao(Model\ProgramLine)
+    logDao: @doctrine.dao(Model\LogRecord)
 #        logger: Logger
 
-        echoLogger:
-            class: Model\Commands\EchoLogger
-            autowired: false
+    echoLogger:
+        class: Model\Commands\EchoLogger
+        autowired: false
+    databaseLogger:
+        class: Model\Commands\DatabaseLogger(@logDao)
+        autowired: false
 
-        importer:
-            class: Model\Commands\ImportCommand(@eventRepository, @annotationRepository, @echoLogger)
-            tags: [kdyby.console.command]
-        feedParser: Model\Commands\FeedParser(@echoLogger)
-
-
-#        doctrine_event_cache_subscriber:
-#            class: App\Core\CacheSubscriber
-#            tags: [doctrineEvent]
-
-
-    factories:
-
-
-production < common:
-
-development < common:
+    importer:
+        class: Model\Commands\ImportCommand(@eventRepository, @annotationRepository, @databaseLogger)
+        tags: [kdyby.console.command]
+    feedParser: Model\Commands\FeedParser(@echoLogger)
