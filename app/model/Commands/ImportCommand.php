@@ -15,6 +15,7 @@ use Model\Annotation;
 use Model\BasicFetchByQuery;
 use Model\Event;
 use Model\ProgramLine;
+use Nette\Diagnostics\Debugger;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
@@ -64,34 +65,53 @@ class ImportCommand extends Command {
     }
 
     private function importData(Event $event, $data) {
-        $annotations = $event->getAnnotations();
-        $data = Mixed::mapAssoc($data, 'pid');
+        try {
+            $annotations = $event->getAnnotations();
+            $data = Mixed::mapAssoc($data, 'pid');
+
+            $additions = 0;
+            $changes = 0;
+            $deletions = 0;
+            $totalCount = count($data);
 
 
-        $programLinesMap = $this->processProgramLines($data, $event);
+            $programLinesMap = $this->processProgramLines($data, $event);
 
-        /** @var $annotation Annotation */
-        foreach($annotations as $id => $annotation) {
-            if(!isset($data[$annotation->pid])) {
-                $annotation->setDeleted(TRUE);
-                continue;
+            /** @var $annotation Annotation */
+            foreach($annotations as $id => $annotation) {
+                if(!isset($data[$annotation->pid])) {
+                    $annotation->setDeleted(TRUE);
+                    $deletions++;
+                    continue;
+                }
+                $newData = $data[$annotation->pid];
+                if($this->annotationChanged($newData, $annotation)) {
+                    $changes++;
+                    $this->processAnnotationUpdate($newData, $annotation, $programLinesMap);
+                }
+
+                unset($data[$annotation->pid]);
             }
-            $newData = $data[$annotation->pid];
 
-            $this->processAnnotationUpdate($newData, $annotation, $programLinesMap);
-
-            unset($data[$annotation->pid]);
-        }
-
-        if(!empty($data)) {
-            foreach($data as $pid => $newData) {
-                $annotation = new Annotation();
-                $annotation->event = $event;
-                $this->processAnnotationUpdate($newData, $annotation, $programLinesMap);
-                $this->annotationDao->add($annotation);
+            if(!empty($data)) {
+                foreach($data as $newData) {
+                    $additions++;
+                    $annotation = new Annotation();
+                    $annotation->event = $event;
+                    $this->processAnnotationUpdate($newData, $annotation, $programLinesMap);
+                    $this->annotationDao->add($annotation);
+                }
             }
+            $this->logger->log("Found total of $totalCount records, discovered $additions new, $changes changed, ".
+                "$deletions deleted, ".($totalCount-$additions-$deletions-$changes)." unchanged.");
+            $this->annotationDao->save();
+
+            $this->logger->log('Successfully processed the feed.');
+        } catch (\Exception $e) {
+            $this->logger->log('Error during data processing. '.$e->getMessage());
+            Debugger::log($e);
+            return 1;
         }
-        $this->annotationDao->save();
 
     }
 
@@ -132,11 +152,50 @@ class ImportCommand extends Command {
         $annotation->author = $newData['author'];
         $annotation->title = $newData['title'];
         $annotation->annotation = $newData['annotation'];
-        $annotation->startTime = $newData['start-time'];
-        $annotation->endTime = $newData['end-time'];
+        if(isset($newData['start-time']) && $newData['start-time']) {
+            $annotation->startTime = new \DateTime($newData['start-time']);
+        }
+        if(isset($newData['end-time']) && $newData['end-time']) {
+            $annotation->endTime = new \DateTime($newData['end-time']);
+        }
         $annotation->location = $newData['location'];
         $annotation->type = $newData['type'];
         $annotation->programLine = $programLinesMap[$newData['program-line']];
+    }
+
+    private function annotationChanged($newData, $annotation) {
+
+        foreach($newData as $key => $item) {
+            if($key === 'pid') {
+                continue;
+            }
+            if(!isset($annotation->$key)) {
+                continue;
+            }
+            if($key === 'start-time') {
+                $key = 'startTime';
+            }
+            if($key === 'end-time') {
+                $key = 'endTime';
+            }
+            if($key === 'program-line') {
+                $key = 'programLine';
+            }
+            $previousValue = $annotation->$key;
+            if($previousValue instanceof Event) {
+                continue;
+            }
+            if($previousValue instanceof ProgramLine) {
+                $previousValue = $previousValue->title;
+            }
+            if($previousValue instanceof \DateTime) {
+                $previousValue = $previousValue->format('c');
+            }
+            if($item !== $previousValue) {
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 
 

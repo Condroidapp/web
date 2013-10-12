@@ -113,7 +113,7 @@ class Annotation extends BaseEntity {
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $deleted;
+    private $deleted = FALSE;
 
     /**
      * @param string $annotation
