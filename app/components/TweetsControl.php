@@ -77,23 +77,5 @@ class OauthLoader implements  ILoader {
         $twitter = new Twitter($this->consumerKey, $this->consumerSecret, $this->accessToken, $this->accessTokenSecret);
         $statuses = $twitter->load($twitter::ME, 5, $this->config);
         return $statuses;
-        foreach($statuses as $status) {
-            dump($status);
-        }
-        exit;
-        if ($this->config['userId'])
-            $url->appendQuery('user_id=' . $this->config['userId']);
-        elseif ($this->config['screenName'])
-            $url->appendQuery('screen_name=' . $this->config['screenName']);
-
-        if ($this->config['tweetCount'])
-            $url->appendQuery('count=' . $this->config['tweetCount']);
-        if ($this->config['retweets'])
-            $url->appendQuery('include_rts=true');
-        if (!$this->config['replies'])
-            $url->appendQuery('exclude_replies=true');
-
-        $url->appendQuery('include_entities=true');
-        return $url;
     }
 }

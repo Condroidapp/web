@@ -4,8 +4,8 @@ namespace ApiModule;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+use Kdyby\Doctrine\EntityDao;
 use Model\BasicFetchByQuery;
-use Model\Dao;
 use Model\Queries\AnnotationLastMod;
 use Nette\Http\Request;
 use Nette\Http\Response;
@@ -22,7 +22,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
     /** @var  Response */
     public $httpResponse;
 
-    /** @var Dao */
+    /** @var EntityDao */
     private $annotationRepository;
 
     protected function startup() {
