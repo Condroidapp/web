@@ -1,5 +1,5 @@
 <?php
-namespace NewRelic;
+namespace Quinix\NewRelic;
 use Nette;
 
 class Logger extends Nette\Diagnostics\Logger {
