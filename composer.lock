@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/twitter-php.git",
-                "reference": "3b381bfd186d5fc2a80f4e25be9ff2331ec8746e"
+                "reference": "b9ed44da6f2363b09d2f306deeaf5df94f786324"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/twitter-php/zipball/3b381bfd186d5fc2a80f4e25be9ff2331ec8746e",
-                "reference": "3b381bfd186d5fc2a80f4e25be9ff2331ec8746e",
+                "url": "https://api.github.com/repos/dg/twitter-php/zipball/b9ed44da6f2363b09d2f306deeaf5df94f786324",
+                "reference": "b9ed44da6f2363b09d2f306deeaf5df94f786324",
                 "shasum": ""
             },
             "type": "library",
@@ -41,7 +41,7 @@
                 "oauth",
                 "twitter"
             ],
-            "time": "2013-06-17 14:42:46"
+            "time": "2013-09-12 18:21:15"
         },
         {
             "name": "doctrine/annotations",
@@ -116,16 +116,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "2c9761ff1d13e188d5f7378066c1ce2882d7a336"
+                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/2c9761ff1d13e188d5f7378066c1ce2882d7a336",
-                "reference": "2c9761ff1d13e188d5f7378066c1ce2882d7a336",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/d0e4447707a064a5814b18cb0dcc2f24185f6179",
+                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179",
                 "shasum": ""
             },
             "require": {
@@ -181,7 +181,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2013-08-07 16:04:25"
+            "time": "2013-09-26 19:23:25"
         },
         {
             "name": "doctrine/collections",
@@ -252,16 +252,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "2.4.0-RC4",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "c4255b9fbd63ee1fe52697839318af5937fced9b"
+                "reference": "ceb18cf9b0230f3ea208b6238130fd415abda0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/c4255b9fbd63ee1fe52697839318af5937fced9b",
-                "reference": "c4255b9fbd63ee1fe52697839318af5937fced9b",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/ceb18cf9b0230f3ea208b6238130fd415abda0a7",
+                "reference": "ceb18cf9b0230f3ea208b6238130fd415abda0a7",
                 "shasum": ""
             },
             "require": {
@@ -322,39 +322,34 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2013-06-21 12:11:28"
+            "time": "2013-09-07 10:20:34"
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.4.0-RC2",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "3253f7a1c13a2177d925bd0f6ee8387c5dd9c57a"
+                "reference": "3eb557f144ec41e6e84997e43acb1946c92fbc88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/3253f7a1c13a2177d925bd0f6ee8387c5dd9c57a",
-                "reference": "3253f7a1c13a2177d925bd0f6ee8387c5dd9c57a",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/3eb557f144ec41e6e84997e43acb1946c92fbc88",
+                "reference": "3eb557f144ec41e6e84997e43acb1946c92fbc88",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "2.4.*@beta",
+                "doctrine/common": "~2.4",
                 "php": ">=5.3.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.*",
-                "symfony/console": "2.*"
+                "symfony/console": "~2.0"
             },
             "suggest": {
                 "symfony/console": "Allows use of the command line interface"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\DBAL\\": "lib/"
@@ -392,7 +387,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-06-25 17:49:29"
+            "time": "2013-09-07 10:49:18"
         },
         {
             "name": "doctrine/inflector",
@@ -511,28 +506,28 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.4.0-RC2",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "29d6da0fa063d55d06117045f3446b2716202d2b"
+                "reference": "57705e0d781719b96daf322a6d6f66ff21e3cdc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/29d6da0fa063d55d06117045f3446b2716202d2b",
-                "reference": "29d6da0fa063d55d06117045f3446b2716202d2b",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/57705e0d781719b96daf322a6d6f66ff21e3cdc9",
+                "reference": "57705e0d781719b96daf322a6d6f66ff21e3cdc9",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "~1.1",
-                "doctrine/dbal": ">=2.4-beta,<2.5-dev",
+                "doctrine/dbal": "~2.4",
                 "ext-pdo": "*",
                 "php": ">=5.3.2",
-                "symfony/console": "2.*"
+                "symfony/console": "~2.0"
             },
             "require-dev": {
                 "satooshi/php-coveralls": "dev-master",
-                "symfony/yaml": "2.1"
+                "symfony/yaml": "~2.1"
             },
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
@@ -582,7 +577,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-06-30 08:38:02"
+            "time": "2013-09-07 16:19:56"
         },
         {
             "name": "kdyby/annotations",
@@ -590,12 +585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Annotations.git",
-                "reference": "0f2f040a0b4db7054c3cd65be8a44d755567da15"
+                "reference": "fcb98945454e6e09359506d370a1af14545ed4a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Annotations/zipball/0f2f040a0b4db7054c3cd65be8a44d755567da15",
-                "reference": "0f2f040a0b4db7054c3cd65be8a44d755567da15",
+                "url": "https://api.github.com/repos/Kdyby/Annotations/zipball/fcb98945454e6e09359506d370a1af14545ed4a2",
+                "reference": "fcb98945454e6e09359506d370a1af14545ed4a2",
                 "shasum": ""
             },
             "require": {
@@ -640,7 +635,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-08-22 22:10:12"
+            "time": "2013-09-26 19:15:32"
         },
         {
             "name": "kdyby/console",
@@ -648,12 +643,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Console.git",
-                "reference": "4db18d707ec637da42b9a03c7927a7373f6dfc16"
+                "reference": "1994a87080c0629978467c4386338ee26238d340"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Console/zipball/4db18d707ec637da42b9a03c7927a7373f6dfc16",
-                "reference": "4db18d707ec637da42b9a03c7927a7373f6dfc16",
+                "url": "https://api.github.com/repos/Kdyby/Console/zipball/1994a87080c0629978467c4386338ee26238d340",
+                "reference": "1994a87080c0629978467c4386338ee26238d340",
                 "shasum": ""
             },
             "require": {
@@ -692,24 +687,24 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-08-22 22:10:12"
+            "time": "2013-09-13 15:26:55"
         },
         {
             "name": "kdyby/doctrine",
-            "version": "v1.0.0-RC1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Doctrine.git",
-                "reference": "a2776d315ff019a061bab982b3498b58be5eae82"
+                "reference": "70f68c734caec67dc0b822df055d1c4939e2f689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/a2776d315ff019a061bab982b3498b58be5eae82",
-                "reference": "a2776d315ff019a061bab982b3498b58be5eae82",
+                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/70f68c734caec67dc0b822df055d1c4939e2f689",
+                "reference": "70f68c734caec67dc0b822df055d1c4939e2f689",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "2.4.*@rc",
+                "doctrine/orm": "~2.4",
                 "kdyby/annotations": "@dev",
                 "kdyby/console": "@dev",
                 "kdyby/events": "@dev",
@@ -751,7 +746,7 @@
                 "nette",
                 "orm"
             ],
-            "time": "2013-08-12 17:58:36"
+            "time": "2013-09-10 18:12:59"
         },
         {
             "name": "kdyby/doctrine-cache",
@@ -805,12 +800,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Events.git",
-                "reference": "1c63710c7bea4c7741b3e3b1bc05bffa81563dea"
+                "reference": "5d682ec242f88c512e9bd282e384a8a27ea36bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Events/zipball/1c63710c7bea4c7741b3e3b1bc05bffa81563dea",
-                "reference": "1c63710c7bea4c7741b3e3b1bc05bffa81563dea",
+                "url": "https://api.github.com/repos/Kdyby/Events/zipball/5d682ec242f88c512e9bd282e384a8a27ea36bf8",
+                "reference": "5d682ec242f88c512e9bd282e384a8a27ea36bf8",
                 "shasum": ""
             },
             "require": {
@@ -849,7 +844,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-08-22 22:10:12"
+            "time": "2013-10-10 00:54:31"
         },
         {
             "name": "mishak/newrelic-nette",
@@ -907,12 +902,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "f36f5daab168925ccd1b4f7f35faa434be076dc6"
+                "reference": "3940773d947cc7fb7fbfc9cb9f28f663b4486162"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/f36f5daab168925ccd1b4f7f35faa434be076dc6",
-                "reference": "f36f5daab168925ccd1b4f7f35faa434be076dc6",
+                "url": "https://api.github.com/repos/nette/nette/zipball/3940773d947cc7fb7fbfc9cb9f28f663b4486162",
+                "reference": "3940773d947cc7fb7fbfc9cb9f28f663b4486162",
                 "shasum": ""
             },
             "require": {
@@ -973,21 +968,21 @@
                 "neon",
                 "templating"
             ],
-            "time": "2013-08-20 15:31:16"
+            "time": "2013-10-12 09:15:47"
         },
         {
             "name": "symfony/console",
-            "version": "v2.3.3",
+            "version": "v2.3.6",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "290fe87d3618ce49c2caf7c456402affbd9917ac"
+                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/290fe87d3618ce49c2caf7c456402affbd9917ac",
-                "reference": "290fe87d3618ce49c2caf7c456402affbd9917ac",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/f880062d56edefb25b36f2defa65aafe65959dc7",
+                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7",
                 "shasum": ""
             },
             "require": {
@@ -1026,7 +1021,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-07-21 12:12:18"
+            "time": "2013-09-25 06:04:15"
         }
     ],
     "packages-dev": [
