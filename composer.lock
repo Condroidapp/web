@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7876a57ccdaa496af8ad671f938d9f64",
+    "hash": "b1478a226fbcc7f3ae54e1c71c3ac6f9",
     "packages": [
         {
             "name": "dg/twitter-php",
@@ -800,12 +800,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Events.git",
-                "reference": "5d682ec242f88c512e9bd282e384a8a27ea36bf8"
+                "reference": "c6e661b76f5fa829a5c27c75c3de8be742bfaa06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Events/zipball/5d682ec242f88c512e9bd282e384a8a27ea36bf8",
-                "reference": "5d682ec242f88c512e9bd282e384a8a27ea36bf8",
+                "url": "https://api.github.com/repos/Kdyby/Events/zipball/c6e661b76f5fa829a5c27c75c3de8be742bfaa06",
+                "reference": "c6e661b76f5fa829a5c27c75c3de8be742bfaa06",
                 "shasum": ""
             },
             "require": {
@@ -844,57 +844,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-10-10 00:54:31"
-        },
-        {
-            "name": "mishak/newrelic-nette",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mishak87/newrelic-nette.git",
-                "reference": "d0ea3d6702b61b9238fc7ba88b39b463977d39e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mishak87/newrelic-nette/zipball/d0ea3d6702b61b9238fc7ba88b39b463977d39e0",
-                "reference": "d0ea3d6702b61b9238fc7ba88b39b463977d39e0",
-                "shasum": ""
-            },
-            "require": {
-                "kdyby/events": "@dev",
-                "nette/nette": "@dev",
-                "php": ">=5.3.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Mishak\\NewRelicLogger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Filip Procházka",
-                    "homepage": "http://filip-prochazka.com"
-                },
-                {
-                    "name": "Michal Gebauer",
-                    "homepage": "http://mishak.net"
-                }
-            ],
-            "description": "Tighter integration of logging to New Relic for Nette Framework",
-            "keywords": [
-                "logger",
-                "nette",
-                "new relic",
-                "newrelic"
-            ],
-            "time": "2013-07-19 02:39:23"
+            "time": "2013-10-12 20:28:58"
         },
         {
             "name": "nette/nette",
@@ -1038,8 +988,7 @@
         "kdyby/doctrine": 5,
         "kdyby/console": 20,
         "dg/twitter-php": 20,
-        "kdyby/events": 20,
-        "mishak/newrelic-nette": 20
+        "kdyby/events": 20
     },
     "platform": {
         "php": ">=5.4"

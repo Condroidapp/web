@@ -17,7 +17,6 @@
         "kdyby/doctrine": "@rc",
         "kdyby/console": "dev-master",
         "dg/twitter-php": "dev-master",
-        "kdyby/events": "dev-master",
-        "mishak/newrelic-nette": "@dev"
+        "kdyby/events": "dev-master"
     }
 }

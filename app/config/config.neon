@@ -10,7 +10,7 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     events: Kdyby\Events\DI\EventsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
-    newrelic: Mishak\NewRelicLogger\DI\NewRelicLoggerExtension
+    newrelic: Quinix\NewRelic\DI\Extension
 
 console:
     url: http://condroid.fan-project.com/
@@ -27,7 +27,9 @@ parameters:
     twitter:
         consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
         accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
-
+newrelic:
+    appName: Condroid
+    licence: ...
 
 php:
     date.timezone: Europe/Prague
