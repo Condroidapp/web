@@ -15,7 +15,7 @@ abstract class BaseEntity extends \Nette\Object {
 
     /**
      * @ORM\Id @ORM\Column(type="integer")
-     * @ORM\generatedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @var int
      */
     protected $id;
