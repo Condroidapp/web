@@ -10,7 +10,9 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     events: Kdyby\Events\DI\EventsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
+    autowired: Kdyby\Autowired\DI\AutowiredExtension
     newrelic: Quinix\NewRelic\DI\Extension
+    bootstrap: Kdyby\BootstrapFormRenderer\DI\RendererExtension
 
 console:
     url: http://condroid.fan-project.com/
@@ -35,6 +37,11 @@ php:
 nette:
     session:
         autoStart: smart
+
+    latte:
+        macros:
+            - Nextras\Forms\Bridges\Latte\Macros\BS3InputMacros::install
+
 
 doctrine:
     driver: mysqli

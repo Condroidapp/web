@@ -17,6 +17,9 @@
         "kdyby/doctrine": "@rc",
         "kdyby/console": "dev-master",
         "dg/twitter-php": "dev-master",
-        "kdyby/events": "dev-master"
+        "kdyby/events": "dev-master",
+        "kdyby/autowired": "@dev",
+        "kdyby/bootstrap-form-renderer": "@dev",
+        "nextras/forms": "@dev"
     }
 }
