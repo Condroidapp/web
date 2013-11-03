@@ -149,7 +149,9 @@ class ImportCommand extends Command {
      */
     private function processAnnotationUpdate($newData, $annotation, $programLinesMap) {
         $annotation->pid = $newData['pid'];
-        $annotation->author = $newData['author'];
+        if(isset($newData['author']) && $newData['author']) {
+            $annotation->author = $newData['author'];
+        }
         $annotation->title = $newData['title'];
         $annotation->annotation = $newData['annotation'];
         if(isset($newData['start-time']) && $newData['start-time']) {
