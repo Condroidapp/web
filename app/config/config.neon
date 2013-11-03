@@ -27,9 +27,6 @@ parameters:
     twitter:
         consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
         accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
-newrelic:
-    appName: Condroid
-    licence: ...
 
 php:
     date.timezone: Europe/Prague

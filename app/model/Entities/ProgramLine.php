@@ -27,7 +27,7 @@ class ProgramLine extends BaseEntity {
     /**
      * @var Event
      *
-     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="programLines")
      *
      */
     private $event;

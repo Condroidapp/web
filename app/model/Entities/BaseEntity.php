@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Base Entity parent class
- * @ORM\MappedSuperClass
+ * @ORM\MappedSuperclass
  * @author Jan Langer <langeja1@fit.cvut.cz>
  * @property-read int $id
  */

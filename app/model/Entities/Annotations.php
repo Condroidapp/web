@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      }
  * )
  * @ORM\Entity
- * @ORM\HasLifeCycleCallbacks
+ * @ORM\HasLifecycleCallbacks
  */
 class Annotation extends BaseEntity {
 
@@ -40,7 +40,7 @@ class Annotation extends BaseEntity {
 
     /**
      * @var Event
-     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="annotations")
      */
     private $event;
 
