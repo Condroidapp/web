@@ -158,7 +158,9 @@ class ImportCommand extends Command {
         if(isset($newData['end-time']) && $newData['end-time']) {
             $annotation->endTime = new \DateTime($newData['end-time']);
         }
-        $annotation->location = $newData['location'];
+        if(isset($newData['location']) && $newData['location']) {
+            $annotation->location = $newData['location'];
+        }
         $annotation->type = $newData['type'];
         $annotation->programLine = $programLinesMap[$newData['program-line']];
     }
