@@ -47,6 +47,14 @@ $container->router[] = new Route('api/3/<presenter>[/<cid>]', array(
     'presenter' =>'Default',
     'action'=> 'default',
     'cid' => null));
+$container->router[] = new Route('admin/<presenter>/<action>[/<id>]', array(
+    'module'=>'Admin',
+    'presenter' =>'Dashboard',
+    'action'=> 'default',
+    'id' => null));
+
+
+
 
 $container->router[] = new Route('<action>/[<id>]', array(
     'module'=>'Front',
