@@ -7,6 +7,7 @@ use App\BootstrapFormRenderer\Bootstrap3Renderer as BootstrapRenderer;
 
 use Nette\Forms\Form as NForm;
 use Nette\Forms\IControl;
+use Nextras\Forms\Rendering\Bs3FormRenderer;
 
 //setup of default rule messages
 
@@ -40,7 +41,7 @@ class Form extends AppForm {
     public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL) {
         parent::__construct($parent, $name);
         $this->addProtection();
-        $this->setRenderer(new BootstrapRenderer());
+        $this->setRenderer(new Bs3FormRenderer());
     }
 
     /**
