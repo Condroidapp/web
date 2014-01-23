@@ -12,7 +12,6 @@ extensions:
     doctrine: Kdyby\Doctrine\DI\OrmExtension
     autowired: Kdyby\Autowired\DI\AutowiredExtension
     newrelic: Quinix\NewRelic\DI\Extension
-    bootstrap: Kdyby\BootstrapFormRenderer\DI\RendererExtension
 
 console:
     url: http://condroid.fan-project.com/

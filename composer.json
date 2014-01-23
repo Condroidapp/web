@@ -1,7 +1,7 @@
 {
     "name": "condroid/server",
     "description": "Condroid server",
-    "minimum-stability": "rc",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Jan Langer",
@@ -10,16 +10,13 @@
     ],
     "require": {
         "php": ">=5.4",
-        "nette/nette": "dev-master",
-        "doctrine/orm": "@rc",
-        "kdyby/annotations": "dev-master",
-
-        "kdyby/doctrine": "@rc",
-        "kdyby/console": "dev-master",
-        "dg/twitter-php": "dev-master",
-        "kdyby/events": "dev-master",
-        "kdyby/autowired": "@dev",
-        "kdyby/bootstrap-form-renderer": "@dev",
-        "nextras/forms": "@dev"
+        "nette/nette": "2.1.*",
+        "doctrine/orm": "2.*",
+        "kdyby/doctrine": "@stable",
+        "kdyby/console": "@stable",
+        "dg/twitter-php": "@stable",
+        "kdyby/events": "@stable",
+        "kdyby/autowired": "@stable",
+        "nextras/forms": "@rc"
     }
 }

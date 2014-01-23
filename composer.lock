@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "30519458342de9a5c920a49272d34776",
+    "hash": "6af19da7bcd70b4334b8e5183c5b08d9",
     "packages": [
         {
             "name": "dg/twitter-php",
-            "version": "dev-master",
+            "version": "v3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/twitter-php.git",
-                "reference": "b9ed44da6f2363b09d2f306deeaf5df94f786324"
+                "reference": "5ca5b8cb823972e1239656c5f3b17ddd28e6d816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/twitter-php/zipball/b9ed44da6f2363b09d2f306deeaf5df94f786324",
-                "reference": "b9ed44da6f2363b09d2f306deeaf5df94f786324",
+                "url": "https://api.github.com/repos/dg/twitter-php/zipball/5ca5b8cb823972e1239656c5f3b17ddd28e6d816",
+                "reference": "5ca5b8cb823972e1239656c5f3b17ddd28e6d816",
                 "shasum": ""
             },
             "type": "library",
@@ -41,7 +41,7 @@
                 "oauth",
                 "twitter"
             ],
-            "time": "2013-09-12 18:21:15"
+            "time": "2014-01-17 16:59:53"
         },
         {
             "name": "doctrine/annotations",
@@ -116,16 +116,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179"
+                "reference": "e16d7adf45664a50fa86f515b6d5e7f670130449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/d0e4447707a064a5814b18cb0dcc2f24185f6179",
-                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/e16d7adf45664a50fa86f515b6d5e7f670130449",
+                "reference": "e16d7adf45664a50fa86f515b6d5e7f670130449",
                 "shasum": ""
             },
             "require": {
@@ -133,6 +133,10 @@
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=3.7",
+                "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
@@ -153,7 +157,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -181,7 +186,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2013-09-26 19:23:25"
+            "time": "2013-10-25 19:04:14"
         },
         {
             "name": "doctrine/collections",
@@ -326,16 +331,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.4.0",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "3eb557f144ec41e6e84997e43acb1946c92fbc88"
+                "reference": "fec965d330c958e175c39e61c3f6751955af32d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/3eb557f144ec41e6e84997e43acb1946c92fbc88",
-                "reference": "3eb557f144ec41e6e84997e43acb1946c92fbc88",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fec965d330c958e175c39e61c3f6751955af32d0",
+                "reference": "fec965d330c958e175c39e61c3f6751955af32d0",
                 "shasum": ""
             },
             "require": {
@@ -363,7 +368,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -387,7 +393,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-09-07 10:49:18"
+            "time": "2014-01-01 16:43:57"
         },
         {
             "name": "doctrine/inflector",
@@ -506,16 +512,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "57705e0d781719b96daf322a6d6f66ff21e3cdc9"
+                "reference": "84373d05a4198ec380918d535abf83c454c3867f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/57705e0d781719b96daf322a6d6f66ff21e3cdc9",
-                "reference": "57705e0d781719b96daf322a6d6f66ff21e3cdc9",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/84373d05a4198ec380918d535abf83c454c3867f",
+                "reference": "84373d05a4198ec380918d535abf83c454c3867f",
                 "shasum": ""
             },
             "require": {
@@ -555,7 +561,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -577,26 +584,26 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-09-07 16:19:56"
+            "time": "2013-11-12 12:40:13"
         },
         {
             "name": "kdyby/annotations",
-            "version": "dev-master",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Annotations.git",
-                "reference": "fcb98945454e6e09359506d370a1af14545ed4a2"
+                "reference": "cbc10ed3269cca682442e367588b4c2582cabce1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Annotations/zipball/fcb98945454e6e09359506d370a1af14545ed4a2",
-                "reference": "fcb98945454e6e09359506d370a1af14545ed4a2",
+                "url": "https://api.github.com/repos/Kdyby/Annotations/zipball/cbc10ed3269cca682442e367588b4c2582cabce1",
+                "reference": "cbc10ed3269cca682442e367588b4c2582cabce1",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "~1.1",
-                "kdyby/doctrine-cache": "@dev",
-                "nette/nette": "@dev"
+                "kdyby/doctrine-cache": "~2.0",
+                "nette/nette": "~2.1@dev"
             },
             "conflict": {
                 "kdyby/doctrine": "0.9.*"
@@ -605,6 +612,11 @@
                 "nette/tester": "@dev"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Kdyby\\Annotations\\": "src/"
@@ -635,24 +647,24 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-09-26 19:15:32"
+            "time": "2014-01-07 19:44:23"
         },
         {
             "name": "kdyby/autowired",
-            "version": "dev-master",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Autowired.git",
-                "reference": "00734d2c01e0262af93a428cb9758ad1d6c11a4c"
+                "reference": "482e30b04cc31cd5854924d9f567640b8cc1539f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Autowired/zipball/00734d2c01e0262af93a428cb9758ad1d6c11a4c",
-                "reference": "00734d2c01e0262af93a428cb9758ad1d6c11a4c",
+                "url": "https://api.github.com/repos/Kdyby/Autowired/zipball/482e30b04cc31cd5854924d9f567640b8cc1539f",
+                "reference": "482e30b04cc31cd5854924d9f567640b8cc1539f",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": "@dev"
+                "nette/nette": "~2.1@dev"
             },
             "require-dev": {
                 "nette/tester": "@dev"
@@ -686,73 +698,25 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-08-22 22:10:12"
-        },
-        {
-            "name": "kdyby/bootstrap-form-renderer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Kdyby/BootstrapFormRenderer.git",
-                "reference": "435593191509f0bca0a7e7f646dd66756bf4a77d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/BootstrapFormRenderer/zipball/435593191509f0bca0a7e7f646dd66756bf4a77d",
-                "reference": "435593191509f0bca0a7e7f646dd66756bf4a77d",
-                "shasum": ""
-            },
-            "require": {
-                "nette/nette": "@dev"
-            },
-            "require-dev": {
-                "nette/tester": "@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Kdyby\\BootstrapFormRenderer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Filip Procházka",
-                    "homepage": "http://filip-prochazka.com"
-                }
-            ],
-            "description": "Nette forms renderer with bootstrap",
-            "homepage": "http://kdyby.org",
-            "keywords": [
-                "Forms",
-                "bootstrap",
-                "kdyby",
-                "nette"
-            ],
-            "time": "2013-08-24 17:22:02"
+            "time": "2014-01-07 19:55:31"
         },
         {
             "name": "kdyby/console",
-            "version": "dev-master",
+            "version": "v2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Console.git",
-                "reference": "1994a87080c0629978467c4386338ee26238d340"
+                "reference": "66346ea70e9729cb0accbc15ddb129b73030cce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Console/zipball/1994a87080c0629978467c4386338ee26238d340",
-                "reference": "1994a87080c0629978467c4386338ee26238d340",
+                "url": "https://api.github.com/repos/Kdyby/Console/zipball/66346ea70e9729cb0accbc15ddb129b73030cce6",
+                "reference": "66346ea70e9729cb0accbc15ddb129b73030cce6",
                 "shasum": ""
             },
             "require": {
                 "nette/nette": "@dev",
-                "symfony/console": "~2.2"
+                "symfony/console": "~2.3"
             },
             "require-dev": {
                 "nette/tester": "@dev"
@@ -786,34 +750,40 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-09-13 15:26:55"
+            "time": "2013-10-23 22:15:36"
         },
         {
             "name": "kdyby/doctrine",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Doctrine.git",
-                "reference": "70f68c734caec67dc0b822df055d1c4939e2f689"
+                "reference": "5bf1cdef3a51614566e1991d894c8581fd3e1200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/70f68c734caec67dc0b822df055d1c4939e2f689",
-                "reference": "70f68c734caec67dc0b822df055d1c4939e2f689",
+                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/5bf1cdef3a51614566e1991d894c8581fd3e1200",
+                "reference": "5bf1cdef3a51614566e1991d894c8581fd3e1200",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "~2.4",
-                "kdyby/annotations": "@dev",
-                "kdyby/console": "@dev",
-                "kdyby/events": "@dev",
-                "nette/nette": "@dev"
+                "kdyby/annotations": "~2.0@dev",
+                "kdyby/console": "~2.0@dev",
+                "kdyby/doctrine-cache": "~2.1@dev",
+                "kdyby/events": "~2.0@dev",
+                "nette/nette": "~2.1@dev"
             },
             "require-dev": {
                 "dg/dibi": "~2.0",
                 "nette/tester": "@dev"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Kdyby\\Doctrine\\": "src/",
@@ -845,25 +815,25 @@
                 "nette",
                 "orm"
             ],
-            "time": "2013-09-10 18:12:59"
+            "time": "2014-01-08 12:23:26"
         },
         {
             "name": "kdyby/doctrine-cache",
-            "version": "v1.0",
+            "version": "v2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/DoctrineCache.git",
-                "reference": "v1.0"
+                "reference": "daa7040e4fa59572f037229c67277b91b745d2da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/DoctrineCache/zipball/v1.0",
-                "reference": "v1.0",
+                "url": "https://api.github.com/repos/Kdyby/DoctrineCache/zipball/daa7040e4fa59572f037229c67277b91b745d2da",
+                "reference": "daa7040e4fa59572f037229c67277b91b745d2da",
                 "shasum": ""
             },
             "require": {
                 "doctrine/cache": "~1.0",
-                "nette/nette": "~2.0"
+                "nette/nette": "@dev"
             },
             "type": "library",
             "autoload": {
@@ -891,29 +861,34 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-08-12 13:20:51"
+            "time": "2013-10-27 19:47:35"
         },
         {
             "name": "kdyby/events",
-            "version": "dev-master",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Events.git",
-                "reference": "c6e661b76f5fa829a5c27c75c3de8be742bfaa06"
+                "reference": "8878e831e7cc10a448b88b72b22f833c84e5adc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Events/zipball/c6e661b76f5fa829a5c27c75c3de8be742bfaa06",
-                "reference": "c6e661b76f5fa829a5c27c75c3de8be742bfaa06",
+                "url": "https://api.github.com/repos/Kdyby/Events/zipball/8878e831e7cc10a448b88b72b22f833c84e5adc8",
+                "reference": "8878e831e7cc10a448b88b72b22f833c84e5adc8",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": "@dev"
+                "nette/nette": "~2.1@dev"
             },
             "require-dev": {
                 "nette/tester": "@dev"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Kdyby\\Events\\": "src/"
@@ -943,46 +918,43 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-10-12 20:28:58"
+            "time": "2014-01-08 11:55:38"
         },
         {
             "name": "nette/nette",
-            "version": "dev-master",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "3940773d947cc7fb7fbfc9cb9f28f663b4486162"
+                "reference": "e5af13a9d662972e9e34272771e52b832629bb91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/3940773d947cc7fb7fbfc9cb9f28f663b4486162",
-                "reference": "3940773d947cc7fb7fbfc9cb9f28f663b4486162",
+                "url": "https://api.github.com/repos/nette/nette/zipball/e5af13a9d662972e9e34272771e52b832629bb91",
+                "reference": "e5af13a9d662972e9e34272771e52b832629bb91",
                 "shasum": ""
             },
             "require": {
                 "ext-iconv": "*",
                 "ext-tokenizer": "*",
-                "php": ">=5.3.0"
+                "php": ">=5.3.1"
             },
             "require-dev": {
-                "nette/tester": "@dev"
+                "nette/tester": "~0.9.5"
             },
             "suggest": {
                 "ext-fileinfo": "*",
                 "ext-gd": "*",
                 "ext-mbstring": "*",
-                "ext-memcache": "*",
                 "ext-pdo": "*"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "autoload": {
+                "classmap": [
+                    "Nette/"
+                ],
                 "files": [
-                    "Nette/loader.php"
+                    "Nette/common/shortcuts.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1006,38 +978,38 @@
             "keywords": [
                 "Forms",
                 "database",
-                "dbal",
                 "debugging",
                 "framework",
-                "images",
-                "latte",
                 "mailing",
-                "micro",
                 "mvc",
-                "neon",
                 "templating"
             ],
-            "time": "2013-10-12 09:15:47"
+            "time": "2013-12-31 00:08:21"
         },
         {
             "name": "nextras/forms",
-            "version": "dev-master",
+            "version": "v1.3.0-RC3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/forms.git",
-                "reference": "de7d54e780e0037ffc7767cc35405fe21e399679"
+                "reference": "625010b42d96c05240124d9c78ebf73e53cef929"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/forms/zipball/de7d54e780e0037ffc7767cc35405fe21e399679",
-                "reference": "de7d54e780e0037ffc7767cc35405fe21e399679",
+                "url": "https://api.github.com/repos/nextras/forms/zipball/625010b42d96c05240124d9c78ebf73e53cef929",
+                "reference": "625010b42d96c05240124d9c78ebf73e53cef929",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": "dev-master",
+                "nette/nette": "~2.1@rc",
                 "php": ">=5.4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Nextras\\Forms": ""
@@ -1055,6 +1027,11 @@
                     "homepage": "http://davidgrudl.com"
                 },
                 {
+                    "name": "Jan Škrášek",
+                    "email": "hrach.cz@gmail.com",
+                    "homepage": "http://jan.skrasek.com"
+                },
+                {
                     "name": "Nextras Community",
                     "homepage": "https://github.com/nextras/forms/graphs/contributors"
                 }
@@ -1064,21 +1041,21 @@
                 "form",
                 "nette"
             ],
-            "time": "2013-09-23 15:03:17"
+            "time": "2013-12-30 22:48:02"
         },
         {
             "name": "symfony/console",
-            "version": "v2.3.6",
+            "version": "v2.4.1",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7"
+                "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/f880062d56edefb25b36f2defa65aafe65959dc7",
-                "reference": "f880062d56edefb25b36f2defa65aafe65959dc7",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
+                "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
                 "shasum": ""
             },
             "require": {
@@ -1093,7 +1070,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -1117,7 +1094,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-25 06:04:15"
+            "time": "2014-01-01 08:14:50"
         }
     ],
     "packages-dev": [
@@ -1126,18 +1103,14 @@
     "aliases": [
 
     ],
-    "minimum-stability": "RC",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "nette/nette": 20,
-        "doctrine/orm": 5,
-        "kdyby/annotations": 20,
-        "kdyby/doctrine": 5,
-        "kdyby/console": 20,
-        "dg/twitter-php": 20,
-        "kdyby/events": 20,
-        "kdyby/autowired": 20,
-        "kdyby/bootstrap-form-renderer": 20,
-        "nextras/forms": 20
+        "kdyby/doctrine": 0,
+        "kdyby/console": 0,
+        "dg/twitter-php": 0,
+        "kdyby/events": 0,
+        "kdyby/autowired": 0,
+        "nextras/forms": 5
     },
     "platform": {
         "php": ">=5.4"
