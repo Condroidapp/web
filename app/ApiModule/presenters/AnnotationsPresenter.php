@@ -17,12 +17,20 @@ use Nette\Http\Response;
  */
 class AnnotationsPresenter extends \FrontModule\BasePresenter  {
 
-    /** @var Request */
+    /**
+     * @autowire
+     * @var \Nette\Http\Request */
     public $httpRequest;
-    /** @var  Response */
+    /**
+     * @autowire
+     * @var  \Nette\Http\Response
+     */
     public $httpResponse;
 
-    /** @var EntityDao */
+    /**
+     * @autowire(\Model\Annotation, factory=\Kdyby\Doctrine\EntityDaoFactory)
+     * @var \Kdyby\Doctrine\EntityDao
+     */
     private $annotationRepository;
 
     protected function startup() {
@@ -112,13 +120,6 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
         $this->template->count = $totalCount;
     }
 
-    public function injectHttpRequest(Request $r) {
-        $this->httpRequest = $r;
-    }
-
-    public function injectHttpResponse(Response $e) {
-        $this->httpResponse =$e;
-    }
 }
 
 
