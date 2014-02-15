@@ -1,6 +1,6 @@
 {contentType text/xml; charset=utf-8}
 {!='<' . '?xml version="1.0" encoding="utf-8"?>'}
-<annotations count="{=$count}" last-update="{=($lastMod != NULL?$lastMod->format("r"):"")}">
+<annotations count="{=$count}" last-update="{=($lastMod != NULL?$lastMod->format("c"):"")}">
 	{foreach $annotations as $item}
 	<programme>
 		<pid>{$item->pid}</pid>
