@@ -3,7 +3,7 @@
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Kdyby\Doctrine\Entities\BaseEntity;
+use Kdyby\Doctrine\Entities\BaseEntity as KBaseEntity;
 use Nette\Object;
 
 
@@ -24,7 +24,7 @@ use Nette\Object;
  *
  *
  */
-class ApiLog extends BaseEntity {
+class ApiLog extends KBaseEntity {
 
     /** @ORM\Id @ORM\Column(type="string") */
     protected $device;
