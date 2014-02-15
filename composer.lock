@@ -190,16 +190,16 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "v1.1",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "560f29c39cfcfbcd210e5d549d993a39d898b04b"
+                "reference": "b99c5c46c87126201899afe88ec490a25eedd6a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/560f29c39cfcfbcd210e5d549d993a39d898b04b",
-                "reference": "560f29c39cfcfbcd210e5d549d993a39d898b04b",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/b99c5c46c87126201899afe88ec490a25eedd6a2",
+                "reference": "b99c5c46c87126201899afe88ec490a25eedd6a2",
                 "shasum": ""
             },
             "require": {
@@ -208,7 +208,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -224,7 +224,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -253,7 +254,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2013-03-07 12:15:54"
+            "time": "2014-02-03 23:07:43"
         },
         {
             "name": "doctrine/common",
@@ -512,16 +513,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.4.1",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "84373d05a4198ec380918d535abf83c454c3867f"
+                "reference": "0363a5548d9263f979f9ca149decb9cfc66419ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/84373d05a4198ec380918d535abf83c454c3867f",
-                "reference": "84373d05a4198ec380918d535abf83c454c3867f",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/0363a5548d9263f979f9ca149decb9cfc66419ab",
+                "reference": "0363a5548d9263f979f9ca149decb9cfc66419ab",
                 "shasum": ""
             },
             "require": {
@@ -584,7 +585,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-11-12 12:40:13"
+            "time": "2014-02-08 16:35:09"
         },
         {
             "name": "kdyby/annotations",
@@ -702,26 +703,31 @@
         },
         {
             "name": "kdyby/console",
-            "version": "v2.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Console.git",
-                "reference": "66346ea70e9729cb0accbc15ddb129b73030cce6"
+                "reference": "324cac9f9867ebcad13eb394d31da9489fc3637c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Console/zipball/66346ea70e9729cb0accbc15ddb129b73030cce6",
-                "reference": "66346ea70e9729cb0accbc15ddb129b73030cce6",
+                "url": "https://api.github.com/repos/Kdyby/Console/zipball/324cac9f9867ebcad13eb394d31da9489fc3637c",
+                "reference": "324cac9f9867ebcad13eb394d31da9489fc3637c",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": "@dev",
-                "symfony/console": "~2.3"
+                "nette/nette": "~2.1@dev",
+                "symfony/console": "~2.4"
             },
             "require-dev": {
                 "nette/tester": "@dev"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Kdyby\\Console\\": "src/"
@@ -750,7 +756,7 @@
                 "kdyby",
                 "nette"
             ],
-            "time": "2013-10-23 22:15:36"
+            "time": "2014-01-07 20:02:49"
         },
         {
             "name": "kdyby/doctrine",
@@ -922,16 +928,16 @@
         },
         {
             "name": "nette/nette",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "e5af13a9d662972e9e34272771e52b832629bb91"
+                "reference": "9e7e5fc5921053172dbacecda2c06d749f89a71b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/e5af13a9d662972e9e34272771e52b832629bb91",
-                "reference": "e5af13a9d662972e9e34272771e52b832629bb91",
+                "url": "https://api.github.com/repos/nette/nette/zipball/9e7e5fc5921053172dbacecda2c06d749f89a71b",
+                "reference": "9e7e5fc5921053172dbacecda2c06d749f89a71b",
                 "shasum": ""
             },
             "require": {
@@ -940,7 +946,7 @@
                 "php": ">=5.3.1"
             },
             "require-dev": {
-                "nette/tester": "~0.9.5"
+                "nette/tester": "~1.0.0"
             },
             "suggest": {
                 "ext-fileinfo": "*",
@@ -984,20 +990,20 @@
                 "mvc",
                 "templating"
             ],
-            "time": "2013-12-31 00:08:21"
+            "time": "2014-02-11 04:51:20"
         },
         {
             "name": "nextras/forms",
-            "version": "v1.3.0-RC3",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nextras/forms.git",
-                "reference": "625010b42d96c05240124d9c78ebf73e53cef929"
+                "reference": "e6b6f1b22a0a843f9b221356b89e9bc90ab35ab2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nextras/forms/zipball/625010b42d96c05240124d9c78ebf73e53cef929",
-                "reference": "625010b42d96c05240124d9c78ebf73e53cef929",
+                "url": "https://api.github.com/repos/nextras/forms/zipball/e6b6f1b22a0a843f9b221356b89e9bc90ab35ab2",
+                "reference": "e6b6f1b22a0a843f9b221356b89e9bc90ab35ab2",
                 "shasum": ""
             },
             "require": {
@@ -1041,21 +1047,21 @@
                 "form",
                 "nette"
             ],
-            "time": "2013-12-30 22:48:02"
+            "time": "2014-02-12 17:15:47"
         },
         {
             "name": "symfony/console",
-            "version": "v2.4.1",
+            "version": "v2.4.2",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7"
+                "reference": "940f217cbc3c8a33e5403e7c595495c4884400fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
-                "reference": "4c1ed2ff514bd85ee186eebb010ccbdeeab05af7",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/940f217cbc3c8a33e5403e7c595495c4884400fe",
+                "reference": "940f217cbc3c8a33e5403e7c595495c4884400fe",
                 "shasum": ""
             },
             "require": {
@@ -1085,7 +1091,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -1094,7 +1102,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-01-01 08:14:50"
+            "time": "2014-02-11 13:52:09"
         }
     ],
     "packages-dev": [
