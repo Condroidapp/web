@@ -37,7 +37,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
      * @autowire
      * @var \Model\ApiLogger
      */
-    //protected $apiLogger;
+    protected $apiLogger;
 
 
     public function actionDefault($cid) {
@@ -57,13 +57,13 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
 
         if($totalCount === $clientCount && $actualLastMod <= $clientLastMod) {
             $this->httpResponse->setCode(Response::S304_NOT_MODIFIED);
-         //   $this->apiLogger->logCheck();
+            $this->apiLogger->logCheck();
             $this->terminate();
         }
         else {
             $this->httpResponse->setCode(Response::S200_OK);
             if($this->httpRequest->isMethod('HEAD')) {
-              //  $this->apiLogger->logCheck();
+                $this->apiLogger->logCheck();
                 $this->terminate();
             }
         }
@@ -72,60 +72,14 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
 
         if ($clientLastMod < $actualLastMod) {
             $data = $this->annotationRepository->fetch(new BasicFetchByQuery(['event' => $cid, 'timestamp > ?'=> ($clientLastMod)]));
-          //  $this->apiLogger->logUpdate();
+            $this->apiLogger->logUpdate();
         }
         else {
 
             $data = $this->annotationRepository->fetch(new BasicFetchByQuery(['event' => $cid]));
             $this->httpResponse->setHeader('X-Full-Update', 1);
-           // $this->apiLogger->logFullUpdate();
+            $this->apiLogger->logFullDownload();
         }
-
-
-
-
-
-        /* $device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
-         if($device != null && trim($device) != "") {
-                 $parts = explode(";", $device);
-                 if(isset($parts[0])) {
-                     if(\Nette\Utils\Strings::startsWith($parts[0], ":")) {
-                         $parts[0] = trim($parts[0], ": ");
-                     }
-                 }
-                 $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
-                 $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                 $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
-                 $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-check`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `annotations-check`=`annotations-check`+1");
-         }*/
-            
-
-           /* $device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
-            if($device != null && trim($device) != "") {
-                    $parts = explode(";", $device);
-                    if(isset($parts[0])) {
-                        if(\Nette\Utils\Strings::startsWith($parts[0], ":")) {
-                            $parts[0] = trim($parts[0], ": ");
-                        }
-                    }
-                    $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
-                    $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                    $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
-                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-update`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `annotations-update`=`annotations-update`+1");
-            }*/
-             /*$device = $this->getContext()->httpRequest->getHeader("X-Device-Info", null);
-            if($device != null && trim($device) != "") {
-                    $parts = explode(";", $device);
-                    if(isset($parts[0])) {
-                        if(\Nette\Utils\Strings::startsWith($parts[0], ":")) {
-                            $parts[0] = trim($parts[0], ": ");
-                        }
-                    }
-                    $model = $this->getContext()->database->quote((isset($parts[0])?$parts[0]:"unknown"));
-                    $sn = $this->getContext()->database->quote((isset($parts[1])?$parts[1]:"unknown"));
-                    $os = $this->getContext()->database->quote((isset($parts[2])?$parts[2]:"unknown"));
-                    $this->getContext()->database->exec("INSERT INTO apicalls (`device`,`serial`,`annotations-full-download`,`os-version`) VALUES (".$model.",".$sn.",1,".$os.") ON DUPLICATE KEY UPDATE `os-version` = ".$os.", `annotations-full-download`=`annotations-full-download`+1");
-            }*/
 
         $this->template->annotations = $data;
         $this->template->lastMod = $actualLastMod;

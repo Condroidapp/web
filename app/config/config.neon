@@ -59,6 +59,7 @@ services:
     annotationRepository: @doctrine.dao(Model\Annotation)
     lineRepository: @doctrine.dao(Model\ProgramLine)
     logDao: @doctrine.dao(Model\LogRecord)
+    - Model\ApiLogger(@doctrine.dao(Model\ApiLog))
 #        logger: Logger
 
     echoLogger:
