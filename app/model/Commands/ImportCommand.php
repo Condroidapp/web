@@ -81,6 +81,7 @@ class ImportCommand extends Command {
             foreach($annotations as $id => $annotation) {
                 if(!isset($data[$annotation->pid])) {
                     $annotation->setDeleted(TRUE);
+                    $annotation->setDeletedWhen(new \DateTime());
                     $deletions++;
                     continue;
                 }
@@ -165,6 +166,8 @@ class ImportCommand extends Command {
         }
         $annotation->type = $newData['type'];
         $annotation->programLine = $programLinesMap[$newData['program-line']];
+        $annotation->deleted = FALSE;
+        $annotation->deletedWhen = NULL;
     }
 
     private function annotationChanged($newData, $annotation) {

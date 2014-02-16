@@ -114,12 +114,24 @@ class Annotation extends BaseEntity {
      * @ORM\Column(type="boolean")
      */
     private $deleted = FALSE;
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedWhen;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     /**
      * @param string $annotation
      */
     public function setAnnotation($annotation) {
         $this->annotation = $annotation;
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -292,6 +304,19 @@ class Annotation extends BaseEntity {
         $this->timestamp = new \DateTime();
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getDeletedWhen() {
+        return $this->deletedWhen;
+    }
+
+    /**
+     * @param \DateTime $deletedWhen
+     */
+    public function setDeletedWhen($deletedWhen) {
+        $this->deletedWhen = $deletedWhen;
+    }
 
 
 }
