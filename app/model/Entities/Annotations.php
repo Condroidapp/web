@@ -15,8 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @property \DateTime $startTime
  * @property \DateTime $endTime
  * @property \DateTime $timestamp
- * @property ProgramLine $location
- * @property string $programLine
+ * @property string $location
+ * @property ProgramLine $programLine
  * @property boolean deleted
  *
  * @ORM\Table(name="annotations",
@@ -118,7 +118,7 @@ class Annotation extends BaseEntity {
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedWhen;
+    private $deletedAt;
 
     /**
      * @var \DateTime
@@ -307,15 +307,15 @@ class Annotation extends BaseEntity {
     /**
      * @return \DateTime
      */
-    public function getDeletedWhen() {
-        return $this->deletedWhen;
+    public function getDeletedAt() {
+        return $this->deletedAt;
     }
 
     /**
      * @param \DateTime $deletedWhen
      */
-    public function setDeletedWhen($deletedWhen) {
-        $this->deletedWhen = $deletedWhen;
+    public function setDeletedAt($deletedWhen) {
+        $this->deletedAt = $deletedWhen;
     }
 
 
