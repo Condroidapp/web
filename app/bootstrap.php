@@ -42,7 +42,7 @@ $container->router[] = new Route('api/2/<presenter>[/<cid>]', array(
     'action'=> 'default',
     'cid' => null));
 
-$container->router[] = new Route('api/3/<presenter>[/<cid>]', array(
+$container->router[] = new Route('api/3/<presenter>[/<id>]', array(
    'module'=>'Api3',
     'presenter' =>'Default',
     'action'=> 'default',
