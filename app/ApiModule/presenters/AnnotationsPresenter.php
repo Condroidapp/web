@@ -44,7 +44,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
         if($cid <= 0) {
             throw new BadRequestException('No cid supplied',404);
         }
-        $clientLastMod = new \DateTime($this->httpRequest->getHeader('If-Modified-Since', "Sun, 13 Mar 1988 17:00:00 +0200")); // :-)
+        $clientLastMod = new \DateTime($this->httpRequest->getHeader('If-Modified-Since', "Sun, 13 Mar 1988 17:00:00 +0100")); // :-)
 
         $clientLastMod->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
