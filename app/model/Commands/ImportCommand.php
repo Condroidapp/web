@@ -167,7 +167,7 @@ class ImportCommand extends Command {
         $annotation->type = $newData['type'];
         $annotation->programLine = $programLinesMap[$newData['program-line']];
         $annotation->deleted = FALSE;
-        $annotation->deletedWhen = NULL;
+        $annotation->deletedAt = NULL;
     }
 
     private function annotationChanged($newData, $annotation) {
