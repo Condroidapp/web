@@ -176,9 +176,6 @@ class ImportCommand extends Command {
             if($key === 'pid') {
                 continue;
             }
-            if(!isset($annotation->$key)) {
-                continue;
-            }
             if($key === 'start-time') {
                 $key = 'startTime';
             }
@@ -188,6 +185,9 @@ class ImportCommand extends Command {
             if($key === 'program-line') {
                 $key = 'programLine';
             }
+            if(!isset($annotation->$key)) {
+                continue;
+            }
             $previousValue = $annotation->$key;
             if($previousValue instanceof Event) {
                 continue;
@@ -196,6 +196,7 @@ class ImportCommand extends Command {
                 $previousValue = $previousValue->title;
             }
             if($previousValue instanceof \DateTime) {
+                $item = (new \DateTime($item))->format('c');
                 $previousValue = $previousValue->format('c');
             }
             if($item !== $previousValue) {
