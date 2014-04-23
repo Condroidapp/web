@@ -33,7 +33,7 @@ class ApiLog extends KBaseEntity {
     /** @ORM\Column(type="string", length=100, nullable=true) */
     protected $osVersion;
     /** @ORM\Column(type="integer") */
-    protected $conList;
+    protected $conList = 0;
     /** @ORM\Column(type="integer") */
     protected $annotationsFullDownload = 0;
     /** @ORM\Column(type="integer") */
