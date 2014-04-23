@@ -79,6 +79,9 @@ class ImportCommand extends Command {
 
             /** @var $annotation Annotation */
             foreach($annotations as $id => $annotation) {
+                if($annotation->getDeleted()) {
+                    continue;
+                }
                 if(!isset($data[$annotation->pid])) {
                     $annotation->setDeleted(TRUE);
                     $annotation->setDeletedAt(new \DateTime());

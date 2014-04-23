@@ -29,7 +29,7 @@ class AnnotationLastMod extends QueryObject {
      * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
      */
     protected function doCreateQuery(Queryable $repository) {
-        return $repository->createQuery("SELECT a.timestamp FROM ".Annotation::getClassName()." a WHERE a.event=:event ORDER by a.timestamp DESC")
+        return $repository->createQuery("SELECT a.timestamp FROM ".Annotation::getClassName()." a WHERE a.deleted=false AND a.event=:event ORDER by a.timestamp DESC")
                 ->setParameter('event', $this->event)
                 ->setMaxResults(1);
     }

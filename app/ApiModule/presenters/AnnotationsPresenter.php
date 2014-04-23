@@ -50,7 +50,7 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
 
         /** @var $actualLastMod \DateTime */
         $actualLastMod = $this->annotationRepository->fetchOne(new AnnotationLastMod($cid))['timestamp'];
-        $totalCount = count($this->annotationRepository->fetch(new BasicFetchByQuery(['event'=>$cid])));
+        $totalCount = count($this->annotationRepository->fetch(new BasicFetchByQuery(['event'=>$cid, 'deleted' => FALSE])));
         $clientCount = (int) $this->httpRequest->getHeader('X-If-Count-Not-Match', 0);
 
         $data = NULL;
@@ -71,12 +71,12 @@ class AnnotationsPresenter extends \FrontModule\BasePresenter  {
         $this->httpResponse->setHeader('Last-Modified', $actualLastMod->format('D, j M Y H:i:s O'));
 
         if ($clientLastMod < $actualLastMod) {
-            $data = $this->annotationRepository->fetch(new BasicFetchByQuery(['event' => $cid, 'timestamp > ?'=> ($clientLastMod)]));
+            $data = $this->annotationRepository->fetch(new BasicFetchByQuery(['event' => $cid, 'deleted'=>FALSE, 'timestamp > ?'=> ($clientLastMod)]));
             $this->apiLogger->logUpdate();
         }
         else {
 
-            $data = $this->annotationRepository->fetch(new BasicFetchByQuery(['event' => $cid]));
+            $data = $this->annotationRepository->fetch(new BasicFetchByQuery(['event' => $cid, 'deleted'=>FALSE]));
             $this->httpResponse->setHeader('X-Full-Update', 1);
             $this->apiLogger->logFullDownload();
         }
