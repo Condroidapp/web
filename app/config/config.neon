@@ -43,6 +43,7 @@ nette:
     latte:
         macros:
             - BS3FormRenderer\Latte\Macros\BS3InputMacros
+            - Nextras\Latte\Macros\RedefineMacro
             - App\VersionMacro
 
 
@@ -80,3 +81,5 @@ services:
 
     - App\Components\Forms\IBaseFormFactory
     - Model\Authenticator(%users%)
+    - App\Components\Grids\EventGridFactory
+    - App\Components\grids\LogGridFactory

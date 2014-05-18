@@ -1,0 +1,19 @@
+{define cell-process}
+{if $cell && (new DateTime()) > $row->checkStart && (new DateTime()) < $row->checkStop}
+    <span class="label label-success"><i class="glyphicon-ok glyphicon"></i></span>
+{else}
+    <span class="label label-danger"><i class="glyphicon-remove glyphicon"></i></span>
+{/if}
+    {$row->checkStart|date:'j.n.Y H:i'} - {$row->checkStop|date:'j.n.Y H:i'}
+{/define}
+{define cell-active}
+    {if $cell}
+        <span class="label label-success"><i class="glyphicon-ok glyphicon"></i></span>
+    {else}
+        <span class="label label-danger"><i class="glyphicon-remove glyphicon"></i></span>
+    {/if}
+{/define}
+
+{define row-actions}
+    <a href="{plink Event:edit?id=$row->id}" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+{/define}

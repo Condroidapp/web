@@ -1,0 +1,10 @@
+{define cell-time}
+    {((int)$cell)|date:'j.n.Y H:i:s'}
+{/define}
+{define cell-active}
+    {if $cell}
+        <span class="label label-success"><i class="glyphicon-ok glyphicon"></i></span>
+    {else}
+        <span class="label label-danger"><i class="glyphicon-remove glyphicon"></i></span>
+    {/if}
+{/define}

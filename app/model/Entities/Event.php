@@ -232,5 +232,13 @@ class Event extends BaseEntity {
         return $this->annotations;
     }
 
+    /**
+     * @return boolean
+     */
+    public function getProcess()
+    {
+        return $this->process;
+    }
+
 
 }

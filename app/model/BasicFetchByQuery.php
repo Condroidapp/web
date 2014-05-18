@@ -35,7 +35,7 @@ class BasicFetchByQuery extends QueryObject {
             $where[] = "b.".$condition.$separator.$i++;
             $params[] = $value;
         }
-        $q = $repository->createQuery("SELECT b FROM ".$repository->getClassName()." b WHERE ".  implode(" AND ", $where))
+        $q = $repository->createQuery("SELECT b FROM ".$repository->getClassName()." b ".(!empty($where) ? " WHERE ".  implode(" AND ", $where) : ""))
                 ->setParameters($params);
         return $q;
     }    //put your code here
