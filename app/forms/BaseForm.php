@@ -7,6 +7,7 @@ use App\BootstrapFormRenderer\Bootstrap3Renderer as BootstrapRenderer;
 
 use Nette\Forms\Form as NForm;
 use Nette\Forms\IControl;
+use Nextras\Forms\Controls\DateTimePicker;
 use Nextras\Forms\Rendering\Bs3FormRenderer;
 
 //setup of default rule messages
@@ -63,6 +64,10 @@ class BaseForm extends AppForm {
         $component->getControlPrototype()->addClass("btn-primary");
         return $component;
 
+    }
+
+    public function addDatetime($name, $caption = NULL) {
+        return $this[$name] = new DateTimePicker($caption);
     }
 
 

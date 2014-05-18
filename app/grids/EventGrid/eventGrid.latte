@@ -16,4 +16,5 @@
 
 {define row-actions}
     <a href="{plink Event:edit?id=$row->id}" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+    <a href="{plink Event:delete?id=$row->id}" class="btn btn-danger" data-confirm="Opravdu?"><i class="glyphicon glyphicon-remove"></i></a>
 {/define}

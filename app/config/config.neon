@@ -83,3 +83,4 @@ services:
     - Model\Authenticator(%users%)
     - App\Components\Grids\EventGridFactory
     - App\Components\grids\LogGridFactory
+    - App\Components\Forms\EventFormFactory

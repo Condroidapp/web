@@ -4,6 +4,8 @@ namespace Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Kdyby\Doctrine\Entities\BaseEntity;
+use Kdyby\Doctrine\Entities\IdentifiedEntity;
 
 /**
  * Cons
@@ -14,230 +16,109 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  * @ORM\Entity
  */
-class Event extends BaseEntity {
+class Event extends IdentifiedEntity {
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $active;
+    protected $active;
 
     /**
      * @var boolean
      * @ORM\Column(name="process", type="boolean", nullable=false)
      */
-    private $process = FALSE;
+    protected $process = FALSE;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="year", type="integer", nullable=true)
      */
-    private $year;
+    protected $year;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="date", type="string", length=255, nullable=false)
      */
-    private $date;
+    protected $date;
 
     /**
      * @var string
      *
      * @ORM\Column(name="icon", type="string", length=255, nullable=true)
      */
-    private $icon;
+    protected $icon;
 
     /**
      * @var string
      *
      * @ORM\Column(name="dataUrl", type="string", length=255, nullable=true)
      */
-    private $dataurl;
+    protected $dataurl;
 
     /**
      * @var string
      *
      * @ORM\Column(name="message", type="text", nullable=true)
      */
-    private $message;
+    protected $message;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hasTimetable", type="boolean", nullable=true)
      */
-    private $hasTimetable;
+    protected $hasTimetable;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hasAnnotations", type="boolean", nullable=true)
      */
-    private $hasAnnotations;
+    protected $hasAnnotations;
 
     /**
      * @var string
      *
      * @ORM\Column(name="locationsFile", type="text", nullable=true)
      */
-    private $locationsFile;
+    protected $locationsFile;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="checkStart", type="datetime", nullable=true)
      */
-    private $checkStart;
+    protected $checkStart;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="checkStop", type="datetime", nullable=true)
      */
-    private $checkStop;
+    protected $checkStop;
     /**
      * @ORM\OneToMany(targetEntity="Annotation", mappedBy="event")
      */
-    private $annotations;
+    protected $annotations;
     /**
      * @ORM\OneToMany(targetEntity="ProgramLine", mappedBy="event")
      */
-    private $programLines;
+    protected $programLines;
 
     public function __construct() {
         $this->annotations = new ArrayCollection();
         $this->programLines = new ArrayCollection();
-    }
-
-
-    /**
-     * @return boolean
-     */
-    public function getActive() {
-        return $this->active;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCheckStart() {
-        return $this->checkStart;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCheckStop() {
-        return $this->checkStop;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDataUrl() {
-        return $this->dataurl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDate() {
-        return $this->date;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getHasAnnotations() {
-        return $this->hasAnnotations;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getHasTimetable() {
-        return $this->hasTimetable;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIcon() {
-        return $this->icon;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocationsFile() {
-        return $this->locationsFile;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage() {
-        return $this->message;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getYear() {
-        return $this->year;
-    }
-
-    /**
-     * @param mixed $programLines
-     */
-    public function setProgramLines($programLines) {
-        $this->programLines = $programLines;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProgramLines() {
-        return $this->programLines;
-    }
-
-    /**
-     * @param mixed $annotations
-     */
-    public function setAnnotations($annotations) {
-        $this->annotations = $annotations;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAnnotations() {
-        return $this->annotations;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getProcess()
-    {
-        return $this->process;
     }
 
 
