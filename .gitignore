@@ -4,3 +4,5 @@ nbproject/
 /vendor
 /.idea
 /app/config/config.local.neon
+.tmp/
+node_modules/

@@ -1,39 +1,9 @@
 {* This is the welcome page, you can delete it *}
 {block js}
-<script type="text/javascript" src="/js/jquery.lightbox-0.5.min.js"></script>
-<link rel="stylesheet" href="/css/jquery.lightbox-0.5.css">
+
 <script type="text/javascript" n:syntax="off">
         
-          $(window).scroll(function() { 
-            if($(window).scrollTop() > 420) $('.sidebar').css({'position' : 'fixed', 'margin-top' : '120px'}); else $('.sidebar').css({'position' : 'relative', 'margin-top' : '20px'});
-          });                                       
-          
-         $(document).ready(function() {
-          
-            $('.menu a, a[rel=clickable]').click(function() {
-              $('.menu a').removeClass('active');
-              if( $(this).attr('href') == '#top') $('.menu a[href=#top]').addClass('active');
-              else if( $(this).attr('href') == '#download' ) $('.menu a[href=#download]').addClass('active');
-              else $(this).addClass('active');
-              $('html, body').animate({scrollTop: $($(this).attr('href').substr(1)).offset().top - 115}, 'slow');
-            });
-            
-            $('#prev').click(function() {
-              $('.slideshow ul li:first').before($('.slideshow ul li:last'));
-              $('#magnify').attr('href', $('.slideshow ul li:first img').attr('src').replace('small-', '') );
-            });
-            
-            $('#next').click(function() {
-              $('.slideshow ul li:last').after($('.slideshow ul li:first'));
-              $('#magnify').attr('href', $('.slideshow ul li:first img').attr('src').replace('small-', '') );
-            });
-            $("#magnify").click(function(e) {
-                e.preventDefault();
-                $(this).lightBox();
-                
-            })
-            
-          });
+
           
         
           
@@ -43,13 +13,12 @@
 <div class="content">
             
               <div class="c-box" id="home">
-              <h2>Condroid - prohlížejte program na Androidu</h2>
+              <h2>Condroid - program conu ve vašem Androidu</h2>
               <!--<p>Zapomeňte na papírový program! Hledejte pořady v telefonu.</p>-->
               <p>Condroid je aplikace pro chytré telefony s operačním systémem Android, která
-                  slouží k procházení programu a anotací pořadů na conu. 
-                  Zpřístupní vám chronologický přehled programů, které běží nebo brzy začínají, 
-                  můžete si také zobrazit všechny pořady filtrované podle linií, nebo data a přečíst 
-                  jejich anotace.</p>
+                  Vám zpřístupní program a anotace pořadů conu.
+                  Zobrazuje přehled programů, v různé formě řazení, s možností v nich vyhledávat, filtrovat, označit,
+                  nebo také nastavit připomenutí jejich začátku.</p>
                                                 
                   <ul>
                     <li><span class="icon list"></span>Přehled pořadů</li>
@@ -173,16 +142,5 @@
             </div>
             
             
-            <div class="slideshow">
-              <ul>
-                <li><img src="img/small-1.png" alt="App Screen" /></li>
-                <li><img src="img/small-3.png" alt="App Screen" /></li>
-                <li><img src="img/small-4.png" alt="App Screen" /></li>
-                <li><img src="img/small-5.png" alt="App Screen" /></li>
-                <li><img src="img/small-2.png" alt="App Screen" /></li>
-              </ul>
-              <div class="navi">
-                <a id="prev">&lsaquo;</a><a id="magnify" href="img/1.png"><img src="img/magnify.png" alt="+" /></a><a id="next">&rsaquo;</a>
-              </div>    
-            </div>
+
 {/block}

@@ -3,8 +3,9 @@
 namespace AdminModule;
 
 
+use App\Components\Forms\IBaseFormFactory;
 use FrontModule\BasePresenter;
-use App\Components\Forms\Form;
+use App\Components\Forms\BaseForm;
 use Nette\Security\AuthenticationException;
 
 class SignPresenter extends BasePresenter {
@@ -18,11 +19,11 @@ class SignPresenter extends BasePresenter {
 
     /**
      * Sign-in form factory.
-     * @return Form
+     * @return BaseForm
      */
-    protected function createComponentSignInForm()
+    protected function createComponentSignInForm(IBaseFormFactory $factory)
     {
-        $form = new Form;
+        $form = $factory->create();
         $form->addText('username', 'Login:')
              ->setRequired();
 
@@ -40,7 +41,7 @@ class SignPresenter extends BasePresenter {
 
 
 
-    public function signInFormSucceeded(Form $form)
+    public function signInFormSucceeded(BaseForm $form)
     {
         $values = $form->getValues();
 

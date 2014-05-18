@@ -17,6 +17,7 @@ console:
     url: http://condroid.fan-project.com/
 
 parameters:
+    useFullAssets: %debugMode%
     database:
         driver: mysqli
         dbname: navigator
@@ -28,6 +29,8 @@ parameters:
     twitter:
         consumerKey: "mfmmAzIcdKlLMQ26xQlZqA"
         accessToken: "92108150-XAn3ENC2sYg4BsIRuv7quMSVEBGihg9rdrCctf72M"
+    users:
+        admin: false
 
 php:
     date.timezone: Europe/Prague
@@ -73,3 +76,6 @@ services:
         class: Model\Commands\ImportCommand(@eventRepository, @annotationRepository, @databaseLogger)
         tags: [kdyby.console.command]
     feedParser: Model\Commands\FeedParser(@echoLogger)
+
+    - App\Components\Forms\IBaseFormFactory
+    - Model\Authenticator(%users%)

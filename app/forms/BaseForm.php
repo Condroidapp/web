@@ -33,15 +33,15 @@ use Nextras\Forms\Rendering\Bs3FormRenderer;
  * @package Maps\Components\Forms
  */
 
-class Form extends AppForm {
+class BaseForm extends AppForm {
 
     /**
      * @inheritdoc
      */
-    public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL) {
-        parent::__construct($parent, $name);
+    public function __construct() {
+        parent::__construct();
         $this->addProtection();
-        $this->setRenderer(new Bs3FormRenderer());
+        $this->setRenderer(new \BS3FormRenderer\Bs3FormRenderer());
     }
 
     /**
@@ -67,4 +67,9 @@ class Form extends AppForm {
 
 
 
+}
+
+interface IBaseFormFactory {
+    /** @return BaseForm */
+    public function create();
 }

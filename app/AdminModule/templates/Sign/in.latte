@@ -36,7 +36,7 @@
                 <h1>Condroid <small>administrace</small></h1>
             </div>
             <div class="well well-lg">
-                <div n:foreach="$flashes as $flash" class="flash {$flash->type} alert alert-{$flash->type}">{$flash->message}</div>
+                <div n:foreach="$flashes as $flash" class="flash {$flash->type} alert alert-{$flash->type=='error'?'danger':$flash->type}">{$flash->message}</div>
                 {control signInForm}
             </div>
         </div>

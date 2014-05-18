@@ -1,0 +1,23 @@
+{
+  "name": "condroid/web",
+  "version": "0.0.0",
+  "authors": [
+    "Jan Langer <jan.langer@gmail.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "<2",
+    "nette-forms": "*",
+    "bootstrap": "3.*",
+    "SyntaxHighlighter": "~3.0",
+    "jquery-migrate": "~1.2.1",
+    "jquery-colorbox": "~1.5.9"
+  }
+}
