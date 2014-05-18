@@ -42,7 +42,8 @@ nette:
 
     latte:
         macros:
-            - Nextras\Forms\Bridges\Latte\Macros\BS3InputMacros::install
+            - BS3FormRenderer\Latte\Macros\BS3InputMacros
+            - App\VersionMacro
 
 
 doctrine:
