@@ -64,7 +64,7 @@ class Event extends IdentifiedEntity {
      *
      * @ORM\Column(name="dataUrl", type="string", length=255, nullable=true)
      */
-    protected $dataurl;
+    protected $dataUrl;
 
     /**
      * @var string
