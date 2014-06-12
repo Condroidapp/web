@@ -127,6 +127,12 @@ class Annotation extends BaseEntity {
     private $createdAt;
 
     /**
+     * @ORM\Column(nullable=true)
+     * @var string
+     */
+    protected $imdb;
+
+    /**
      * @param string $annotation
      */
     public function setAnnotation($annotation) {

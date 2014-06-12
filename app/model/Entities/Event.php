@@ -53,6 +53,12 @@ class Event extends IdentifiedEntity {
     protected $date;
 
     /**
+     * @ORM\Column(nullable=true)
+     * @var string
+     */
+    protected $url;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="icon", type="string", length=255, nullable=true)

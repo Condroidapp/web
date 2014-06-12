@@ -38,6 +38,8 @@ class EventPresenter extends BasePresenter {
                 'id' => $event->id,
                 'name' => $event->getName(),
                 'timetable' => $event->getHasTimetable(),
+                'date' => $event->date,
+                'url' => $event->url,
                 'annotations' => $event->getHasAnnotations(),
                 'datasource' => $this->link('//:Api3:Program:default', ['id' => $event->getId()]),
                 'start' => $event->getCheckStart()->format('c'),
