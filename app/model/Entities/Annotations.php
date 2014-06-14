@@ -133,6 +133,22 @@ class Annotation extends BaseEntity {
     protected $imdb;
 
     /**
+     * @param string $imdb
+     */
+    public function setImdb($imdb)
+    {
+        $this->imdb = $imdb;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImdb()
+    {
+        return $this->imdb;
+    }
+
+    /**
      * @param string $annotation
      */
     public function setAnnotation($annotation) {

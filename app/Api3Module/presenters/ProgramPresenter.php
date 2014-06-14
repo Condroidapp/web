@@ -86,6 +86,7 @@ class ProgramPresenter extends BasePresenter {
                 'pid' => $annotation->pid,
                 'author' => $annotation->author,
                 'title' => $annotation->title,
+                'imdb' => $annotation->imdb,
                 'type' => $annotation->type,
                 'location' => $annotation->location,
                 'programLine' => $annotation->programLine ? $annotation->programLine->title : NULL,
