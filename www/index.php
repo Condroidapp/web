@@ -13,4 +13,6 @@ define('LIBS_DIR', WWW_DIR . '/../libs');
 // require APP_DIR . '/templates/maintenance.phtml';
 
 // load bootstrap file
-require APP_DIR . '/bootstrap.php';
+$container = require APP_DIR . '/bootstrap.php';
+
+$container->getService('application')->run();

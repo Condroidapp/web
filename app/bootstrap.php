@@ -24,8 +24,8 @@ $configurator->enableDebugger(__DIR__ . '/../log');
 // Enable RobotLoader - this will load all classes automatically
 $configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->createRobotLoader()
-	->addDirectory(APP_DIR)
-	->addDirectory(LIBS_DIR)
+	->addDirectory(__DIR__)
+	->addDirectory(__DIR__.'/../libs')
 	->register();
 
 // Create Dependency Injection container from config.neon file
@@ -63,4 +63,4 @@ $container->router[] = new Route('<action>/[<id>]', array(
 
 
 // Configure and run the application!
-$container->application->run();
+return $container;

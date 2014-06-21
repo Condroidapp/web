@@ -7,7 +7,8 @@ use FrontModule\BasePresenter;
 use Model\Event;
 use Nette\Application\BadRequestException;
 
-class EventPresenter extends BasePresenter {
+class EventPresenter extends BasePresenter
+{
 
     /**
      * @autowire(\Model\Event, factory=\Kdyby\Doctrine\EntityDaoFactory)
@@ -20,20 +21,21 @@ class EventPresenter extends BasePresenter {
      */
     protected $apiLogger;
 
-    public function actionDefault($id = NULL) {
-        $condition = ['active'=>1];
-        if($id) {
+    public function actionDefault($id = NULL)
+    {
+        $condition = ['active' => 1];
+        if ($id) {
             $condition['id'] = $id;
         }
         $events = $this->eventRepository->findBy($condition);
         $this->apiLogger->logEventList();
-        if(!count($events)) {
+        if (!count($events)) {
             throw new BadRequestException("Not found", 404);
         }
 
         $data = [];
         /** @var $event Event */
-        foreach($events as $event) {
+        foreach ($events as $event) {
             $data[] = [
                 'id' => $event->id,
                 'name' => $event->getName(),
@@ -46,10 +48,16 @@ class EventPresenter extends BasePresenter {
                 'end' => $event->getCheckStop()->format('c'),
                 'image' => NULL,
                 'message' => $event->getMessage(),
+                'places' => ($id ? $this->getPlaces($event) : NULL),
             ];
         }
 
-        $this->sendJson($data);
+        $this->sendJson($id ? array_shift($data) : $data);
+    }
+
+    private function getPlaces($event)
+    {
+        return $event->places;
     }
 
 } 

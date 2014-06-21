@@ -122,6 +122,13 @@ class Event extends IdentifiedEntity {
      */
     protected $programLines;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Place", mappedBy="event")
+     * @ORM\OrderBy({"categorySort":"ASC", "sort":"ASC", "name":"ASC"})
+     */
+    protected $places;
+
+
     public function __construct() {
         $this->annotations = new ArrayCollection();
         $this->programLines = new ArrayCollection();
