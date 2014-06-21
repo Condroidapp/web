@@ -106,6 +106,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
             'address' => explode(";", $this->address),
             'hours' => $this->parseHours($this->hours),
             "url" => $this->url,
+            'id' => $this->id
         ];
 
         return $data;
