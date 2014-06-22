@@ -49,6 +49,7 @@ class EventPresenter extends BasePresenter
                 'image' => NULL,
                 'message' => $event->getMessage(),
                 'places' => ($id ? $this->getPlaces($event) : NULL),
+                'gps' => ($id && $event->gps ? ['lat' => $event->gps[0], 'lon' => $event->gps[1]] : null),
             ];
         }
 

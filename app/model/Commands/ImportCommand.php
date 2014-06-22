@@ -79,7 +79,7 @@ class ImportCommand extends Command {
 
             /** @var $annotation Annotation */
             foreach($annotations as $id => $annotation) {
-                if($annotation->getDeleted()) {
+                if($annotation->getDeleted() && !isset($data[$annotation->pid])) {
                     continue;
                 }
                 if(!isset($data[$annotation->pid])) {

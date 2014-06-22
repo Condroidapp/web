@@ -109,7 +109,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
             'id' => $this->id
         ];
 
-        return $data;
+        return array_filter($data);
     }
 
     private function parseHours($hours)

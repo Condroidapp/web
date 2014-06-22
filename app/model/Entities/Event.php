@@ -128,6 +128,12 @@ class Event extends IdentifiedEntity {
      */
     protected $places;
 
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @var
+     */
+    protected $gps;
+
 
     public function __construct() {
         $this->annotations = new ArrayCollection();
