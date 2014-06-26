@@ -118,7 +118,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
             return NULL;
         }
 
-        if(isset($hours['hours'][8])) {
+        if($hours['type'] === 2 &&  isset($hours['hours'][8])) {
             for ($i = 1; $i < 8; $i++) {
                 $hours['hours'][$i] = $hours['hours'][8];
             }
