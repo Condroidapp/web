@@ -17,9 +17,9 @@
         "dg/twitter-php": "3.*",
         "kdyby/events": "~2.0",
         "kdyby/autowired": "@dev",
-        "nextras/forms": "~1.3.0@dev",
-        "nextras/latte-macros":"~1.0@dev",
-        "nextras/datagrid": "~2.0.0@rc",
+        "nextras/forms": "~1.3",
+        "nextras/latte-macros":"~1.0",
+        "nextras/datagrid": "~2.0",
         "quinix/bs3-formrenderer":"dev-master",
         "quinix/presenter-link-panel":"~1.0"
     }
