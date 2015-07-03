@@ -16,6 +16,9 @@ extensions:
 console:
     url: http://condroid.fan-project.com/
 
+newrelic:
+    appName: condroid.fan-project.com
+
 parameters:
     useFullAssets: %debugMode%
     database:
