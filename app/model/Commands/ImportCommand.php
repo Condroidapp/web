@@ -27,14 +27,16 @@ class ImportCommand extends Command {
     private $feedParser;
     private $annotationDao;
 
-    public function __construct(EntityDao $dao, EntityDao $an, ILogger $logger,  FeedParser $parser) {
+	private $logger;
+
+	public function __construct(EntityDao $dao, EntityDao $an, ILogger $logger,  FeedParser $parser) {
         parent::__construct();
 
         $this->eventDao = $dao;
         $this->annotationDao = $an;
 
         $this->feedParser = $parser;
-        $this->logger = $logger;
+        $this->logger = new EchoLogger();
         $this->feedParser->onError[] = function($message, $code) {
             $this->logger->log("#$code: $message", ILogger::ERROR);
         };
