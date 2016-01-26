@@ -2,9 +2,9 @@
 
 namespace App\Tools;
 
-use Maps\InvalidArgumentException;
-use Maps\InvalidStateException;
-use Maps\StaticClassException;
+use \InvalidArgumentException;
+use Nette\InvalidStateException;
+use Nette\StaticClassException;
 use Nette;
 
 /**
@@ -129,7 +129,7 @@ class Mixed extends Nette\Object {
                throw new InvalidArgumentException('Key '.$key.' does not exists in every item.');
             }
             if(array_key_exists($item[$key], $arr)) {
-                throw new InvalidStateException('Associative key '.$key.' is not unique in collection.');
+                throw new InvalidStateException('Associative key '.$key.' is not unique in collection. Item '.$item[$key].' found again.');
             }
             $arr[$item[$key]] = $item;
         }

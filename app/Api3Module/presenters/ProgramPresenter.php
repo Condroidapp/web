@@ -83,7 +83,7 @@ class ProgramPresenter extends BasePresenter {
         /** @var $annotation Annotation */
         foreach($annotations as $annotation) {
             $data[] = [
-                'pid' => $annotation->pid,
+                'pid' => (int) $annotation->pid,
                 'author' => $annotation->author,
                 'title' => $annotation->title,
                 'imdb' => $annotation->imdb,
@@ -91,7 +91,7 @@ class ProgramPresenter extends BasePresenter {
                 'location' => $annotation->location,
                 'programLine' => $annotation->programLine ? $annotation->programLine->title : NULL,
                 'start' => $annotation->startTime ? $annotation->startTime->format('c') : NULL,
-                'end' => $annotation->endTime ? $annotation->endTime->format('c') : NULL,
+                'end' => $annotation->endTime ? ($annotation->endTime < $annotation->startTime ? $annotation->endTime->modify("+1day")->format("c"):$annotation->endTime->format('c')) : NULL,
                 'annotation' => $annotation->annotation,
             ];
         }

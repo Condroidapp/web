@@ -167,7 +167,7 @@ class ImportCommand extends Command {
         if(isset($newData['location']) && $newData['location']) {
             $annotation->location = $newData['location'];
         }
-        $annotation->type = $newData['type'];
+        $annotation->type = isset( $newData['type']) ? $newData['type'] : "P";
         $annotation->programLine = $programLinesMap[$newData['program-line']];
         $annotation->deleted = FALSE;
         $annotation->deletedAt = NULL;

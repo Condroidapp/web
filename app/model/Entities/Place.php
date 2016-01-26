@@ -99,7 +99,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
         $data = [
             'name' => $this->name,
             'description' => $this->description,
-            'gps' => $this->gps ? ['lat' => (float)$this->gps[0], 'lon' => (float)$this->gps[1]] : NULL,
+            'gps' => $this->gps ? ['lat' => (float)$this->gps[0], 'lon' => (float)$this->gps[1]] : null,
             'sort' => $this->sort,
             'category' => $this->category,
             'categorySort' => $this->categorySort,
@@ -109,7 +109,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
             'id' => $this->id
         ];
 
-        return array_filter($data);
+        return ($data);
     }
 
     private function parseHours($hours)
@@ -124,6 +124,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
             }
             unset($hours['hours'][8]);
         }
+	$hours['hours'] = (object) $hours['hours'];
         return $hours;
     }
 }
