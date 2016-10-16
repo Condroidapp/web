@@ -1,29 +1,26 @@
 <?php
 namespace FrontModule;
 
-/**
- * Homepage presenter.
- *
- * @author     John Doe
- * @package    MyApplication
- */
+use Smasty\Components\Twitter\TwitterControlFactory;
+
 class HomepagePresenter extends BasePresenter
 {
 
-	public function createComponentTwitter($name)
+	/** @var \Smasty\Components\Twitter\TwitterControlFactory */
+	private $twitterControlFactory;
+
+	public function __construct(TwitterControlFactory $twitterControlFactory)
 	{
-		$c = new \Smasty\Components\Twitter\Control([
+		parent::__construct();
+		$this->twitterControlFactory = $twitterControlFactory;
+	}
+
+	public function createComponentTwitter()
+	{
+		return $this->twitterControlFactory->create([
 			'screen_name' => 'Condroid_CZ',
 			'count' => 4,
 		]);
-		$c->setLoader(new \OauthLoader($this->getContext()->parameters['twitter']));
-
-		return $c;
-	}
-
-	public function actionLog()
-	{
-		$this->template->data = $this->getContext()->database->table("logger")->order("time DESC")->limit(200);
 	}
 
 }

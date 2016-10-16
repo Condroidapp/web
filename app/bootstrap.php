@@ -28,30 +28,31 @@ $configurator->createRobotLoader()
 
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
-$configurator->addConfig(__DIR__ . '/config/config.local.neon', Configurator::NONE);
+$configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
 $container = $configurator->createContainer();
 
 // Setup router
-$container->router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
-$container->router[] = new Route('api/2/<presenter>[/<cid>]', [
+$router = $container->getService('router');
+$router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
+$router[] = new Route('api/2/<presenter>[/<cid>]', [
 	'module' => 'Api',
 	'presenter' => 'Default',
 	'action' => 'default',
 	'cid' => null]);
 
-$container->router[] = new Route('api/3/<presenter>[/<id>]', [
+$router[] = new Route('api/3/<presenter>[/<id>]', [
 	'module' => 'Api3',
 	'presenter' => 'Default',
 	'action' => 'default',
 	'cid' => null]);
-$container->router[] = new Route('admin/<presenter>/<action>[/<id>]', [
+$router[] = new Route('admin/<presenter>/<action>[/<id>]', [
 	'module' => 'Admin',
 	'presenter' => 'Dashboard',
 	'action' => 'default',
 	'id' => null]);
 
-$container->router[] = new Route('<action>/[<id>]', [
+$router[] = new Route('<action>/[<id>]', [
 	'module' => 'Front',
 	'presenter' => 'Homepage',
 	'action' => 'default']);

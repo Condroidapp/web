@@ -7,11 +7,10 @@
 
 namespace Smasty\Components\Twitter;
 
-use Nette,
-	Nette\InvalidStateException,
-	Nette\Diagnostics\Debugger,
-	Nette\Application\UI\Control as NetteControl;
-
+use Nette;
+use Nette\Application\UI\Control as NetteControl;
+use Tracy\Debugger;
+use Nette\InvalidStateException;
 
 /**
  * TwitterControl renderable component.
@@ -29,8 +28,8 @@ use Nette,
  *
  * @author Martin Srank, http://smasty.net
  */
-class Control extends NetteControl {
-
+class Control extends NetteControl
+{
 
 	/** @var string */
 	public static $templateDirectory = '/templates';
@@ -47,22 +46,13 @@ class Control extends NetteControl {
 	/** @var IFormatter */
 	private $formatter;
 
-
 	const VERSION = '2.0';
 
+	public function __construct(array $config, ILoader $loader)
+	{
+		parent::__construct();
 
-	/**
-	 * Create the TwitterControl.
-	 * @param array|string|int $config Config options (array) or Twitter screen name (string) or Twitter user ID (int)
-	 * @return void
-	 */
-	public function __construct($config){
-		if(!$config)
-			throw new InvalidStateException('No configuration given.');
-		if(is_scalar($config))
-			$config = array((is_numeric($config) ? 'userId' : 'screenName') => $config);
-
-		$defaults = array(
+		$defaults = [
 			'screenName' => null,
 			'userId' => null,
 			'tweetCount' => 5,
@@ -70,202 +60,215 @@ class Control extends NetteControl {
 			'avatars' => true,
 			'retweets' => true,
 			'replies' => true,
-			'intents' => true
-		);
+			'intents' => true,
+		];
 
 		$this->config = $config + $defaults;
 
-		if(!isset($this->config['user_id']) && !isset($this->config['screen_name']))
+		if (!isset($this->config['user_id']) && !isset($this->config['screen_name'])) {
 			throw new InvalidStateException('No screenName/userId specified.');
+		}
+		$this->loader = $loader;
 	}
-
 
 	/**
 	 * Render with predefined config.
 	 * @param array $config Config overrides
 	 * @return void
 	 */
-	public function render(array $config = null){
-		if($config !== null)
+	public function render(array $config = null)
+	{
+		if ($config !== null) {
 			$this->config = $config + $this->config;
+		}
 		$this->doRender();
 	}
-
 
 	/**
 	 * Render full control (header, avatars, retweets, replies, intents)
 	 * @param array $config Config overrides
 	 * @return void
 	 */
-	public function renderFull(array $config = null){
-		$overrides = array(
+	public function renderFull(array $config = null)
+	{
+		$overrides = [
 			'header' => true,
 			'avatars' => true,
 			'retweets' => true,
 			'replies' => true,
-			'intents' => true
-		);
+			'intents' => true,
+		];
 		$this->config = $overrides + (array) $this->config;
 
-		if($config !== null)
+		if ($config !== null) {
 			$this->config = $config + $this->config;
+		}
 		$this->doRender();
 	}
-
 
 	/**
 	 * Render medium control (avatars, retweets, replies; no header, no intents)
 	 * @param array $config Config overrides
 	 * @return void
 	 */
-	public function renderMedium(array $config = null){
-		$overrides = array(
+	public function renderMedium(array $config = null)
+	{
+		$overrides = [
 			'header' => false,
 			'avatars' => true,
 			'retweets' => true,
 			'replies' => true,
-			'intents' => false
-		);
+			'intents' => false,
+		];
 		$this->config = $overrides + $this->config;
 
-		if($config !== null)
+		if ($config !== null) {
 			$this->config = $config + $this->config;
+		}
 		$this->doRender();
 	}
-
 
 	/**
 	 * Render minimal control (replies, retweets; no header, no avatars, no intents)
 	 * @param array $config Config overrides
 	 * @return void
 	 */
-	public function renderMinimal(array $config = null){
-		$overrides = array(
+	public function renderMinimal(array $config = null)
+	{
+		$overrides = [
 			'header' => false,
 			'avatars' => false,
 			'retweets' => true,
 			'replies' => true,
-			'intents' => false
-		);
+			'intents' => false,
+		];
 		$this->config = $overrides + $this->config;
 
-		if($config !== null)
+		if ($config !== null) {
 			$this->config = $config + $this->config;
+		}
 		$this->doRender();
 	}
-
 
 	/**
 	 * Get the tweet loader.
 	 * @return ILoader;
 	 */
-	public function getLoader(){
-		if($this->loader === null)
+	public function getLoader()
+	{
+		if ($this->loader === null) {
 			$this->loader = new StandardLoader;
+		}
+
 		return $this->loader;
 	}
-
 
 	/**
 	 * Set the tweet loader.
 	 * @param ILoader $loader
 	 * @return void
 	 */
-	public function setLoader(ILoader $loader){
+	public function setLoader(ILoader $loader)
+	{
 		$this->loader = $loader;
 	}
-
 
 	/**
 	 * Get the tweet formatter.
 	 * @return IFormatter
 	 */
-	public function getFormatter(){
-		if($this->formatter === null)
+	public function getFormatter()
+	{
+		if ($this->formatter === null) {
 			$this->formatter = new StandardFormatter;
+		}
+
 		return $this->formatter;
 	}
-
 
 	/**
 	 * Set the tweet formatter.
 	 * @param IFormatter $formatter
 	 * @return void
 	 */
-	public function setFormatter(IFormatter $formatter){
+	public function setFormatter(IFormatter $formatter)
+	{
 		$this->formatter = $formatter;
 	}
-
 
 	/**
 	 * Get the template file name.
 	 * @return string
 	 */
-	public function getTemplateFile(){
-		return dirname($this->reflection->fileName)
-			. static::$templateDirectory
-			. $this->templateFile;
+	public function getTemplateFile()
+	{
+		return dirname((new \ReflectionClass($this))->getFileName())
+		. static::$templateDirectory
+		. $this->templateFile;
 	}
-
 
 	/**
-	 * Set the template file name, relative to the template directory.
 	 * @param string $filename
-	 * @return TwitterControl fluent interface
+	 * @return $this
 	 */
-	public function setTemplateFile($filename){
+	public function setTemplateFile($filename)
+	{
 		$this->templateFile = $filename;
+
 		return $this;
 	}
-
 
 	/**
 	 * Render the component.
 	 * @return void
 	 */
-	protected function doRender(){
+	protected function doRender()
+	{
 		$this->template->setFile($this->getTemplateFile());
 		$this->template->config = (object) $this->config;
-                 $this->template->registerHelper('timeAgo','Helpers::timeAgoInWords');
+		$this->template->getLatte()->addFilter('timeAgo', 'Helpers::timeAgoInWords');
 		ob_start();
-		try{
+		try {
 			$this->template->tweets = $this->getLoader()->getTweets($this->config);
 			$this->template->render();
 			ob_end_flush();
-		} catch(TwitterException $e){
-			if(Debugger::$productionMode){
+		} catch (TwitterException $e) {
+			if (Debugger::$productionMode) {
 				Debugger::log($e, Debugger::WARNING);
 				ob_end_clean();
-			} else{
+			} else {
 				throw $e;
 				ob_end_flush();
 			}
 		}
 	}
 
-
 	/**
 	 * Custom helpers registration.
 	 * @param string $class
-	 * @return Nette\Templating\FileTemplate
+	 * @return \Nette\Bridges\ApplicationLatte\Template
 	 */
-	protected function createTemplate($class = NULL){
+	protected function createTemplate($class = null)
+	{
+		/** @var Nette\Bridges\ApplicationLatte\Template $template */
 		$template = parent::createTemplate($class);
 
 		$formatter = $this->getFormatter();
-		$template->registerHelper('avatar', function($url){
-				return str_replace('_normal.', '_reasonably_small.', $url);
-			});
-		$template->registerHelper('tweetFormat', callback($formatter, 'formatTweet'));
-		$template->registerHelper('timeFormat', callback($formatter, 'formatTime'));
-		$template->registerHelper('userLink', callback($formatter, 'formatUserUrl'));
-		$template->registerHelper('intentLink', callback($formatter, 'formatIntentUrl'));
+		$latte = $template->getLatte();
+		$latte->addFilter('avatar', function ($url) {
+			return str_replace('_normal.', '_reasonably_small.', $url);
+		});
+		$latte->addFilter('tweetFormat', [$formatter, 'formatTweet']);
+		$latte->addFilter('timeFormat', [$formatter, 'formatTime']);
+		$latte->addFilter('userLink', [$formatter, 'formatUserUrl']);
+		$latte->addFilter('intentLink', [$formatter, 'formatIntentUrl']);
 
 		return $template;
 	}
 
-
 }
 
+class TwitterException extends \Exception
+{
 
-class TwitterException extends \Exception {}
+}

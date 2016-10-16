@@ -6,7 +6,7 @@
  *
  *}
 <p class="tweet" n:foreach="$tweets as $t">
-    {!$t|tweetFormat}<br>
+    {$t|tweetFormat|noescape}<br>
     &mdash; <a href="{$t->user->screen_name|userLink:$t->id_str}">{$t->created_at|timeAgo}</a>
 </p>
 

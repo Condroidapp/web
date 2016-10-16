@@ -182,7 +182,7 @@ class StandardFormatter extends Nette\Object implements IFormatter {
 	protected function createMentionEntity($entity){
 		return Html::el('span', '')
 				->class('mention')
-				->add(
+				->addHtml(
 					Html::el('a', '@'.$entity['screenName'])
 						->href("http://twitter.com/$entity[screenName]")
 						->target('_blank')

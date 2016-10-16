@@ -1,23 +1,27 @@
 <?php
+
+namespace App\Components\Twitter;
+
+use Nette\Caching\Cache;
+use Nette\Caching\IStorage;
 use Nette\Utils\JsonException;
 use Smasty\Components\Twitter\ILoader;
+use Smasty\Components\Twitter\TwitterException;
+use Twitter;
 
-/**
- * Created by JetBrains PhpStorm.
- * User: Jan
- * Date: 13.6.13
- * Time: 11:32
- * To change this template use File | Settings | File Templates.
- */
 class OauthLoader implements ILoader
 {
 
+	/** @var string */
 	private $consumerKey;
 
+	/** @var string */
 	private $consumerSecret;
 
+	/** @var string */
 	private $accessToken;
 
+	/** @var string */
 	private $accessTokenSecret;
 
 	/** @var array */
@@ -26,12 +30,13 @@ class OauthLoader implements ILoader
 	/** @var array */
 	private $tweetCache = [];
 
-	function __construct($tokens)
+	public function __construct(array $tokens, IStorage $storage)
 	{
 		$this->accessToken = $tokens['accessToken'];
 		$this->accessTokenSecret = $tokens['accessTokenSecret'];
 		$this->consumerKey = $tokens['consumerKey'];
 		$this->consumerSecret = $tokens['consumerSecret'];
+		$this->cache = new Cache($storage, __CLASS__);
 	}
 
 	/**
@@ -42,11 +47,11 @@ class OauthLoader implements ILoader
 	 */
 	public function getTweets(array $config)
 	{
-		$cache = Nette\Environment::getCache('Tweets');
-		if (!$cache['statuses']) {
+		$data = $this->cache->load('statuses');
+		if ($data === null) {
 			$this->config = $config;
 
-			$path = md5("statuses" . json_encode($this->config));
+			$path = md5('statuses' . json_encode($this->config));
 			if (isset($this->tweetCache[$path])) {
 				return $this->tweetCache[$path];
 			}
@@ -55,33 +60,30 @@ class OauthLoader implements ILoader
 				restore_error_handler();
 				throw new TwitterException($m);
 			});
-			$content = $this->generateRequestUrl();
+			$content = $this->getStatuses();
 			restore_error_handler();
 
 			try {
-				$cache->save('statuses', $content, [
-					Nette\Caching\Cache::EXPIRATION => "+1h",
+				$this->cache->save('statuses', $content, [
+					Cache::EXPIRATION => '+1h',
 				]);
 
-				return $this->tweetCache[$path] = $cache['statuses'];
+				return $this->tweetCache[$path] = $content;
 			} catch (JsonException $e) {
 				throw new TwitterException($e->getMessage(), $e->getCode(), $e);
 			}
 		} else {
-			return $cache['statuses'];
+			return $data;
 		}
 	}
 
 	/**
-	 * Generate URL for Twitter JSON API request.
-	 *
-	 * @return Url
+	 * @return \stdClass[]
 	 */
-	protected function generateRequestUrl()
+	protected function getStatuses()
 	{
 		$twitter = new Twitter($this->consumerKey, $this->consumerSecret, $this->accessToken, $this->accessTokenSecret);
-		$statuses = $twitter->load($twitter::ME, 5, $this->config);
 
-		return $statuses;
+		return $twitter->load($twitter::ME, 5, $this->config);
 	}
 }

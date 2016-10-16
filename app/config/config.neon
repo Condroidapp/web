@@ -10,7 +10,6 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     events: Kdyby\Events\DI\EventsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
-    autowired: Kdyby\Autowired\DI\AutowiredExtension
     newrelic: Quinix\NewRelic\DI\Extension
 
 console:
@@ -38,16 +37,14 @@ parameters:
 php:
     date.timezone: Europe/Prague
 
+session:
+	autoStart: smart
 
-nette:
-    session:
-        autoStart: smart
-
-    latte:
-        macros:
-            - BS3FormRenderer\Latte\Macros\BS3InputMacros
-            - Nextras\Latte\Macros\RedefineMacro
-            - App\VersionMacro
+latte:
+	macros:
+		- BS3FormRenderer\Latte\Macros\BS3InputMacros
+		- Nextras\Latte\Macros\RedefineMacro
+		- App\VersionMacro
 
 
 doctrine:
@@ -62,24 +59,21 @@ doctrine:
         Model: annotations("%appDir%/model")
 
 services:
-  #  em: @doctrine.dao
-    eventRepository: @doctrine.dao(Model\Event)
-    annotationRepository: @doctrine.dao(Model\Annotation)
-    lineRepository: @doctrine.dao(Model\ProgramLine)
-    logDao: @doctrine.dao(Model\LogRecord)
-    - Model\ApiLogger(@doctrine.dao(Model\ApiLog))
+    - Model\ApiLogger()
 #        logger: Logger
 
     echoLogger:
         class: Model\Commands\EchoLogger
         autowired: false
     databaseLogger:
-        class: Model\Commands\DatabaseLogger(@logDao)
+        class: Model\Commands\DatabaseLogger
         autowired: false
 
     importer:
-        class: Model\Commands\ImportCommand(@eventRepository, @annotationRepository, @databaseLogger)
+        class: Model\Commands\ImportCommand
         tags: [kdyby.console.command]
+        arguments:
+        	logger: @echoLogger
     feedParser: Model\Commands\FeedParser(@echoLogger)
 
     - App\Components\Forms\IBaseFormFactory
@@ -87,3 +81,5 @@ services:
     - App\Components\Grids\EventGridFactory
     - App\Components\grids\LogGridFactory
     - App\Components\Forms\EventFormFactory
+    - Smasty\Components\Twitter\TwitterControlFactory
+    - App\Components\Twitter\OauthLoader(%twitter%)
