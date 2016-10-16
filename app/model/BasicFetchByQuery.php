@@ -10,35 +10,40 @@ use Nette\Utils\Strings;
  * @package Maps\Model
  * @author Jan Langer <langeja1@fit.cvut.cz>
  */
-class BasicFetchByQuery extends QueryObject {
-    /** @var array conditions */
-    private $conditions = [];
+class BasicFetchByQuery extends QueryObject
+{
 
-    /**
-     * @param $conditions
-     */
-    function __construct($conditions) {
-        $this->conditions = $conditions;
-    }
+	/** @var array conditions */
+	private $conditions = [];
 
-    /** {@inheritdoc} */
-    protected function doCreateQuery(Queryable $repository) {
-        
-        $where = [];
-        $params = [];
-        $i = 0;
-        foreach($this->conditions as $condition=>$value) {
-            $separator = '= ?';
-            if(Strings::endsWith($condition, '?')) {
-                $separator = '';
-            }
-            $where[] = "b.".$condition.$separator.$i++;
-            $params[] = $value;
-        }
-        $q = $repository->createQuery("SELECT b FROM ".$repository->getClassName()." b ".(!empty($where) ? " WHERE ".  implode(" AND ", $where) : ""))
-                ->setParameters($params);
-        return $q;
-    }    //put your code here
+	/**
+	 * @param $conditions
+	 */
+	function __construct($conditions)
+	{
+		$this->conditions = $conditions;
+	}
+
+	/** {@inheritdoc} */
+	protected function doCreateQuery(Queryable $repository)
+	{
+
+		$where = [];
+		$params = [];
+		$i = 0;
+		foreach ($this->conditions as $condition => $value) {
+			$separator = '= ?';
+			if (Strings::endsWith($condition, '?')) {
+				$separator = '';
+			}
+			$where[] = "b." . $condition . $separator . $i++;
+			$params[] = $value;
+		}
+		$q = $repository->createQuery("SELECT b FROM " . $repository->getClassName() . " b " . (!empty($where) ? " WHERE " . implode(" AND ", $where) : ""))
+			->setParameters($params);
+
+		return $q;
+	}    //put your code here
 }
 
 ?>

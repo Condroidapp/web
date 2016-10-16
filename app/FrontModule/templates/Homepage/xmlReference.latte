@@ -1,85 +1,105 @@
 {block js}
-<script type="text/javascript">
-        
-         /* $(window).load(function() {
-             $('.sidebar').css({'position' : 'fixed', 'margin-top' : '120px'});
-          });      */
-          
-        </script>
-        {/block}
+	<script type="text/javascript">
+
+		/* $(window).load(function() {
+		 $('.sidebar').css({'position' : 'fixed', 'margin-top' : '120px'});
+		 });      */
+
+	</script>
+{/block}
 {block content}
 <div class="content">
-            
-<div class="c-box" id="add">
-              <h2>Jak dostat svou akci do Condroidu?</h2>
 
-              <p>Datovým zdrojem pro Condroid je vždy XML obsahující komplatní program. 
-                  Jeho přesnou strukturu a význam jednotlivých prvků naleznete níže na této stránce.</p>
-              <p>Pokud jste schopni připravit tento XML zdroj (nebo máte nějaký systém, který 
-                  vám ho vygeneruje, což je ta nejlepší varianta), stačí pro přidání do 
-                  Condroidu napsat e-mail na mojí adresu spolu s nějakými základními informacemi o akci.</p>
-              
-              <p>Jesliže zdroj připravit neumíte (nebo dokonce nevíte co je XML :-), můžu ho 
-                  připravit za vás. Nicméně záleží na mých časových možnostech, ale za zeptání nikoho neukousnu. :-) (a volňásky či jiný bonus ochotu zvětšují ;)</p>
-              
-              </div>
-              
-              <div class="c-box">              
-              <h2>Reference XML</h2>
-              <div class="small">
-              <ul class="reference">
-                  <li><code>&lt;annotations&gt;</code> - kořenový element, může být v dokumentu 
-                      maximálně jednou.
-                      <ul>
-                          <li><code>&lt;programme&gt;</code> - element obalující jednotlivé pořady
-                              <ul>
-                                  <li><code>&lt;pid&gt;</code> - ID programu. Musí zůstat unikátní i po aktualizacích. Povinné.</li>
-                                  <li><code>&lt;author&gt;</code> - Autor, Jméno, nick, cokoliv. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
-                                  <li><code>&lt;title&gt;</code> - Název pořadu. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
-                                  <li><code>&lt;type&gt;</code> - Typ pořadu. Viz níže. Povinné.</li>
-                                  <li><code>&lt;program-line&gt;</code> - Název programové linie. Povinné. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
-                                  <li><code>&lt;location&gt;</code> - Umístění pořadu (místnost). Pokud se akce konná ve více budovách nebo chcete zjednodušit navigaci, zadávejte od nejobecnějšího k konkrétnímu (např. KD Junior, Velký sál nebo 1. patro, místnost 20). Nepovinné.</li>
-                                  <li><code>&lt;start-time&gt;</code> - Začátek pořadu. Nepovinné. (pokud je vyplněn, je ale nutné vyplnit i end-time)</li>
-                                  <li><code>&lt;end-time&gt;</code> - Konec pořadu. Nepovinné. (pokud je vyplněn, je ale nutné vyplnit i start-time)</li>
-                                  <li><code>&lt;annotation&gt;</code> - Anotace. Nepovinné, pokud ale nebude uvedená, nezobrazí se detail pořadu. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-              
-              <h3>Časové údaje</h3>
-              <p>Všechny časové údaje (tzn. elementy start-time a end-time) musí být uvedeny ve formátu podle ISO 8610, tedy <b><code>yyyy-MM-ddThh:mm:ss+HH:00</code></b>. 
-                  Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00 nebo +02:00). Například tedy {=date("c")}</p>
-              <h3>Typy pořadů</h3>
-              <p>Vychází z typů pořadů používaných na Festivalu fantazie:
-              <ul class="types">
-                  <li><b>B</b> - beseda, diskuzní pořad</li>
-                  <li><b>C</b> - ceremoniál, divadlo</li>
-                  <li><b>D</b> - dokument, bonusový materiál</li>
-                  <li><b>F</b> - film, seriál (promítání)</li>
-                  <li><b>G</b> - herní turnaj</li>
-                  <li><b>H</b> - koncert, diskotéka</li>
-                  <li><b>P</b> - přednáška</li>
-                  <li><b>Q</b> - soutěž</li>
-                  <li><b>W</b> - workshop</li>
-              </ul>
-              <p>Pokud se pořad skládá z více typů, oddělují se znaménkem "+" a první by měl být ten nejvíce zastoupený.</p>
-              </p>
-              <p>Použijte kódování češtiny UTF-8.</p>
-              <p>Aby se v Condroidu zobrazil časový harmonogram, je nutné vyplnit časy začátku a konce aspoň pro čtvrtinu pořadů.</p>
-              <p>Obsah XML zdroje není neměnný a lze nějaké smysluplné informace přidat (ubrat většinou moc ne). V případě dotazů či nesnází napište :-)</p>
-              
-                
-              <a href="#top" rel="top">nahoru &uarr;</a>
-              </div>
-            
-              </div>
-              
-              <div class="c-box">
-              <h2>Ukázka XML</h2>
-              
-<pre class="brush: xml;">
+	<div class="c-box" id="add">
+		<h2>Jak dostat svou akci do Condroidu?</h2>
+
+		<p>Datovým zdrojem pro Condroid je vždy XML obsahující komplatní program.
+			Jeho přesnou strukturu a význam jednotlivých prvků naleznete níže na této stránce.</p>
+		<p>Pokud jste schopni připravit tento XML zdroj (nebo máte nějaký systém, který
+			vám ho vygeneruje, což je ta nejlepší varianta), stačí pro přidání do
+			Condroidu napsat e-mail na mojí adresu spolu s nějakými základními informacemi o akci.</p>
+
+		<p>Jesliže zdroj připravit neumíte (nebo dokonce nevíte co je XML :-), můžu ho
+			připravit za vás. Nicméně záleží na mých časových možnostech, ale za zeptání nikoho neukousnu. :-) (a
+			volňásky či jiný bonus ochotu zvětšují ;)</p>
+
+	</div>
+
+	<div class="c-box">
+		<h2>Reference XML</h2>
+		<div class="small">
+			<ul class="reference">
+				<li><code>&lt;annotations&gt;</code> - kořenový element, může být v dokumentu
+					maximálně jednou.
+					<ul>
+						<li><code>&lt;programme&gt;</code> - element obalující jednotlivé pořady
+							<ul>
+								<li><code>&lt;pid&gt;</code> - ID programu. Musí zůstat unikátní i po aktualizacích.
+									Povinné.
+								</li>
+								<li><code>&lt;author&gt;</code> - Autor, Jméno, nick, cokoliv. Povinné. Obsah musí být
+									obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+								<li><code>&lt;title&gt;</code> - Název pořadu. Povinné. Obsah musí být obalený
+									v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+								<li><code>&lt;type&gt;</code> - Typ pořadu. Viz níže. Povinné.</li>
+								<li><code>&lt;program-line&gt;</code> - Název programové linie. Povinné. Obsah musí být
+									obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
+								<li><code>&lt;location&gt;</code> - Umístění pořadu (místnost). Pokud se akce konná ve
+									více budovách nebo chcete zjednodušit navigaci, zadávejte od nejobecnějšího k
+									konkrétnímu (např. KD Junior, Velký sál nebo 1. patro, místnost 20). Nepovinné.
+								</li>
+								<li><code>&lt;start-time&gt;</code> - Začátek pořadu. Nepovinné. (pokud je vyplněn, je
+									ale nutné vyplnit i end-time)
+								</li>
+								<li><code>&lt;end-time&gt;</code> - Konec pořadu. Nepovinné. (pokud je vyplněn, je ale
+									nutné vyplnit i start-time)
+								</li>
+								<li><code>&lt;annotation&gt;</code> - Anotace. Nepovinné, pokud ale nebude uvedená,
+									nezobrazí se detail pořadu. Obsah musí být obalený v&nbsp;<code>&lt;![CDATA[
+										]]&gt;</code></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<h3>Časové údaje</h3>
+			<p>Všechny časové údaje (tzn. elementy start-time a end-time) musí být uvedeny ve formátu podle ISO 8610,
+				tedy <b><code>yyyy-MM-ddThh:mm:ss+HH:00</code></b>.
+				Kde yyyy je rok, MM měsíc, dd den, hh hodina, mm minuty, ss sekundy a +HH:00 je časové pásmo (+01:00
+				nebo +02:00). Například tedy {=date("c")}</p>
+			<h3>Typy pořadů</h3>
+			<p>Vychází z typů pořadů používaných na Festivalu fantazie:
+			<ul class="types">
+				<li><b>B</b> - beseda, diskuzní pořad</li>
+				<li><b>C</b> - ceremoniál, divadlo</li>
+				<li><b>D</b> - dokument, bonusový materiál</li>
+				<li><b>F</b> - film, seriál (promítání)</li>
+				<li><b>G</b> - herní turnaj</li>
+				<li><b>H</b> - koncert, diskotéka</li>
+				<li><b>P</b> - přednáška</li>
+				<li><b>Q</b> - soutěž</li>
+				<li><b>W</b> - workshop</li>
+			</ul>
+			<p>Pokud se pořad skládá z více typů, oddělují se znaménkem "+" a první by měl být ten nejvíce
+				zastoupený.</p>
+			</p>
+			<p>Použijte kódování češtiny UTF-8.</p>
+			<p>Aby se v Condroidu zobrazil časový harmonogram, je nutné vyplnit časy začátku a konce aspoň pro čtvrtinu
+				pořadů.</p>
+			<p>Obsah XML zdroje není neměnný a lze nějaké smysluplné informace přidat (ubrat většinou moc ne). V případě
+				dotazů či nesnází napište :-)</p>
+
+
+			<a href="#top" rel="top">nahoru &uarr;</a>
+		</div>
+
+	</div>
+
+	<div class="c-box">
+		<h2>Ukázka XML</h2>
+
+		<pre class="brush: xml;">
 &lt;annotations&gt;
     &lt;programme&gt;
         &lt;pid&gt;1343&lt;/pid&gt;
@@ -129,8 +149,8 @@
     &lt;/programme&gt;
 &lt;/annotations&gt;
 </pre>
-              
-              </div>
-            
-            
-            </div>
+
+	</div>
+
+
+</div>

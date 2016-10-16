@@ -8,7 +8,6 @@
 
 namespace Model;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\IdentifiedEntity;
 
@@ -22,111 +21,111 @@ use Kdyby\Doctrine\Entities\IdentifiedEntity;
 class Place extends IdentifiedEntity implements \JsonSerializable
 {
 
-    /**
-     * @ORM\Column
-     * @var string
-     */
+	/**
+	 * @ORM\Column
+	 * @var string
+	 */
 	private $name;
 
-    /**
-     * @ORM\Column(nullable=true)
-     * @var
-     */
-    private $description;
+	/**
+	 * @ORM\Column(nullable=true)
+	 * @var
+	 */
+	private $description;
 
-    /**
-     * @ORM\Column(type="json_array", nullable=true)
-     * @var string
-     */
-    private $hours;
+	/**
+	 * @ORM\Column(type="json_array", nullable=true)
+	 * @var string
+	 */
+	private $hours;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @var int
-     */
-    private $sort;
+	/**
+	 * @ORM\Column(type="integer", nullable=true)
+	 * @var int
+	 */
+	private $sort;
 
-    /**
-     * @ORM\Column(nullable=true, nullable=true)
-     * @var
-     */
-    private $category;
+	/**
+	 * @ORM\Column(nullable=true, nullable=true)
+	 * @var
+	 */
+	private $category;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @var int
-     */
-    private $categorySort;
+	/**
+	 * @ORM\Column(type="integer", nullable=true)
+	 * @var int
+	 */
+	private $categorySort;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Event")
-     * @var Event
-     */
-    private $event;
+	/**
+	 * @ORM\ManyToOne(targetEntity="Event")
+	 * @var Event
+	 */
+	private $event;
 
-    /**
-     * @ORM\Column(type="simple_array", nullable=true)
-     * @var
-     */
-    private $gps;
+	/**
+	 * @ORM\Column(type="simple_array", nullable=true)
+	 * @var
+	 */
+	private $gps;
 
-    /**
-     * @ORM\Column(nullable=true)
-     * @var
-     */
-    private $address;
+	/**
+	 * @ORM\Column(nullable=true)
+	 * @var
+	 */
+	private $address;
 
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime")
-     */
-    private $timestamp;
+	/**
+	 * @var \DateTime
+	 * @ORM\Column(type="datetime")
+	 */
+	private $timestamp;
 
+	/**
+	 * @ORM\Column(nullable=true)
+	 * @var string
+	 */
+	private $url;
 
-    /**
-     * @ORM\Column(nullable=true)
-     * @var string
-     */
-    private $url;
+	public function __construct()
+	{
+		$this->timestamp = new \DateTime();
+	}
 
-    public function __construct()
-    {
-        $this->timestamp = new \DateTime();
-    }
+	public function jsonSerialize()
+	{
+		$data = [
+			'name' => $this->name,
+			'description' => $this->description,
+			'gps' => $this->gps ? ['lat' => (float) $this->gps[0], 'lon' => (float) $this->gps[1]] : null,
+			'sort' => $this->sort,
+			'category' => $this->category,
+			'categorySort' => $this->categorySort,
+			'address' => explode(";", $this->address),
+			'hours' => $this->parseHours($this->hours),
+			"url" => $this->url,
+			'id' => $this->id,
+		];
 
-    public function jsonSerialize()
-    {
-        $data = [
-            'name' => $this->name,
-            'description' => $this->description,
-            'gps' => $this->gps ? ['lat' => (float)$this->gps[0], 'lon' => (float)$this->gps[1]] : null,
-            'sort' => $this->sort,
-            'category' => $this->category,
-            'categorySort' => $this->categorySort,
-            'address' => explode(";", $this->address),
-            'hours' => $this->parseHours($this->hours),
-            "url" => $this->url,
-            'id' => $this->id
-        ];
+		return ($data);
+	}
 
-        return ($data);
-    }
+	private function parseHours($hours)
+	{
+		if (empty($hours['type'])) {
+			return null;
+		}
 
-    private function parseHours($hours)
-    {
-        if(empty($hours['type'])) {
-            return NULL;
-        }
+		if ($hours['type'] === 2 && isset($hours['hours'][8])) {
+			for ($i = 1; $i < 8; $i++) {
+				$hours['hours'][$i] = $hours['hours'][8];
+			}
+			unset($hours['hours'][8]);
+		}
+		$hours['hours'] = (object) $hours['hours'];
 
-        if($hours['type'] === 2 &&  isset($hours['hours'][8])) {
-            for ($i = 1; $i < 8; $i++) {
-                $hours['hours'][$i] = $hours['hours'][8];
-            }
-            unset($hours['hours'][8]);
-        }
-	$hours['hours'] = (object) $hours['hours'];
-        return $hours;
-    }
+		return $hours;
+	}
 
 	/**
 	 * @return string
@@ -303,6 +302,5 @@ class Place extends IdentifiedEntity implements \JsonSerializable
 	{
 		$this->url = $url;
 	}
-
 
 }

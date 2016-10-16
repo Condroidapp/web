@@ -1,7 +1,7 @@
 <?php
 namespace Model;
-use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Lines
@@ -15,52 +15,54 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  * @ORM\Entity
  */
-class ProgramLine extends BaseEntity {
+class ProgramLine extends BaseEntity
+{
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     */
-    private $title;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="title", type="string", length=255, nullable=false)
+	 */
+	private $title;
 
-    /**
-     * @var Event
-     *
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="programLines")
-     *
-     */
-    private $event;
+	/**
+	 * @var Event
+	 *
+	 * @ORM\ManyToOne(targetEntity="Event", inversedBy="programLines")
+	 *
+	 */
+	private $event;
 
-    /**
-     * @param \Model\Event $event
-     */
-    public function setEvent($event) {
-        $this->event = $event;
-    }
+	/**
+	 * @param \Model\Event $event
+	 */
+	public function setEvent($event)
+	{
+		$this->event = $event;
+	}
 
-    /**
-     * @return \Model\Event
-     */
-    public function getEvent() {
-        return $this->event;
-    }
+	/**
+	 * @return \Model\Event
+	 */
+	public function getEvent()
+	{
+		return $this->event;
+	}
 
-    /**
-     * @param string $title
-     */
-    public function setTitle($title) {
-        $this->title = $title;
-    }
+	/**
+	 * @param string $title
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
+	}
 
-    /**
-     * @return string
-     */
-    public function getTitle() {
-        return $this->title;
-    }
-
-
-
+	/**
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
 
 }

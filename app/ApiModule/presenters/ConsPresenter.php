@@ -12,24 +12,27 @@ use Model\Persistence\IDao;
  *
  * @author Honza
  */
-class ConsPresenter extends \FrontModule\BasePresenter {
+class ConsPresenter extends \FrontModule\BasePresenter
+{
 
-    /**
-     * @autowire(\Model\Event, factory=\Kdyby\Doctrine\EntityDaoFactory)
-     * @var \Kdyby\Doctrine\EntityDao
-     */
-    protected $eventRepository;
-    /**
-     * @autowire
-     * @var \Model\ApiLogger
-     */
-    protected $apiLogger;
+	/**
+	 * @autowire(\Model\Event, factory=\Kdyby\Doctrine\EntityDaoFactory)
+	 * @var \Kdyby\Doctrine\EntityDao
+	 */
+	protected $eventRepository;
 
-    public function renderDefault() {
-		$this->template->cons = $this->eventRepository->findBy(['active'=>1]);
-        $this->apiLogger->logEventList();
+	/**
+	 * @autowire
+	 * @var \Model\ApiLogger
+	 */
+	protected $apiLogger;
 
-    }
+	public function renderDefault()
+	{
+		$this->template->cons = $this->eventRepository->findBy(['active' => 1]);
+		$this->apiLogger->logEventList();
+
+	}
 
 }
 

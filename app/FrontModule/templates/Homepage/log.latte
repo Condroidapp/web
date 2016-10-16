@@ -1,14 +1,14 @@
 <table border="1" width="100%">
-    <tr>
-        <th>severity</th>
-        <th>tag</th>
-        <th>time</th>
-        <th>Text</th>
-    </tr>
-    <tr n:foreach="$data as $row">
-        <td>{$row->severity}</td>    
-        <td>{$row->tag}</td>    
-        <td>{$row->time|date:'d.n.Y H:m:i'}</td>    
-        <td>{$row->message}</td>    
-    </tr>
+	<tr>
+		<th>severity</th>
+		<th>tag</th>
+		<th>time</th>
+		<th>Text</th>
+	</tr>
+	<tr n:foreach="$data as $row">
+		<td>{$row->severity}</td>
+		<td>{$row->tag}</td>
+		<td>{$row->time|date:'d.n.Y H:m:i'}</td>
+		<td>{$row->message}</td>
+	</tr>
 </table>

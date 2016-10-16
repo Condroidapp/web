@@ -8,17 +8,17 @@
 
 namespace Model\Commands;
 
+interface ILogger
+{
 
-interface ILogger {
+	const INFO = 'INFO';
+	const WARNING = 'WARNING';
+	const ERROR = 'ERROR';
 
-    const INFO = 'INFO';
-    const WARNING = 'WARNING';
-    const ERROR = 'ERROR';
+	public function start($message);
 
-    public function start($message);
+	public function end();
 
-    public function end();
+	public function log($message, $severity = self::INFO);
 
-    public function log($message, $severity = self::INFO);
-
-} 
+}

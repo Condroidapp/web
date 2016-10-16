@@ -1,6 +1,7 @@
 <?php
 namespace ApiModule;
 use FrontModule\BasePresenter;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,8 +12,10 @@ use FrontModule\BasePresenter;
  *
  * @author Honza
  */
-class DefaultPresenter extends BasePresenter {
-    //put your code here
+class DefaultPresenter extends BasePresenter
+{
+
+	//put your code here
 }
 
 ?>

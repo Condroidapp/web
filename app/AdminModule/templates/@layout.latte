@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
 
-    <!-- start: Meta -->
-    <meta charset="utf-8">
-    <title>Condroid - Admin</title>
-    <!-- end: Meta -->
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Condroid - Admin</title>
+	<!-- end: Meta -->
 
-    <!-- start: CSS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    {if $useFullAssets}
-        <!-- build:css {$basePath}/webtemp/admin.min.css -->
-        <link rel="stylesheet" href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap-theme.min.css">
-        <!-- endbuild -->
+	<!-- start: CSS -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	{if $useFullAssets}
+		<!-- build:css {$basePath}/webtemp/admin.min.css -->
+		<link rel="stylesheet" href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap-theme.min.css">
+		<!-- endbuild -->
 
-    {else}
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/webtemp/admin.min.css{version}" type="text/css" />
-    {/if}
-    <!-- start: Favicon -->
-    <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-    <!-- end: Favicon -->
+	{else}
+		<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/webtemp/admin.min.css{version}" type="text/css"/>
+	{/if}
+	<!-- start: Favicon -->
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<!-- end: Favicon -->
 
 
 </head>
@@ -29,31 +29,33 @@
 
 <body>
 <div class="container">
-    <div class="row">
-            <div class="page-header">
-                <h1>Condroid <small>administrace</small></h1>
-            </div>
-            <div n:foreach="$flashes as $flash" class="flash {$flash->type} alert alert-{$flash->type=='error'?'danger':$flash->type}">{$flash->message}</div>
-        </div>
-    <div class="row">
-        <ul class="nav nav-pills">
-            <li><a n:href="Dashboard:">Dashboard</a></li>
-            <li><a n:href="Dashboard:log">Import log</a></li>
-        </ul>
+	<div class="row">
+		<div class="page-header">
+			<h1>Condroid
+				<small>administrace</small>
+			</h1>
+		</div>
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type} alert alert-{$flash->type=='error'?'danger':$flash->type}">{$flash->message}</div>
+	</div>
+	<div class="row">
+		<ul class="nav nav-pills">
+			<li><a n:href="Dashboard:">Dashboard</a></li>
+			<li><a n:href="Dashboard:log">Import log</a></li>
+		</ul>
 
 
-        {include #content}
-    </div>
+		{include #content}
+	</div>
 </div>
 <!--/.fluid-container-->
 {if $useFullAssets}
-    <!-- build:js {$basePath}/webtemp/admin.min.js -->
-    <script src="{$basePath}/assets/bower/jquery/dist/jquery.js" type="text/javascript"></script>
-    <script src="{$basePath}/assets/bower/jquery-migrate/jquery-migrate.min.js" type="text/javascript"></script>
-    <script src="{$basePath}/assets/bower/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- endbuild -->
+	<!-- build:js {$basePath}/webtemp/admin.min.js -->
+	<script src="{$basePath}/assets/bower/jquery/dist/jquery.js" type="text/javascript"></script>
+	<script src="{$basePath}/assets/bower/jquery-migrate/jquery-migrate.min.js" type="text/javascript"></script>
+	<script src="{$basePath}/assets/bower/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+	<!-- endbuild -->
 {else}
-    <script src="{$basePath}/webtemp/admin.min.js{version}" type="text/javascript"></script>
+	<script src="{$basePath}/webtemp/admin.min.js{version}" type="text/javascript"></script>
 {/if}
 </body>
 </html>

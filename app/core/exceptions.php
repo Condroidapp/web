@@ -1,11 +1,11 @@
 <?php
 namespace App;
+
 /**
  * The exception that is thrown when a value (typically returned by function) does not match with the expected value.
  */
 class UnexpectedValueException extends \UnexpectedValueException
 {
-
 
 	/**
 	 * @param mixed $list
@@ -17,10 +17,9 @@ class UnexpectedValueException extends \UnexpectedValueException
 	public static function invalidEventValue($list, $class, $property)
 	{
 		$class = is_object($class) ? get_class($class) : $class;
+
 		return new static("Property $class::$$property must be array or NULL, " . gettype($list) . " given.");
 	}
-
-
 
 	/**
 	 * @param string|object $class
@@ -31,10 +30,9 @@ class UnexpectedValueException extends \UnexpectedValueException
 	public static function notACollection($class, $property)
 	{
 		$class = is_object($class) ? get_class($class) : $class;
+
 		return new static("Class property $class::\$$property is not an instance of Doctrine\\Common\\Collections\\Collection.");
 	}
-
-
 
 	/**
 	 * @param string|object $class
@@ -45,12 +43,14 @@ class UnexpectedValueException extends \UnexpectedValueException
 	public static function collectionCannotBeReplaced($class, $property)
 	{
 		$class = is_object($class) ? get_class($class) : $class;
+
 		return new static("Class property $class::\$$property is an instance of Doctrine\\Common\\Collections\\Collection. Use add<property>() and remove<property>() methods to manipulate it or declare your own.");
 	}
 
 }
 
 use Doctrine\ORM\Query;
+
 /**
  * @author Filip Procházka <filip@prochazka.su>
  */
@@ -60,20 +60,16 @@ class QueryException extends \Exception
 	/** @var \Doctrine\ORM\Query */
 	private $query;
 
-
-
 	/**
 	 * @param \Exception $previous
 	 * @param \Doctrine\ORM\Query $query
 	 * @param string $message
 	 */
-	public function __construct(\Exception $previous, Query $query = NULL, $message = "")
+	public function __construct(\Exception $previous, Query $query = null, $message = "")
 	{
-		parent::__construct($message ? : $previous->getMessage(), 0, $previous);
+		parent::__construct($message ?: $previous->getMessage(), 0, $previous);
 		$this->query = $query;
 	}
-
-
 
 	/**
 	 * @return \Doctrine\ORM\Query
@@ -91,7 +87,9 @@ class QueryException extends \Exception
  * @package Maps
  * @author Jan Langer <langeja1@fit.cvut.cz>
  */
-class InvalidArgumentException extends \InvalidArgumentException {
+class InvalidArgumentException extends \InvalidArgumentException
+{
+
 }
 
 /**
@@ -100,7 +98,9 @@ class InvalidArgumentException extends \InvalidArgumentException {
  * @package Maps
  * @author Jan Langer <langeja1@fit.cvut.cz>
  */
-class InvalidStateException extends \RuntimeException {
+class InvalidStateException extends \RuntimeException
+{
+
 }
 
 /**
@@ -109,7 +109,9 @@ class InvalidStateException extends \RuntimeException {
  * @package Maps
  * @author Jan Langer <langeja1@fit.cvut.cz>
  */
-class ShellCommandException extends \RuntimeException {
+class ShellCommandException extends \RuntimeException
+{
+
 }
 
 /**
@@ -118,9 +120,12 @@ class ShellCommandException extends \RuntimeException {
  * @package Maps
  * @author Jan Langer <langeja1@fit.cvut.cz>
  */
-class StaticClassException extends \LogicException {
+class StaticClassException extends \LogicException
+{
+
 }
 
-class InvalidProgramNodeException extends InvalidArgumentException {
+class InvalidProgramNodeException extends InvalidArgumentException
+{
 
 }

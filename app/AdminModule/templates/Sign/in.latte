@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
 
-    <!-- start: Meta -->
-    <meta charset="utf-8">
-    <title>Condroid - Sign in</title>
-    <!-- end: Meta -->
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Condroid - Sign in</title>
+	<!-- end: Meta -->
 
-    <!-- start: CSS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+	<!-- start: CSS -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	<link href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="{$basePath}/assets/bower/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 
 
-    <!-- start: Favicon -->
-    <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-    <!-- end: Favicon -->
+	<!-- start: Favicon -->
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<!-- end: Favicon -->
 
 
 </head>
@@ -24,17 +24,19 @@
 
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="page-header">
-                <h1>Condroid <small>administrace</small></h1>
-            </div>
-            <div class="well well-lg">
-                <div n:foreach="$flashes as $flash" class="flash {$flash->type} alert alert-{$flash->type=='error'?'danger':$flash->type}">{$flash->message}</div>
-                {control signInForm}
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="page-header">
+				<h1>Condroid
+					<small>administrace</small>
+				</h1>
+			</div>
+			<div class="well well-lg">
+				<div n:foreach="$flashes as $flash" class="flash {$flash->type} alert alert-{$flash->type=='error'?'danger':$flash->type}">{$flash->message}</div>
+				{control signInForm}
+			</div>
+		</div>
+	</div>
 </div>
 <!--/.fluid-container-->
 <script src="{$basePath}/assets/bower/jquery/dist/jquery.min.js"></script>

@@ -15,40 +15,40 @@ use Model\Event;
 /** @User(loggedIn) */
 class EventPresenter extends SecuredPresenter
 {
-    /** @var  EntityManager @autowire */
-    protected $em;
 
-    public function actionEdit($id)
-    {
-        $this['editForm']->bindEntity($this->em->find(Event::class, $id));
-        $this['editForm']->onComplete[] = function($entity) {
-            $this->em->flush($entity);
-        };
-    }
+	/** @var  EntityManager @autowire */
+	protected $em;
 
-    public function actionAdd($id)
-    {
-        $this['editForm']->bindEntity(new Event());
-        $this['editForm']->onComplete[] = function($entity) {
-            $this->em->persist($entity);
-            $this->em->flush($entity);
+	public function actionEdit($id)
+	{
+		$this['editForm']->bindEntity($this->em->find(Event::class, $id));
+		$this['editForm']->onComplete[] = function ($entity) {
+			$this->em->flush($entity);
+		};
+	}
 
-        };
-        $this['editForm']->setRedirect('Dashboard:');
-    }
+	public function actionAdd($id)
+	{
+		$this['editForm']->bindEntity(new Event());
+		$this['editForm']->onComplete[] = function ($entity) {
+			$this->em->persist($entity);
+			$this->em->flush($entity);
 
-    public function actionDelete($id)
-    {
-        $entity = $this->em->getReference(Event::class, $id);
-        $this->em->remove($entity);
-        $this->em->flush($entity);
-        $this->redirect('Dashboard:');
-    }
+		};
+		$this['editForm']->setRedirect('Dashboard:');
+	}
 
+	public function actionDelete($id)
+	{
+		$entity = $this->em->getReference(Event::class, $id);
+		$this->em->remove($entity);
+		$this->em->flush($entity);
+		$this->redirect('Dashboard:');
+	}
 
-    public function createComponentEditForm(EventFormFactory $factory)
-    {
-        return $factory->create();
-    }
+	public function createComponentEditForm(EventFormFactory $factory)
+	{
+		return $factory->create();
+	}
 
-} 
+}

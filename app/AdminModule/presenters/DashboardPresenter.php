@@ -11,15 +11,14 @@ use App\Components\grids\LogGridFactory;
 class DashboardPresenter extends SecuredPresenter
 {
 
+	public function createComponentEventGrid(EventGridFactory $factory)
+	{
+		return $factory->create();
+	}
 
-    public function createComponentEventGrid(EventGridFactory $factory)
-    {
-        return $factory->create();
-    }
+	public function createComponentLogGrid(LogGridFactory $factory)
+	{
+		return $factory->create();
+	}
 
-    public function createComponentLogGrid(LogGridFactory $factory)
-    {
-        return $factory->create();
-    }
-
-} 
+}

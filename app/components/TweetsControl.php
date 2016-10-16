@@ -1,6 +1,4 @@
 <?php
-use Nette\Diagnostics\Debugger;
-use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use Smasty\Components\Twitter\ILoader;
 
@@ -11,71 +9,79 @@ use Smasty\Components\Twitter\ILoader;
  * Time: 11:32
  * To change this template use File | Settings | File Templates.
  */
+class OauthLoader implements ILoader
+{
 
-class OauthLoader implements  ILoader {
+	private $consumerKey;
 
-    private $consumerKey;
-    private $consumerSecret;
-    private $accessToken;
-    private $accessTokenSecret;
-    /** @var array */
-    private $config = array();
+	private $consumerSecret;
 
-    /** @var array */
-    private $tweetCache = array();
+	private $accessToken;
 
-    function __construct($tokens) {
-        $this->accessToken = $tokens['accessToken'];
-        $this->accessTokenSecret = $tokens['accessTokenSecret'];
-        $this->consumerKey = $tokens['consumerKey'];
-        $this->consumerSecret = $tokens['consumerSecret'];
-    }
+	private $accessTokenSecret;
 
+	/** @var array */
+	private $config = [];
 
-    /**
-     * Get the loaded tweets, formatted according to Twitter REST API JSON format.
-     *
-     * @param array $config Configuration options
-     * @return array|null
-     */
-    public function getTweets(array $config) {
-        $cache = Nette\Environment::getCache('Tweets');
-        if (!$cache['statuses']) {
-            $this->config = $config;
+	/** @var array */
+	private $tweetCache = [];
 
-            $path = md5("statuses".json_encode($this->config));
-            if (isset($this->tweetCache[$path])) {
-                return $this->tweetCache[$path];
-            }
+	function __construct($tokens)
+	{
+		$this->accessToken = $tokens['accessToken'];
+		$this->accessTokenSecret = $tokens['accessTokenSecret'];
+		$this->consumerKey = $tokens['consumerKey'];
+		$this->consumerSecret = $tokens['consumerSecret'];
+	}
 
-            set_error_handler(function($s, $m) {
-                restore_error_handler();
-                throw new TwitterException($m);
-            });
-            $content = $this->generateRequestUrl();
-            restore_error_handler();
+	/**
+	 * Get the loaded tweets, formatted according to Twitter REST API JSON format.
+	 *
+	 * @param array $config Configuration options
+	 * @return array|null
+	 */
+	public function getTweets(array $config)
+	{
+		$cache = Nette\Environment::getCache('Tweets');
+		if (!$cache['statuses']) {
+			$this->config = $config;
 
-            try {
-                $cache->save('statuses', $content, array(
-                    Nette\Caching\Cache::EXPIRATION => "+1h",
-                ));
-                return $this->tweetCache[$path] = $cache['statuses'];
-            } catch (JsonException $e) {
-                throw new TwitterException($e->getMessage(), $e->getCode(), $e);
-            }
-        }
-        else
-            return $cache['statuses'];
-    }
+			$path = md5("statuses" . json_encode($this->config));
+			if (isset($this->tweetCache[$path])) {
+				return $this->tweetCache[$path];
+			}
 
-    /**
-     * Generate URL for Twitter JSON API request.
-     *
-     * @return Url
-     */
-    protected function generateRequestUrl() {
-        $twitter = new Twitter($this->consumerKey, $this->consumerSecret, $this->accessToken, $this->accessTokenSecret);
-        $statuses = $twitter->load($twitter::ME, 5, $this->config);
-        return $statuses;
-    }
+			set_error_handler(function ($s, $m) {
+				restore_error_handler();
+				throw new TwitterException($m);
+			});
+			$content = $this->generateRequestUrl();
+			restore_error_handler();
+
+			try {
+				$cache->save('statuses', $content, [
+					Nette\Caching\Cache::EXPIRATION => "+1h",
+				]);
+
+				return $this->tweetCache[$path] = $cache['statuses'];
+			} catch (JsonException $e) {
+				throw new TwitterException($e->getMessage(), $e->getCode(), $e);
+			}
+		} else {
+			return $cache['statuses'];
+		}
+	}
+
+	/**
+	 * Generate URL for Twitter JSON API request.
+	 *
+	 * @return Url
+	 */
+	protected function generateRequestUrl()
+	{
+		$twitter = new Twitter($this->consumerKey, $this->consumerSecret, $this->accessToken, $this->accessTokenSecret);
+		$statuses = $twitter->load($twitter::ME, 5, $this->config);
+
+		return $statuses;
+	}
 }
