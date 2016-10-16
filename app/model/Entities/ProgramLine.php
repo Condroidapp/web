@@ -33,6 +33,13 @@ class ProgramLine extends BaseEntity
 	 */
 	private $event;
 
+	public function __construct($title, Event $event)
+	{
+		parent::__construct();
+		$this->title = $title;
+		$this->event = $event;
+	}
+
 	/**
 	 * @param \Model\Event $event
 	 */

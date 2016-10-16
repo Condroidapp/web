@@ -2,14 +2,8 @@
 
 use FrontModule\BasePresenter;
 use Nette\Application as NA;
-use Nette\Diagnostics\Debugger;
+use Tracy\Debugger;
 
-/**
- * Error presenter.
- *
- * @author     John Doe
- * @package    MyApplication
- */
 class ErrorPresenter extends BasePresenter
 {
 

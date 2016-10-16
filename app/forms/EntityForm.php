@@ -44,8 +44,8 @@ class EntityForm extends BaseForm
 			$value = null;
 			if ($this->hasProperty($entity, $name)) {
 				$value = $entity->$name;
-			} elseif (count(explode("__", $name)) > 1) {
-				$parts = explode("__", $name);
+			} elseif (count(explode('__', $name)) > 1) {
+				$parts = explode('__', $name);
 				if ($this->hasProperty($entity, $parts[0])) {
 					$call = $parts[0];
 					$object = $entity->$call();
@@ -93,7 +93,7 @@ class EntityForm extends BaseForm
 			}
 			$this->onComplete($this->entity);
 			if ($this->redirect) {
-				call_user_func_array([$presenter, "redirect"], $this->redirect);
+				call_user_func_array([$presenter, 'redirect'], $this->redirect);
 			}
 		} catch (\InvalidArgumentException $e) {
 			$this->addError($e->getMessage());
@@ -113,7 +113,7 @@ class EntityForm extends BaseForm
 	public function processForm($entity, $values)
 	{
 		foreach ($values as $key => $value) {
-			$method = "set" . ucfirst($key);
+			$method = 'set' . ucfirst($key);
 			$entity->$method($value);
 		}
 	}

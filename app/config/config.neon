@@ -11,12 +11,19 @@ extensions:
     events: Kdyby\Events\DI\EventsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
     newrelic: Quinix\NewRelic\DI\Extension
+    monolog: Kdyby\Monolog\DI\MonologExtension
 
 console:
     url: http://condroid.fan-project.com/
 
 newrelic:
     appName: condroid.fan-project.com
+
+monolog:
+    name: condroid.server
+    registerFallback: %debugMode%
+    handlers:
+        syslog: Monolog\Handler\SyslogUdpHandler(%papertrail.host%, %papertrail.port%, 8, Monolog\Logger::INFO)
 
 parameters:
     useFullAssets: %debugMode%
@@ -34,17 +41,21 @@ parameters:
     users:
         admin: false
 
+    papertrail:
+        host:
+        port:
+
 php:
     date.timezone: Europe/Prague
 
 session:
-	autoStart: smart
+    autoStart: smart
 
 latte:
-	macros:
-		- BS3FormRenderer\Latte\Macros\BS3InputMacros
-		- Nextras\Latte\Macros\RedefineMacro
-		- App\VersionMacro
+    macros:
+        - BS3FormRenderer\Latte\Macros\BS3InputMacros
+        - Nextras\Latte\Macros\RedefineMacro
+        - App\VersionMacro
 
 
 doctrine:
@@ -72,9 +83,10 @@ services:
     importer:
         class: Model\Commands\ImportCommand
         tags: [kdyby.console.command]
-        arguments:
-        	logger: @echoLogger
-    feedParser: Model\Commands\FeedParser(@echoLogger)
+
+    feedParser: Model\Commands\FeedParser
+    - App\RouterFactory
+    router: @App\RouterFactory::create
 
     - App\Components\Forms\IBaseFormFactory
     - Model\Authenticator(%users%)
@@ -83,3 +95,4 @@ services:
     - App\Components\Forms\EventFormFactory
     - Smasty\Components\Twitter\TwitterControlFactory
     - App\Components\Twitter\OauthLoader(%twitter%)
+    - Model\Commands\FileDownloader(%tempDir%)

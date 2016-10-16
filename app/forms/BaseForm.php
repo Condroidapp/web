@@ -1,7 +1,6 @@
 <?php
 namespace App\Components\Forms;
 
-use App\BootstrapFormRenderer\Bootstrap3Renderer as BootstrapRenderer;
 use FrontModule\BasePresenter;
 use Nette\Application\UI\Form as AppForm;
 use Nette\Forms\Form as NForm;
@@ -49,7 +48,7 @@ class BaseForm extends AppForm
 	 */
 	public function addError($message)
 	{
-		if (trim($message) != "") {
+		if (trim($message) != '') {
 			$this->getPresenter()->flashMessage($message, BasePresenter::FLASH_ERROR);
 		}
 		$this->valid = false;
@@ -61,7 +60,7 @@ class BaseForm extends AppForm
 	public function addSubmit($name, $caption = null)
 	{
 		$component = parent::addSubmit($name, $caption);
-		$component->getControlPrototype()->addClass("btn-primary");
+		$component->getControlPrototype()->addClass('btn-primary');
 
 		return $component;
 

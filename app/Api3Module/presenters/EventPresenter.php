@@ -3,23 +3,25 @@
 namespace Api3Module;
 
 use FrontModule\BasePresenter;
+use Kdyby\Doctrine\EntityManager;
+use Model\ApiLogger;
 use Model\Event;
-use Nette\Application\BadRequestException;
 
 class EventPresenter extends BasePresenter
 {
 
-	/**
-	 * @autowire(\Model\Event, factory=\Kdyby\Doctrine\EntityDaoFactory)
-	 * @var \Kdyby\Doctrine\EntityDao
-	 */
-	protected $eventRepository;
+	/** @var \Model\ApiLogger */
+	private $apiLogger;
 
-	/**
-	 * @autowire
-	 * @var \Model\ApiLogger
-	 */
-	protected $apiLogger;
+	/** @var \Kdyby\Doctrine\EntityManager */
+	private $entityManager;
+
+	public function __construct(EntityManager $entityManager, ApiLogger $apiLogger)
+	{
+		parent::__construct();
+		$this->entityManager = $entityManager;
+		$this->apiLogger = $apiLogger;
+	}
 
 	public function actionDefault($id = null)
 	{
@@ -27,10 +29,10 @@ class EventPresenter extends BasePresenter
 		if ($id) {
 			$condition['id'] = $id;
 		}
-		$events = $this->eventRepository->findBy($condition);
+		$events = $this->entityManager->getRepository(Event::class)->findBy($condition);
 		$this->apiLogger->logEventList();
 		if (!count($events)) {
-			throw new BadRequestException("Not found", 404);
+			$this->sendJson([]);
 		}
 
 		$data = [];
@@ -39,26 +41,26 @@ class EventPresenter extends BasePresenter
 			$data[] = [
 				'id' => $event->id,
 				'name' => $event->getName(),
-				'timetable' => $event->getHasTimetable(),
-				'date' => $event->date,
-				'url' => $event->url,
-				'annotations' => $event->getHasAnnotations(),
+				'timetable' => $event->isHasTimetable(),
+				'date' => $event->getDate(),
+				'url' => $event->getUrl(),
+				'annotations' => $event->isHasAnnotations(),
 				'datasource' => $this->link('//:Api3:Program:default', ['id' => $event->getId()]),
 				'start' => $event->getCheckStart()->format('c'),
 				'end' => $event->getCheckStop()->format('c'),
 				'image' => null,
 				'message' => $event->getMessage(),
-				'places' => ($id ? $this->getPlaces($event) : null),
-				'gps' => ($id && $event->gps ? ['lat' => $event->gps[0], 'lon' => $event->gps[1]] : null),
+				'places' => $id !== null ? $this->getPlaces($event) : null,
+				'gps' => $id !== null && is_array($event->getGps()) ? ['lat' => $event->getGps()[0], 'lon' => $event->getGps()[1]] : null,
 			];
 		}
 
 		$this->sendJson($id ? array_shift($data) : $data);
 	}
 
-	private function getPlaces($event)
+	private function getPlaces(Event $event)
 	{
-		return $event->places;
+		return $event->getPlaces();
 	}
 
 }

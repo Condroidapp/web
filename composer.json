@@ -19,6 +19,9 @@
         "nextras/latte-macros":"~1.0",
         "nextras/datagrid": "~2.0",
         "quinix/bs3-formrenderer":"dev-master",
-        "quinix/presenter-link-panel":"~1.0"
+        "quinix/presenter-link-panel":"~1.0",
+        "kdyby/monolog": "^1.2",
+        "composer/ca-bundle": "^1.0",
+        "guzzlehttp/guzzle": "^6.2"
     }
 }

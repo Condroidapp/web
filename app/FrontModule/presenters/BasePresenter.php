@@ -1,8 +1,6 @@
 <?php
 namespace FrontModule;
 
-use Kdyby\Autowired\AutowireComponentFactories;
-use Kdyby\Autowired\AutowireProperties;
 use Nette;
 
 /**

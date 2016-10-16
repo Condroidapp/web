@@ -2,7 +2,7 @@
 
 namespace Model;
 
-use Kdyby\Doctrine\EntityDao;
+use Doctrine\ORM\EntityManager;
 use Nette\Http\Request;
 use Nette\Object;
 use Nette\Utils\Strings;
@@ -11,28 +11,26 @@ class ApiLogger extends Object
 {
 
 	/**
-	 * @var \Kdyby\Doctrine\EntityDao
-	 */
-	private $repository;
-
-	/**
 	 * @var \Nette\Http\Request
 	 */
 	private $httpRequest;
 
 	private $os, $device, $serial;
 
-	public function __construct(EntityDao $repository, Request $httpRequest)
+	/** @var \Doctrine\ORM\EntityManager */
+	private $entityManager;
+
+	public function __construct(EntityManager $entityManager, Request $httpRequest)
 	{
-		$this->repository = $repository;
+		$this->entityManager = $entityManager;
 		$this->httpRequest = $httpRequest;
 
-		$header = trim($httpRequest->getHeader('X-Device-Info', ""));
-		if ($header) {
-			$identifiers = explode(";", $header);
+		$header = trim($httpRequest->getHeader('X-Device-Info', null));
+		if ($header !== null) {
+			$identifiers = explode(';', $header);
 			if (isset($identifiers[0])) {
-				if (Strings::startsWith($identifiers[0], ":")) {
-					$identifiers[0] = trim($identifiers[0], ": ");
+				if (Strings::startsWith($identifiers[0], ':')) {
+					$identifiers[0] = trim($identifiers[0], ': ');
 				}
 			}
 
@@ -49,7 +47,7 @@ class ApiLogger extends Object
 			return;
 		}
 		$entity->annotationsFullDownload++;
-		$this->repository->save($entity);
+		$this->entityManager->flush($entity);
 	}
 
 	public function logUpdate()
@@ -59,7 +57,7 @@ class ApiLogger extends Object
 			return;
 		}
 		$entity->annotationsUpdate++;
-		$this->repository->save($entity);
+		$this->entityManager->flush($entity);
 	}
 
 	public function logCheck()
@@ -69,7 +67,7 @@ class ApiLogger extends Object
 			return;
 		}
 		$entity->annotationsCheck++;
-		$this->repository->save($entity);
+		$this->entityManager->flush($entity);
 	}
 
 	public function logEventList()
@@ -79,7 +77,7 @@ class ApiLogger extends Object
 			return;
 		}
 		$entity->conList++;
-		$this->repository->save($entity);
+		$this->entityManager->flush($entity);
 	}
 
 	private function getEntity()
@@ -87,7 +85,7 @@ class ApiLogger extends Object
 		if (!$this->device || !$this->serial) {
 			return null;
 		}
-		$entity = $this->repository->findOneBy(['serial' => $this->serial, 'device' => $this->device]);
+		$entity = $this->entityManager->getRepository(ApiLog::class)->findOneBy(['serial' => $this->serial, 'device' => $this->device]);
 		if (!$entity) {
 			$entity = new ApiLog();
 			$entity->device = $this->device;

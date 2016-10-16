@@ -18,17 +18,17 @@ class EchoLogger implements ILogger
 
 			return;
 		}
-		echo '[' . date("Y-m-d H:i:s") . '] ' . $m . PHP_EOL;
+		echo '[' . date('Y-m-d H:i:s') . '] ' . $m . PHP_EOL;
 	}
 
 	public function start($message)
 	{
 		$this->out(PHP_EOL);
 		$this->out('****** STARTING ******');
-		if ($message !== "") {
+		if ($message !== '') {
 			$this->out($message);
 		}
-		$this->out("**********************");
+		$this->out('**********************');
 	}
 
 	public function end()

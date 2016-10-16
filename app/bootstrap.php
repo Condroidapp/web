@@ -1,61 +1,22 @@
 <?php
 
-/**
- * My Application bootstrap file.
- */
-use Nette\Application\Routers\Route;
-use Nette\Configurator;
+require __DIR__ . '/../vendor/autoload.php';
 
-// Load Nette Framework
-require APP_DIR . '/../vendor/autoload.php';
+$configurator = new \Nette\Configurator();
 
-// Configure application
-$configurator = new Configurator;
-
-// Enable Nette Debugger for error visualisation & logging
-//$configurator->setProductionMode($configurator::AUTO);
-if (PHP_SAPI == 'cli') {
+if (PHP_SAPI === 'cli' && in_array('--debug', $_SERVER['argv'], true)) {
+	unset($_SERVER['argv'][array_search('--debug', $_SERVER['argv'], true)]);
 	$configurator->setDebugMode(true);
 }
 $configurator->enableDebugger(__DIR__ . '/../log');
 
-// Enable RobotLoader - this will load all classes automatically
 $configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
-// Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
-$container = $configurator->createContainer();
-
-// Setup router
-$router = $container->getService('router');
-$router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
-$router[] = new Route('api/2/<presenter>[/<cid>]', [
-	'module' => 'Api',
-	'presenter' => 'Default',
-	'action' => 'default',
-	'cid' => null]);
-
-$router[] = new Route('api/3/<presenter>[/<id>]', [
-	'module' => 'Api3',
-	'presenter' => 'Default',
-	'action' => 'default',
-	'cid' => null]);
-$router[] = new Route('admin/<presenter>/<action>[/<id>]', [
-	'module' => 'Admin',
-	'presenter' => 'Dashboard',
-	'action' => 'default',
-	'id' => null]);
-
-$router[] = new Route('<action>/[<id>]', [
-	'module' => 'Front',
-	'presenter' => 'Homepage',
-	'action' => 'default']);
-
-// Configure and run the application!
-return $container;
+return $configurator->createContainer();

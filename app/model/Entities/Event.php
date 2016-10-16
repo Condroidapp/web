@@ -367,11 +367,11 @@ class Event extends IdentifiedEntity
 	}
 
 	/**
-	 * @return mixed
+	 * @return Annotation[]
 	 */
 	public function getAnnotations()
 	{
-		return $this->annotations;
+		return $this->annotations->toArray();
 	}
 
 	/**
@@ -383,11 +383,11 @@ class Event extends IdentifiedEntity
 	}
 
 	/**
-	 * @return mixed
+	 * @return ProgramLine[]
 	 */
 	public function getProgramLines()
 	{
-		return $this->programLines;
+		return $this->programLines->toArray();
 	}
 
 	/**

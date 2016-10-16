@@ -2,30 +2,31 @@
 
 namespace Model\Commands;
 
-use Kdyby\Doctrine\EntityDao;
+use Doctrine\ORM\EntityManager;
 use Model\LogRecord;
 
 class DatabaseLogger implements ILogger
 {
 
-	private $logDao;
-
 	private $records = [];
 
-	function __construct(EntityDao $logDao)
+	/** @var \Doctrine\ORM\EntityManager */
+	private $entityManager;
+
+	public function __construct(EntityManager $entityManager)
 	{
-		$this->logDao = $logDao;
+		$this->entityManager = $entityManager;
 	}
 
 	public function start($message)
 	{
-		$this->addRecord($message, "START", self::INFO);
+		$this->addRecord($message, 'START', self::INFO);
 	}
 
 	public function end()
 	{
-		$this->addRecord('End', "END", self::INFO);
-		$this->logDao->save($this->records);
+		$this->addRecord('End', 'END', self::INFO);
+		$this->entityManager->flush($this->records);
 	}
 
 	public function log($message, $severity = self::INFO)
@@ -41,6 +42,7 @@ class DatabaseLogger implements ILogger
 		$record->setSeverity($severity);
 		$record->setTag($tag);
 		$record->setTime(microtime(true));
+		$this->entityManager->persist($record);
 		$this->records[] = $record;
 	}
 }

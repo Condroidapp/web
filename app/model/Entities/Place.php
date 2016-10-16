@@ -101,9 +101,9 @@ class Place extends IdentifiedEntity implements \JsonSerializable
 			'sort' => $this->sort,
 			'category' => $this->category,
 			'categorySort' => $this->categorySort,
-			'address' => explode(";", $this->address),
+			'address' => explode(';', $this->address),
 			'hours' => $this->parseHours($this->hours),
-			"url" => $this->url,
+			'url' => $this->url,
 			'id' => $this->id,
 		];
 

@@ -1,24 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jan
- * Date: 5.8.13
- * Time: 22:43
- */
 
 namespace Model\Commands;
 
 use App\InvalidProgramNodeException;
-use Model\Dao;
 use Nette\Object;
 use Nette\Utils\Strings;
 
 class FeedParser extends Object
 {
-
-	private $annotations;
-
-	private $programLines;
 
 	public $onError = [];
 
@@ -26,26 +15,32 @@ class FeedParser extends Object
 
 	private $programIds = [];
 
-	public function __construct(/*Dao $annotation, Dao $programLines*/)
+	/** @var \GuzzleHttp\Client */
+	private $httpClient;
+
+	/** @var \Model\Commands\FileDownloader */
+	private $downloader;
+
+	public function __construct(FileDownloader $downloader)
 	{
-		/*$this->annotations = $annotation;
-		$this->programLines = $annotation;*/
+		$this->downloader = $downloader;
 	}
 
 	public function parseXML($feedUrl)
 	{
 		$this->programIds = [];
 		$dom = new \DOMDocument();
-		$return = @$dom->load($feedUrl);
+		$file = $this->downloader->downloadFile($feedUrl);
+		$return = $dom->load($file);
 		if (!$return) {
 			$error = error_get_last();
-			$this->log("Feed data source load failed!", ILogger::ERROR);
-			$this->onError("DOM Load Failed: " . $error['message'], 1);
+			$this->log('Feed data source load failed!', ILogger::ERROR);
+			$this->onError('DOM Load Failed: ' . $error['message'], 1);
 
 			return;
 		}
-		$this->log("Feed data source loaded");
-		$this->log("Processing XML");
+		$this->log('Feed data source loaded');
+		$this->log('Processing XML');
 		$feedData = [];
 		foreach ($dom->documentElement->childNodes as $node) {
 			try {
@@ -56,8 +51,9 @@ class FeedParser extends Object
 				//skip node
 			}
 		}
-		$this->log("XML sucesfully processed, found " . count($feedData) . " entries.");
+		$this->log('XML sucesfully processed, found ' . count($feedData) . ' entries.');
 
+		@unlink($file);
 		return $feedData;
 	}
 
@@ -67,7 +63,7 @@ class FeedParser extends Object
 		foreach ($node->childNodes as $n) {
 			if ($n->nodeType == XML_ELEMENT_NODE) {
 				$value = $this->sanitizeValue($n->nodeValue, $n->nodeName);
-				if ($this->validateValue($n->nodeName, $value)) {
+				if ($this->validateValue($n->nodeName, $value, $n)) {
 					$data[$n->nodeName] = $value;
 				}
 			}
@@ -77,37 +73,37 @@ class FeedParser extends Object
 		return $data;
 	}
 
-	private function validateValue($name, $value)
+	private function validateValue($name, $value, \DOMNode $node)
 	{
 		switch ($name) {
 			case 'pid':
 				if (!ctype_digit($value)) {
-					$this->onError("Expected PID value to be numeric, " . $value . ' given.', 101);
+					$this->onError(sprintf('Line %d - Expected PID value to be numeric, %s given.', $node->getLineNo(), $value), 101);
 				}
 				if (in_array($value, $this->programIds)) {
-					$this->onError("Program ID is not unique throughout the document.", 102);
+					$this->onError(sprintf('Line %d - Program ID is not unique throughout the document.', $node->getLineNo()), 102);
 					throw new InvalidProgramNodeException();
 				}
 				break;
 			case 'author':
-				if ($value === "") {
-					$this->onError("Author has to be filled.", 103);
+				if ($value === '' || $value === null) {
+					$this->onError(sprintf('Line %d - Author has to be filled.', $node->getLineNo()), 103);
 				}
 				break;
 			case 'title':
-				if ($value === '') {
-					$this->onError("Title has to be filled.", 104);
+				if ($value === '' || $value === null) {
+					$this->onError(sprintf('Line %d - Title has to be filled.', $node->getLineNo()), 104);
 				}
 				break;
 			case 'program-line':
-				if ($value === '') {
-					$this->onError("Program line has to be filled.", 105);
+				if ($value === '' || $value === null) {
+					$this->onError(sprintf('Line %d - Program line has to be filled.', $node->getLineNo()), 105);
 				}
 				break;
 			case 'start-time':
 			case 'end-time':
 				if ($value !== null && !strtotime($value)) {
-					$this->onError('Invalid datetime value ' . $value, 106);
+					$this->onError(sprintf('Line %d - Invalid datetime value %s', $node->getLineNo(), $value), 106);
 				}
 				break;
 			case 'type':
@@ -124,7 +120,7 @@ class FeedParser extends Object
 
 	private function validateNode($data)
 	{
-		if ((isset($data['start-time']) && $data['start-time'] != "") && (isset($data['end-time']) && $data['end-time'] !== "")) {
+		if ((isset($data['start-time']) && $data['start-time'] != '') && (isset($data['end-time']) && $data['end-time'] !== '')) {
 
 		} else {
 			$this->onError('PID ' . $data['pid'] . ' - When you set start or end time, the other one has to be set too.', 107);
@@ -139,7 +135,7 @@ class FeedParser extends Object
 	private function sanitizeValue($nodeValue, $name)
 	{
 		$value = Strings::trim($nodeValue);
-		if ($value == "") {
+		if ($value == '') {
 			return null;
 		}
 		if (in_array($name, ['start-time', 'end-time'])) {

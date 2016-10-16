@@ -3,38 +3,38 @@
 namespace Api3Module;
 
 use FrontModule\BasePresenter;
+use Kdyby\Doctrine\EntityManager;
 use Model\Annotation;
+use Model\ApiLogger;
 use Model\BasicFetchByQuery;
 use Model\Queries\AnnotationLastMod;
 use Nette\Application\BadRequestException;
+use Nette\Http\Request;
 use Nette\Http\Response;
 
 class ProgramPresenter extends BasePresenter
 {
 
-	/**
-	 * @autowire
-	 * @var \Nette\Http\Request
-	 */
-	protected $httpRequest;
+	/** @var \Nette\Http\Request */
+	private $httpRequest;
 
-	/**
-	 * @autowire
-	 * @var \Nette\Http\Response
-	 */
-	protected $httpResponse;
+	/** @var \Nette\Http\Response */
+	private $httpResponse;
 
-	/**
-	 * @autowire(\Model\Annotation, factory=\Kdyby\Doctrine\EntityDaoFactory)
-	 * @var \Kdyby\Doctrine\EntityDao
-	 */
-	protected $annotationRepository;
+	/** @var \Model\ApiLogger */
+	private $apiLogger;
 
-	/**
-	 * @autowire
-	 * @var \Model\ApiLogger
-	 */
-	protected $apiLogger;
+	/** @var \Kdyby\Doctrine\EntityManager */
+	private $entityManager;
+
+	public function __construct(Request $httpRequest, Response $httpResponse, ApiLogger $apiLogger, EntityManager $entityManager)
+	{
+		parent::__construct();
+		$this->httpRequest = $httpRequest;
+		$this->httpResponse = $httpResponse;
+		$this->apiLogger = $apiLogger;
+		$this->entityManager = $entityManager;
+	}
 
 	public function actionDefault($id)
 	{
@@ -42,10 +42,10 @@ class ProgramPresenter extends BasePresenter
 			throw new BadRequestException('No id supplied', 404);
 		}
 
-		$clientLastMod = new \DateTime($this->httpRequest->getHeader('If-Modified-Since', "Sun, 13 Mar 1988 17:00:00 +0100")); // :-)
+		$clientLastMod = new \DateTime($this->httpRequest->getHeader('If-Modified-Since', 'Sun, 13 Mar 1988 17:00:00 +0100')); // :-)
 
 		/** @var $actualLastMod \DateTime */
-		$actualLastMod = $this->annotationRepository->fetchOne(new AnnotationLastMod($id))['timestamp'];
+		$actualLastMod = $this->entityManager->getRepository(Annotation::class)->fetchOne(new AnnotationLastMod($id))['timestamp'];
 
 		$data = null;
 
@@ -61,9 +61,9 @@ class ProgramPresenter extends BasePresenter
 			}
 		}
 
+		$actualClientLastMod = $this->httpRequest->getHeader('If-Modified-Since', null);
 		$this->httpResponse->setHeader('Last-Modified', $actualLastMod->format('D, j M Y H:i:s O'));
-		$query = [];
-		if ($clientLastMod < $actualLastMod) {
+		if ($actualClientLastMod !== null && $clientLastMod < $actualLastMod) {
 			$query = ['event' => $id, 'timestamp > ?' => $clientLastMod];
 			$this->apiLogger->logUpdate();
 		} else {
@@ -71,31 +71,46 @@ class ProgramPresenter extends BasePresenter
 			$this->apiLogger->logFullDownload();
 		}
 
+		$annotationRepository = $this->entityManager->getRepository(Annotation::class);
 		$data = [
-			'add' => $this->getJsonData($this->annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['createdAt > ?' => $clientLastMod])))),
-			'change' => $this->getJsonData($this->annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['createdAt <= ?' => $clientLastMod])))),
-			'delete' => $this->getJsonData($this->annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['deleted' => true, 'deletedAt > ?' => $clientLastMod])))),
+			'add' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['createdAt > ?' => $clientLastMod])))),
+			'change' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['createdAt <= ?' => $clientLastMod])))),
+			'delete' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['deleted' => true, 'deletedAt > ?' => $clientLastMod])))),
 		];
 		$this->sendJson($data);
 	}
 
-	private function getJsonData($annotations)
+	/**
+	 * @param Annotation[]|\Traversable $annotations
+	 * @return array
+	 */
+	private function getJsonData(\Traversable $annotations)
 	{
 		$data = [];
 
-		/** @var $annotation Annotation */
 		foreach ($annotations as $annotation) {
+			$startTime = $annotation->getStartTime();
+			$endTime = $annotation->getEndTime();
+
+			if ($startTime === null || $endTime === null) {
+				$startTime = null;
+				$endTime = null;
+			}
+
+			if ($endTime !== null  && $endTime < $startTime) {
+				$endTime = $endTime->modify('+1 day');
+			}
 			$data[] = [
-				'pid' => (int) $annotation->pid,
-				'author' => $annotation->author,
-				'title' => $annotation->title,
-				'imdb' => $annotation->imdb,
-				'type' => $annotation->type,
-				'location' => $annotation->location,
-				'programLine' => $annotation->programLine ? $annotation->programLine->title : null,
-				'start' => $annotation->startTime ? $annotation->startTime->format('c') : null,
-				'end' => $annotation->endTime ? ($annotation->endTime < $annotation->startTime ? $annotation->endTime->modify("+1day")->format("c") : $annotation->endTime->format('c')) : null,
-				'annotation' => $annotation->annotation,
+				'pid' => (int) $annotation->getPid(),
+				'author' => $annotation->getAuthor(),
+				'title' => $annotation->getTitle(),
+				'imdb' => $annotation->getImdb(),
+				'type' => $annotation->getType(),
+				'location' => $annotation->getLocation(),
+				'programLine' => $annotation->getProgramLine() ? $annotation->getProgramLine()->getTitle() : null,
+				'start' => $startTime !== null ? $startTime->format('c') : null,
+				'end' => $endTime !== null ? $endTime->format('c') : null,
+				'annotation' => $annotation->getAnnotation(),
 			];
 		}
 

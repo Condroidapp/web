@@ -38,7 +38,7 @@ abstract class BaseEntity extends \Nette\Object
 	public function getCacheKeys()
 	{
 		if ($this->id != null) {
-			return [get_class($this) . "#" . $this->id];
+			return [get_class($this) . '#' . $this->id];
 		}
 
 		return [];
