@@ -51,7 +51,7 @@ class EventPresenter extends BasePresenter
 				'end' => $event->getCheckStop()->format('c'),
 				'image' => null,
 				'message' => $event->getMessage(),
-				'places' => $id !== null ? $this->getPlaces($event) : null,
+				'places' => $id !== null ? $event->getPlaces()->toArray() : null,
 				'gps' => $id !== null && count($gps) === 2 ? ['lat' => $event->getGps()[0], 'lon' => $event->getGps()[1]] : null,
 			];
 		}
@@ -59,9 +59,5 @@ class EventPresenter extends BasePresenter
 		$this->sendJson($id ? array_shift($data) : $data);
 	}
 
-	private function getPlaces(Event $event)
-	{
-		return $event->getPlaces();
-	}
 
 }
