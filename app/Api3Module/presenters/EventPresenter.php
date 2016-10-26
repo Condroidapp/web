@@ -38,6 +38,7 @@ class EventPresenter extends BasePresenter
 		$data = [];
 		/** @var $event Event */
 		foreach ($events as $event) {
+			$gps = $event->getGps();
 			$data[] = [
 				'id' => $event->id,
 				'name' => $event->getName(),
@@ -51,7 +52,7 @@ class EventPresenter extends BasePresenter
 				'image' => null,
 				'message' => $event->getMessage(),
 				'places' => $id !== null ? $this->getPlaces($event) : null,
-				'gps' => $id !== null && is_array($event->getGps()) ? ['lat' => $event->getGps()[0], 'lon' => $event->getGps()[1]] : null,
+				'gps' => $id !== null && count($gps) === 2 ? ['lat' => $event->getGps()[0], 'lon' => $event->getGps()[1]] : null,
 			];
 		}
 
