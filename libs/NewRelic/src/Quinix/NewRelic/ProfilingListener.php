@@ -4,7 +4,7 @@ use Kdyby;
 use Nette;
 use Nette\Application\Application;
 use Nette\Application\Request;
-use Nette\Diagnostics\Debugger;
+use Tracy\Debugger;
 
 class ProfilingListener extends Nette\Object implements Kdyby\Events\Subscriber {
     public function getSubscribedEvents() {
@@ -19,10 +19,6 @@ class ProfilingListener extends Nette\Object implements Kdyby\Events\Subscriber 
         if (!extension_loaded('newrelic')) {
             return;
         }
-        // registrace vlastního loggeru na errory
-        Debugger::$logger = new Logger;
-        Debugger::$logger->directory =& Debugger::$logDirectory;
-        Debugger::$logger->email =& Debugger::$email;
     }
 
     public function onRequest(Application $app, Request $request) {

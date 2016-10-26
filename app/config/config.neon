@@ -23,7 +23,8 @@ monolog:
     name: condroid.server
     registerFallback: %debugMode%
     handlers:
-        syslog: Monolog\Handler\SyslogUdpHandler(%papertrail.host%, %papertrail.port%, 8, Monolog\Logger::INFO)
+        - Monolog\Handler\SyslogUdpHandler(%papertrail.host%, %papertrail.port%, 8, Monolog\Logger::INFO)
+        - Kdyby\Monolog\Handler\NewRelicHandler(Monolog\Logger::NOTICE)
 
 parameters:
     useFullAssets: %debugMode%
