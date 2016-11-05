@@ -91,6 +91,7 @@ class ApiLogger extends Object
 			$entity->device = $this->device;
 			$entity->serial = $this->serial;
 			$entity->osVersion = $this->os;
+			$this->entityManager->persist($entity);
 		}
 		$entity->lastContact = new \DateTime();
 		$entity->lastIP = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
