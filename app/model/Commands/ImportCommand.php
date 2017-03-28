@@ -55,7 +55,19 @@ class ImportCommand extends Command
 	/** {@inheritdoc} */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$events = $this->entityManager->getRepository(Event::class)->findBy(['process' => true, 'checkStart < ' => new \DateTime(), 'checkStop > ' => new \DateTime()]);
+		$events = $this->entityManager->createQueryBuilder()
+			->select('e')
+			->from(Event::class, 'e')
+			->andWhere('e.process = :process')
+			->andWhere('e.checkStart < :start')
+			->andWhere('e.checkStop > :stop')
+			->setParameters([
+				'process' => true,
+				'start' => new \DateTime(),
+				'stop' => new \DateTime(),
+			])
+			->getQuery()
+			->getResult();
 
 		/** @var $event Event */
 		foreach ($events as $event) {
