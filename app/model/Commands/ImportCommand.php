@@ -127,8 +127,8 @@ class ImportCommand extends Command
 
 			$this->logger->log('Successfully processed the feed.');
 		} catch (\Exception $e) {
-			$this->logger->log('Error during data processing. ' . $e->getMessage());
 			Debugger::log($e);
+			$this->logger->log('Error during data processing. ' . $e->getMessage());
 		}
 
 	}
