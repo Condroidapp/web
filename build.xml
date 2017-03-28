@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="SlevomatCsobGateway" default="build">
+
+	<property name="path.build" value="${project.basedir}/build"/>
+	<property name="path.build.properties" value="${path.build}/build.properties"/>
+
+	<property file="${path.build.properties}"/>
+
+	<target name="build" depends="check"/>
+
+	<target name="check" depends="phplint,phpcs,phpstan"/>
+
+	<target name="phpcs">
+		<exec
+				executable="${path.phpcs.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--standard=${path.build}"/>
+			<arg value="--extensions=php,phpt"/>
+			<arg value="--encoding=utf-8"/>
+			<arg value="--tab-width=4"/>
+			<arg value="-sp"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
+	<target name="phpcs-fix">
+		<exec
+				executable="${path.phpcbf.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--standard=${path.build}"/>
+			<arg value="--extensions=php,phpt"/>
+			<arg value="--encoding=utf-8"/>
+			<arg value="--tab-width=4"/>
+			<arg value="-sp"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
+	<target name="phplint">
+		<exec
+				executable="${path.phplint.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
+	<target name="phpstan">
+		<exec
+				executable="${path.phpstan.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="analyse"/>
+			<arg value="-l"/>
+			<arg value="5"/>
+			<arg value="-c"/>
+			<arg value="${path.phpstan.configuration}"/>
+			<arg path="${path.src}"/>
+		</exec>
+	</target>
+
+</project>
