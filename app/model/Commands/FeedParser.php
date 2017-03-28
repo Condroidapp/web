@@ -93,6 +93,7 @@ class FeedParser extends Object
 			case 'title':
 				if ($value === '' || $value === null) {
 					$this->onError(sprintf('Line %d - Title has to be filled.', $node->getLineNo()), 104);
+					throw new InvalidProgramNodeException();
 				}
 				break;
 			case 'program-line':
