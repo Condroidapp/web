@@ -45,14 +45,12 @@ class ImportCommand extends Command
 		$this->entityManager = $entityManager;
 	}
 
-	/** {@inheritdoc} */
 	protected function configure()
 	{
 		$this->setName('import:parse')
 			->setDescription('Downloads and parses all active data feeds.');
 	}
 
-	/** {@inheritdoc} */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$events = $this->entityManager->createQueryBuilder()
@@ -76,7 +74,6 @@ class ImportCommand extends Command
 			$this->importData($event, $data);
 			$this->logger->end();
 		}
-
 	}
 
 	private function importData(Event $event, array $data)
@@ -130,7 +127,6 @@ class ImportCommand extends Command
 			Debugger::log($e);
 			$this->logger->log('Error during data processing. ' . $e->getMessage());
 		}
-
 	}
 
 	/**
@@ -166,9 +162,9 @@ class ImportCommand extends Command
 	}
 
 	/**
-	 * @param $newData
-	 * @param $annotation
-	 * @param $programLinesMap
+	 * @param mixed[] $newData
+	 * @param \Model\Annotation $annotation
+	 * @param mixed[] $programLinesMap
 	 */
 	private function hydrateAnnotation(array $newData, Annotation $annotation, array $programLinesMap)
 	{
@@ -195,7 +191,6 @@ class ImportCommand extends Command
 
 	private function isAnnotationChanged($newData, $annotation)
 	{
-
 		foreach ($newData as $key => $item) {
 			if ($key === 'pid') {
 				continue;

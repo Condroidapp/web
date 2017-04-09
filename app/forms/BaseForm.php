@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Components\Forms;
 
 use FrontModule\BasePresenter;
@@ -33,9 +34,6 @@ use Nextras\Forms\Controls\DateTimePicker;
 class BaseForm extends AppForm
 {
 
-	/**
-	 * @inheritdoc
-	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -51,19 +49,14 @@ class BaseForm extends AppForm
 		if (trim($message) != '') {
 			$this->getPresenter()->flashMessage($message, BasePresenter::FLASH_ERROR);
 		}
-		$this->valid = false;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function addSubmit($name, $caption = null)
 	{
 		$component = parent::addSubmit($name, $caption);
-		$component->getControlPrototype()->addClass('btn-primary');
+		$component->getControlPrototype()->addAttributes(['class' => 'btn-primary']);
 
 		return $component;
-
 	}
 
 	public function addDatetime($name, $caption = null)
@@ -78,4 +71,5 @@ interface IBaseFormFactory
 
 	/** @return BaseForm */
 	public function create();
+
 }

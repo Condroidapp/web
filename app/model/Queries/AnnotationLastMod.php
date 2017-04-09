@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jan
- * Date: 4.8.13
- * Time: 20:22
- */
 
 namespace Model\Queries;
 
@@ -17,8 +11,9 @@ class AnnotationLastMod extends QueryObject
 
 	private $event;
 
-	function __construct($event)
+	public function __construct($event)
 	{
+		parent::__construct();
 		$this->event = $event;
 	}
 
@@ -28,8 +23,18 @@ class AnnotationLastMod extends QueryObject
 	 */
 	protected function doCreateQuery(Queryable $repository)
 	{
-		return $repository->createQuery('SELECT a.timestamp FROM ' . Annotation::getClassName() . ' a WHERE a.deleted=false AND a.event=:event ORDER by a.timestamp DESC')
-			->setParameter('event', $this->event)
+		return $repository->createQueryBuilder()
+			->select('a.timestamp')
+			->from(Annotation::class, 'a')
+			->andWhere('a.deleted = :deleted')
+			->andWhere('a.event = :event')
+			->addOrderBy('a.timestamp', 'desc')
+			->setParameters([
+				'deleted' => false,
+				'event' => $this->event,
+			])
+			->getQuery()
 			->setMaxResults(1);
 	}
+
 }

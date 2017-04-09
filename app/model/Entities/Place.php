@@ -9,7 +9,7 @@
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Kdyby\Doctrine\Entities\IdentifiedEntity;
+use JsonSerializable;
 
 /**
  * Class Place
@@ -18,7 +18,7 @@ use Kdyby\Doctrine\Entities\IdentifiedEntity;
  * @ORM\Entity
  * @ORM\Table
  */
-class Place extends IdentifiedEntity implements \JsonSerializable
+class Place extends BaseEntity implements JsonSerializable
 {
 
 	/**
@@ -89,6 +89,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
 
 	public function __construct()
 	{
+		parent::__construct();
 		$this->timestamp = new \DateTime();
 	}
 
@@ -107,7 +108,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
 			'id' => $this->id,
 		];
 
-		return ($data);
+		return $data;
 	}
 
 	private function parseHours($hours)
@@ -240,7 +241,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
 	}
 
 	/**
-	 * @param int $sort
+	 * @param integer $sort
 	 */
 	public function setSort($sort)
 	{
@@ -256,7 +257,7 @@ class Place extends IdentifiedEntity implements \JsonSerializable
 	}
 
 	/**
-	 * @param int $categorySort
+	 * @param integer $categorySort
 	 */
 	public function setCategorySort($categorySort)
 	{

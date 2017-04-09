@@ -30,6 +30,9 @@ class OauthLoader implements ILoader
 	/** @var array */
 	private $tweetCache = [];
 
+	/** @var \Nette\Caching\Cache */
+	private $cache;
+
 	public function __construct(array $tokens, IStorage $storage)
 	{
 		$this->accessToken = $tokens['accessToken'];
@@ -86,4 +89,5 @@ class OauthLoader implements ILoader
 
 		return $twitter->load($twitter::ME, 5, $this->config);
 	}
+
 }

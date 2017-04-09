@@ -8,17 +8,8 @@
 
 namespace App\Components\Forms;
 
-use Doctrine\ORM\EntityManager;
-
 class EventFormFactory
 {
-
-	private $em;
-
-	function __construct(EntityManager $em)
-	{
-		$this->em = $em;
-	}
 
 	public function create()
 	{
@@ -37,4 +28,5 @@ class EventFormFactory
 
 		return $form;
 	}
+
 }

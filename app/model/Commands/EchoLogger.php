@@ -41,4 +41,5 @@ class EchoLogger implements ILogger
 	{
 		$this->out($severity . ': ' . $message);
 	}
+
 }

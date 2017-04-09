@@ -10,12 +10,14 @@ use Nette\Utils\Strings;
 class ApiLogger extends Object
 {
 
-	/**
-	 * @var \Nette\Http\Request
-	 */
-	private $httpRequest;
+	/** @var string */
+	private $os;
 
-	private $os, $device, $serial;
+	/** @var string */
+	private $device;
+
+	/** @var string */
+	private $serial;
 
 	/** @var \Doctrine\ORM\EntityManager */
 	private $entityManager;
@@ -23,7 +25,6 @@ class ApiLogger extends Object
 	public function __construct(EntityManager $entityManager, Request $httpRequest)
 	{
 		$this->entityManager = $entityManager;
-		$this->httpRequest = $httpRequest;
 
 		$header = trim($httpRequest->getHeader('X-Device-Info', null));
 		if ($header !== null) {
@@ -88,13 +89,13 @@ class ApiLogger extends Object
 		$entity = $this->entityManager->getRepository(ApiLog::class)->findOneBy(['serial' => $this->serial, 'device' => $this->device]);
 		if (!$entity) {
 			$entity = new ApiLog();
-			$entity->device = $this->device;
-			$entity->serial = $this->serial;
-			$entity->osVersion = $this->os;
+			$entity->setDevice($this->device);
+			$entity->setSerial($this->serial);
+			$entity->setOsVersion($this->os);
 			$this->entityManager->persist($entity);
 		}
-		$entity->lastContact = new \DateTime();
-		$entity->lastIP = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+		$entity->setLastContact(new \DateTime());
+		$entity->setLastIP(isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
 
 		return $entity;
 	}

@@ -1,4 +1,5 @@
 <?php
+
 namespace FrontModule;
 
 use Smasty\Components\Twitter\TwitterControlFactory;
@@ -22,6 +23,5 @@ class HomepagePresenter extends BasePresenter
 			'count' => 4,
 		]);
 	}
-
 
 }

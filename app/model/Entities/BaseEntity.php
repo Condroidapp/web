@@ -3,6 +3,7 @@
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Nette\Object;
 
 /**
  * Base Entity parent class
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Jan Langer <langeja1@fit.cvut.cz>
  * @property-read int $id
  */
-abstract class BaseEntity extends \Nette\Object
+abstract class BaseEntity extends Object
 {
 
 	/**
@@ -18,7 +19,7 @@ abstract class BaseEntity extends \Nette\Object
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 * @var int
 	 */
-	protected $id;
+	private $id;
 
 	public function __construct()
 	{
@@ -27,26 +28,9 @@ abstract class BaseEntity extends \Nette\Object
 	/**
 	 * @return int
 	 */
-	public function getId()
+	final public function getId()
 	{
 		return $this->id;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getCacheKeys()
-	{
-		if ($this->id != null) {
-			return [get_class($this) . '#' . $this->id];
-		}
-
-		return [];
-	}
-
-	public static function getClassName()
-	{
-		return get_called_class();
 	}
 
 }

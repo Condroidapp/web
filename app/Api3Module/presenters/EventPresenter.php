@@ -59,5 +59,4 @@ class EventPresenter extends BasePresenter
 		$this->sendJson($id ? array_shift($data) : $data);
 	}
 
-
 }

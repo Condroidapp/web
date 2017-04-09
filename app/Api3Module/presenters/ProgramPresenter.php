@@ -97,7 +97,7 @@ class ProgramPresenter extends BasePresenter
 				$endTime = null;
 			}
 
-			if ($endTime !== null  && $endTime < $startTime) {
+			if ($endTime !== null && $endTime < $startTime) {
 				$endTime = $endTime->modify('+1 day');
 			}
 			$data[] = [

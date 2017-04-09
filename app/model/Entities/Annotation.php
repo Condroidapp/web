@@ -1,4 +1,5 @@
 <?php
+
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -114,7 +115,7 @@ class Annotation extends BaseEntity
 	private $deleted = false;
 
 	/**
-	 * @var \DateTime
+	 * @var \DateTime|null
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	private $deletedAt;
@@ -358,11 +359,16 @@ class Annotation extends BaseEntity
 	}
 
 	/**
-	 * @param \DateTime $deletedWhen
+	 * @param \DateTime|null $deletedWhen
 	 */
 	public function setDeletedAt($deletedWhen)
 	{
 		$this->deletedAt = $deletedWhen;
+	}
+
+	public function getCreatedAt()
+	{
+		return $this->createdAt;
 	}
 
 }

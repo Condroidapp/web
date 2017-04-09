@@ -4,7 +4,6 @@ namespace Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Kdyby\Doctrine\Entities\IdentifiedEntity;
 
 /**
  * Cons
@@ -15,7 +14,7 @@ use Kdyby\Doctrine\Entities\IdentifiedEntity;
  * })
  * @ORM\Entity
  */
-class Event extends IdentifiedEntity
+class Event extends BaseEntity
 {
 
 	/**
@@ -138,6 +137,7 @@ class Event extends IdentifiedEntity
 
 	public function __construct()
 	{
+		parent::__construct();
 		$this->annotations = new ArrayCollection();
 		$this->programLines = new ArrayCollection();
 	}
@@ -183,7 +183,7 @@ class Event extends IdentifiedEntity
 	}
 
 	/**
-	 * @param int $year
+	 * @param integer $year
 	 */
 	public function setYear($year)
 	{

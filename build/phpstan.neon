@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		- "#EntityRepository::fetch#"
+		- "#Access to an undefined property DOM#"
+		- "#FeedParser::on#"
+		- "#Template::\\$useFullAssets#"
+		- "#EntityForm::on#"

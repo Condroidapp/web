@@ -24,9 +24,9 @@ class FileDownloader
 		]);
 
 		$filename = $this->tmpDir . DIRECTORY_SEPARATOR . md5($url);
-		$resource = fopen($filename, 'w+');
+		$resource = fopen($filename, 'wb+');
 
-		$client->get($url, [
+		$client->request('GET', $url, [
 			RequestOptions::SINK => $resource,
 		]);
 

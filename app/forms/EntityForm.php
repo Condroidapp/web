@@ -18,8 +18,6 @@ class EntityForm extends BaseForm
 
 	private $entity;
 
-	private $entityService;
-
 	private $successFlashMessage = 'Data byla úspěšně uložena.';
 
 	private $redirect;
@@ -44,7 +42,7 @@ class EntityForm extends BaseForm
 			$value = null;
 			if ($this->hasProperty($entity, $name)) {
 				$value = $entity->$name;
-			} elseif (count(explode('__', $name)) > 1) {
+			} elseif (substr_count($name, '__') + 1 > 1) {
 				$parts = explode('__', $name);
 				if ($this->hasProperty($entity, $parts[0])) {
 					$call = $parts[0];
@@ -122,8 +120,6 @@ class EntityForm extends BaseForm
 	{
 		if ($entity instanceof \Kdyby\Doctrine\Entities\BaseEntity) {
 			return isset($entity->$name);
-		} else {
-
 		}
 	}
 

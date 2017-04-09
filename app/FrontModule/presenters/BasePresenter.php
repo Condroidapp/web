@@ -1,4 +1,5 @@
 <?php
+
 namespace FrontModule;
 
 use Nette;

@@ -45,4 +45,5 @@ class DatabaseLogger implements ILogger
 		$this->entityManager->persist($record);
 		$this->records[] = $record;
 	}
+
 }

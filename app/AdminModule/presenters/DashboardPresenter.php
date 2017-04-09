@@ -1,4 +1,5 @@
 <?php
+
 namespace AdminModule;
 
 use App\Components\Grids\EventGridFactory;

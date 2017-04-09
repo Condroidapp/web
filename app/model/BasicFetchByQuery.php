@@ -1,5 +1,6 @@
 <?php
 namespace Model;
+
 use Kdyby\Doctrine\QueryObject;
 use Kdyby\Persistence\Queryable;
 use Nette\Utils\Strings;
@@ -14,20 +15,23 @@ class BasicFetchByQuery extends QueryObject
 {
 
 	/** @var array conditions */
-	private $conditions = [];
+	private $conditions;
 
 	/**
-	 * @param $conditions
+	 * @param mixed[] $conditions
 	 */
-	function __construct($conditions)
+	public function __construct($conditions)
 	{
+		parent::__construct();
 		$this->conditions = $conditions;
 	}
 
-	/** {@inheritdoc} */
+	/**
+	 * @param \Kdyby\Doctrine\EntityRepository|\Kdyby\Persistence\Queryable $repository
+	 * @return self
+	 */
 	protected function doCreateQuery(Queryable $repository)
 	{
-
 		$where = [];
 		$params = [];
 		$i = 0;
@@ -39,11 +43,12 @@ class BasicFetchByQuery extends QueryObject
 			$where[] = 'b.' . $condition . $separator . $i++;
 			$params[] = $value;
 		}
-		$q = $repository->createQuery('SELECT b FROM ' . $repository->getClassName() . ' b ' . (!empty($where) ? ' WHERE ' . implode(' AND ', $where) : ''))
+		/** @var \Kdyby\Doctrine\EntityRepository $repository */
+		$className = $repository->getClassName();
+		$q = $repository->createQuery('SELECT b FROM ' . $className . ' b ' . (!empty($where) ? ' WHERE ' . implode(' AND ', $where) : ''))
 			->setParameters($params);
 
 		return $q;
 	}    //put your code here
-}
 
-?>
+}

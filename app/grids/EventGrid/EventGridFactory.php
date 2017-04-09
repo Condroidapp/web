@@ -18,7 +18,7 @@ class EventGridFactory
 	/** @var \Kdyby\Doctrine\EntityManager */
 	private $em;
 
-	function __construct(EntityManager $em)
+	public function __construct(EntityManager $em)
 	{
 		$this->em = $em;
 	}

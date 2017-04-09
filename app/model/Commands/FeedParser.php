@@ -15,9 +15,6 @@ class FeedParser extends Object
 
 	private $programIds = [];
 
-	/** @var \GuzzleHttp\Client */
-	private $httpClient;
-
 	/** @var \Model\Commands\FileDownloader */
 	private $downloader;
 
@@ -54,6 +51,7 @@ class FeedParser extends Object
 		$this->log('XML sucesfully processed, found ' . count($feedData) . ' entries.');
 
 		@unlink($file);
+
 		return $feedData;
 	}
 
@@ -121,9 +119,7 @@ class FeedParser extends Object
 
 	private function validateNode($data)
 	{
-		if ((isset($data['start-time']) && $data['start-time'] != '') && (isset($data['end-time']) && $data['end-time'] !== '')) {
-
-		} else {
+		if ((isset($data['start-time']) || isset($data['end-time'])) && ($data['start-time'] === null || $data['end-time'] === null)) {
 			$this->onError('PID ' . $data['pid'] . ' - When you set start or end time, the other one has to be set too.', 107);
 		}
 	}

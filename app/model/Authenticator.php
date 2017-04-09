@@ -18,12 +18,12 @@ class Authenticator implements IAuthenticator
 
 	private $users;
 
-	function __construct($users)
+	public function __construct($users)
 	{
 		$this->users = $users;
 	}
 
-	function authenticate(array $credentials)
+	public function authenticate(array $credentials)
 	{
 		list($user, $password) = $credentials;
 
@@ -38,4 +38,5 @@ class Authenticator implements IAuthenticator
 		}
 		throw new AuthenticationException("User '$user' not found.", self::IDENTITY_NOT_FOUND);
 	}
+
 }

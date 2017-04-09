@@ -33,7 +33,6 @@ class EventPresenter extends SecuredPresenter
 		$this['editForm']->onComplete[] = function ($entity) {
 			$this->em->persist($entity);
 			$this->em->flush($entity);
-
 		};
 		$this['editForm']->setRedirect('Dashboard:');
 	}

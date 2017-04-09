@@ -17,10 +17,6 @@ class SignPresenter extends BasePresenter
 		}
 	}
 
-	/**
-	 * Sign-in form factory.
-	 * @return BaseForm
-	 */
 	protected function createComponentSignInForm(IBaseFormFactory $factory)
 	{
 		$form = $factory->create();
@@ -61,7 +57,6 @@ class SignPresenter extends BasePresenter
 			$this->restoreRequest($this->getParameter('key'));
 		}
 		$this->redirect(':Admin:Dashboard:');
-
 	}
 
 	public function actionOut()

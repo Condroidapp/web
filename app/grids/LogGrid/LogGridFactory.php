@@ -14,7 +14,7 @@ class LogGridFactory
 	/** @var EntityManager */
 	protected $em;
 
-	function __construct(EntityManager $em)
+	public function __construct(EntityManager $em)
 	{
 		$this->em = $em;
 	}
@@ -44,7 +44,6 @@ class LogGridFactory
 		});
 
 		return $grid;
-
 	}
 
 }
