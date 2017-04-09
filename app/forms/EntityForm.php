@@ -120,9 +120,10 @@ class EntityForm extends BaseForm
 
 	private function hasProperty($entity, $name)
 	{
-		if ($entity instanceof \Kdyby\Doctrine\Entities\BaseEntity) {
+		if ($entity instanceof \Kdyby\Doctrine\Entities\BaseEntity || $entity instanceof \Nette\Object) {
 			return isset($entity->$name);
 		}
+		return false;
 	}
 
 }
