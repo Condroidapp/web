@@ -37,7 +37,7 @@ class ProfilingListener extends Nette\Object implements Kdyby\Events\Subscriber 
         newrelic_name_transaction($request->getPresenterName() . (isset($params['action']) ? ':' . $params['action'] : ''));
     }
 
-    public function onError(Application $app, \Exception $e) {
+    public function onError(Application $app, \Throwable $e) {
         if (!extension_loaded('newrelic')) {
             return;
         }
