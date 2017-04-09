@@ -31,7 +31,9 @@ class EntityForm extends BaseForm
 	public function __construct()
 	{
 		parent::__construct();
-		$this->onSuccess[] = \callback($this, 'handler');
+		$this->onSuccess[] = function (Form $form) {
+			$this->handler($form);
+		};
 	}
 
 	public function bindEntity($entity)
