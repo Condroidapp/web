@@ -9,6 +9,6 @@ interface TwitterControlFactory
 	 * @param array $config
 	 * @return \Smasty\Components\Twitter\Control
 	 */
-	public function create(array $config);
+	public function create(array $config): Control;
 
 }

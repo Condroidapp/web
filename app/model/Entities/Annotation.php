@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model;
 
@@ -6,18 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Annotations
- * @property string $pid
- * @property Event $event
- * @property string $author
- * @property string $title
- * @property string $annotation
- * @property string $type
- * @property \DateTime $startTime
- * @property \DateTime $endTime
- * @property \DateTime $timestamp
- * @property string $location
- * @property ProgramLine $programLine
- * @property boolean deleted
  *
  * @ORM\Table(name="annotations",
  *   indexes={
@@ -40,13 +28,13 @@ class Annotation extends BaseEntity
 	private $pid;
 
 	/**
-	 * @var Event
+	 * @var \Model\Event
 	 * @ORM\ManyToOne(targetEntity="Event", inversedBy="annotations")
 	 */
 	private $event;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="author", type="string", length=255, nullable=true)
 	 */
@@ -60,7 +48,7 @@ class Annotation extends BaseEntity
 	private $title;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="annotation", type="text", nullable=true)
 	 */
@@ -74,14 +62,14 @@ class Annotation extends BaseEntity
 	private $type;
 
 	/**
-	 * @var \DateTime
+	 * @var \DateTime|null
 	 *
 	 * @ORM\Column(name="startTime", type="datetime", nullable=true)
 	 */
 	private $startTime;
 
 	/**
-	 * @var \DateTime
+	 * @var \DateTime|null
 	 *
 	 * @ORM\Column(name="endTime", type="datetime", nullable=true)
 	 */
@@ -95,14 +83,14 @@ class Annotation extends BaseEntity
 	private $timestamp;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="location", type="string", length=255, nullable=true)
 	 */
 	private $location;
 
 	/**
-	 * @var ProgramLine
+	 * @var \Model\ProgramLine
 	 *
 	 * @ORM\ManyToOne(targetEntity="ProgramLine", fetch="EAGER", cascade={"persist"})
 	 */
@@ -128,245 +116,157 @@ class Annotation extends BaseEntity
 
 	/**
 	 * @ORM\Column(nullable=true)
-	 * @var string
+	 * @var string|null
 	 */
 	protected $imdb;
 
-	/**
-	 * @param string $imdb
-	 */
-	public function setImdb($imdb)
+	public function setImdb(?string $imdb): void
 	{
 		$this->imdb = $imdb;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getImdb()
+	public function getImdb(): ?string
 	{
 		return $this->imdb;
 	}
 
-	/**
-	 * @param string $annotation
-	 */
-	public function setAnnotation($annotation)
+	public function setAnnotation(?string $annotation): void
 	{
 		$this->annotation = $annotation;
 		$this->createdAt = new \DateTime();
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getAnnotation()
+	public function getAnnotation(): ?string
 	{
 		return $this->annotation;
 	}
 
-	/**
-	 * @param string $author
-	 */
-	public function setAuthor($author)
+	public function setAuthor(?string $author): void
 	{
 		$this->author = $author;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getAuthor()
+	public function getAuthor(): ?string
 	{
 		return $this->author;
 	}
 
-	/**
-	 * @param \DateTime $endTime
-	 */
-	public function setEndTime($endTime)
+	public function setEndTime(?\DateTime $endTime): void
 	{
 		$this->endTime = $endTime;
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getEndTime()
+	public function getEndTime(): ?\DateTime
 	{
 		return $this->endTime;
 	}
 
-	/**
-	 * @param \Model\Event $event
-	 */
-	public function setEvent($event)
+	public function setEvent(Event $event): void
 	{
 		$this->event = $event;
 	}
 
-	/**
-	 * @return \Model\Event
-	 */
-	public function getEvent()
+	public function getEvent(): Event
 	{
 		return $this->event;
 	}
 
-	/**
-	 * @param string $location
-	 */
-	public function setLocation($location)
+	public function setLocation(?string $location): void
 	{
 		$this->location = $location;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getLocation()
+	public function getLocation(): ?string
 	{
 		return $this->location;
 	}
 
-	/**
-	 * @param string $pid
-	 */
-	public function setPid($pid)
+	public function setPid(string $pid): void
 	{
 		$this->pid = $pid;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getPid()
+	public function getPid(): string
 	{
 		return $this->pid;
 	}
 
-	/**
-	 * @param \Model\ProgramLine $programLine
-	 */
-	public function setProgramLine($programLine)
+	public function setProgramLine(ProgramLine $programLine): void
 	{
 		$this->programLine = $programLine;
 	}
 
-	/**
-	 * @return \Model\ProgramLine
-	 */
-	public function getProgramLine()
+	public function getProgramLine(): ProgramLine
 	{
 		return $this->programLine;
 	}
 
-	/**
-	 * @param \DateTime $starttime
-	 */
-	public function setStartTime($starttime)
+	public function setStartTime(?\DateTime $starttime): void
 	{
 		$this->startTime = $starttime;
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getStartTime()
+	public function getStartTime(): ?\DateTime
 	{
 		return $this->startTime;
 	}
 
-	/**
-	 * @param \DateTime $timestamp
-	 */
-	public function setTimestamp($timestamp)
+	public function setTimestamp(\DateTime $timestamp): void
 	{
 		$this->timestamp = $timestamp;
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getTimestamp()
+	public function getTimestamp(): \DateTime
 	{
 		return $this->timestamp;
 	}
 
-	/**
-	 * @param string $title
-	 */
-	public function setTitle($title)
+	public function setTitle(string $title): void
 	{
 		$this->title = $title;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getTitle()
+	public function getTitle(): string
 	{
 		return $this->title;
 	}
 
-	/**
-	 * @param string $type
-	 */
-	public function setType($type)
+	public function setType(string $type): void
 	{
 		$this->type = $type;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getType()
+	public function getType(): string
 	{
 		return $this->type;
 	}
 
-	/**
-	 * @param boolean $deleted
-	 */
-	public function setDeleted($deleted)
+	public function setDeleted(bool $deleted): void
 	{
 		$this->deleted = $deleted;
 	}
 
-	/**
-	 * @return boolean
-	 */
-	public function getDeleted()
+	public function getDeleted(): bool
 	{
 		return $this->deleted;
 	}
 
-	/**
-	 * @ORM\PrePersist
-	 * @ORM\PreUpdate
-	 */
-	public function updateTimestamp()
+	public function updateTimestamp(): void
 	{
 		$this->timestamp = new \DateTime();
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getDeletedAt()
+	public function getDeletedAt(): \DateTime
 	{
 		return $this->deletedAt;
 	}
 
-	/**
-	 * @param \DateTime|null $deletedWhen
-	 */
-	public function setDeletedAt($deletedWhen)
+	public function setDeletedAt(?\DateTime $deletedWhen): void
 	{
 		$this->deletedAt = $deletedWhen;
 	}
 
-	public function getCreatedAt()
+	public function getCreatedAt(): \DateTime
 	{
 		return $this->createdAt;
 	}

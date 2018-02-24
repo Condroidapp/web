@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace FrontModule;
 
@@ -10,10 +10,10 @@ use Nette;
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
-	const FLASH_ERROR = 'error';
-	const FLASH_INFO = 'info';
+	public const FLASH_ERROR = 'error';
+	public const FLASH_INFO = 'info';
 
-	protected function beforeRender()
+	protected function beforeRender(): void
 	{
 		$this->template->useFullAssets = $this->context->parameters['useFullAssets'];
 		parent::beforeRender();

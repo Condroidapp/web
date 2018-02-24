@@ -1,18 +1,14 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App;
 
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
-use Nette\Object;
 
-class RouterFactory extends Object
+class RouterFactory
 {
 
-	/**
-	 * @return \Nette\Application\Routers\RouteList
-	 */
-	public function create()
+	public function create(): \Nette\Application\Routers\RouteList
 	{
 		$router = new RouteList();
 		$router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);

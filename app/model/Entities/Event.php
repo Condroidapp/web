@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model;
 
@@ -18,20 +18,20 @@ class Event extends BaseEntity
 {
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
 	 * @ORM\Column(name="active", type="boolean", nullable=false)
 	 */
 	private $active;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 * @ORM\Column(name="process", type="boolean", nullable=false)
 	 */
 	private $process = false;
 
 	/**
-	 * @var integer
+	 * @var int|null
 	 *
 	 * @ORM\Column(name="year", type="integer", nullable=true)
 	 */
@@ -53,61 +53,61 @@ class Event extends BaseEntity
 
 	/**
 	 * @ORM\Column(nullable=true)
-	 * @var string
+	 * @var string|null
 	 */
 	private $url;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="icon", type="string", length=255, nullable=true)
 	 */
 	private $icon;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="dataUrl", type="string", length=255, nullable=true)
 	 */
 	private $dataUrl;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="message", type="text", nullable=true)
 	 */
 	private $message;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
-	 * @ORM\Column(name="hasTimetable", type="boolean", nullable=true)
+	 * @ORM\Column(name="hasTimetable", type="boolean")
 	 */
-	private $hasTimetable;
+	private $hasTimetable = true;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 *
-	 * @ORM\Column(name="hasAnnotations", type="boolean", nullable=true)
+	 * @ORM\Column(name="hasAnnotations", type="boolean")
 	 */
-	private $hasAnnotations;
+	private $hasAnnotations = true;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(name="locationsFile", type="text", nullable=true)
 	 */
 	private $locationsFile;
 
 	/**
-	 * @var \DateTime
+	 * @var \DateTime|null
 	 *
 	 * @ORM\Column(name="checkStart", type="datetime", nullable=true)
 	 */
 	private $checkStart;
 
 	/**
-	 * @var \DateTime
+	 * @var \DateTime|null
 	 *
 	 * @ORM\Column(name="checkStop", type="datetime", nullable=true)
 	 */
@@ -115,23 +115,26 @@ class Event extends BaseEntity
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Annotation", mappedBy="event")
+	 * @var \Model\Annotation[]|\Doctrine\Common\Collections\Collection
 	 */
 	private $annotations;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="ProgramLine", mappedBy="event")
+	 * @var \Model\ProgramLine[]|\Doctrine\Common\Collections\Collection
 	 */
 	private $programLines;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Place", mappedBy="event")
 	 * @ORM\OrderBy({"categorySort":"ASC", "sort":"ASC", "name":"ASC"})
+	 * @var \Model\Place[]|\Doctrine\Common\Collections\Collection
 	 */
 	private $places;
 
 	/**
 	 * @ORM\Column(type="simple_array", nullable=true)
-	 * @var
+	 * @var float[]|null
 	 */
 	private $gps;
 
@@ -142,234 +145,150 @@ class Event extends BaseEntity
 		$this->programLines = new ArrayCollection();
 	}
 
-	/**
-	 * @return boolean
-	 */
-	public function isActive()
+	public function isActive(): bool
 	{
 		return $this->active;
 	}
 
-	/**
-	 * @param boolean $active
-	 */
-	public function setActive($active)
+	public function setActive(bool $active): void
 	{
 		$this->active = $active;
 	}
 
-	/**
-	 * @return boolean
-	 */
-	public function isProcess()
+	public function isProcess(): bool
 	{
 		return $this->process;
 	}
 
-	/**
-	 * @param boolean $process
-	 */
-	public function setProcess($process)
+	public function setProcess(bool $process): void
 	{
 		$this->process = $process;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getYear()
+	public function getYear(): int
 	{
 		return $this->year;
 	}
 
-	/**
-	 * @param integer $year
-	 */
-	public function setYear($year)
+	public function setYear(int $year): void
 	{
 		$this->year = $year;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function setName($name)
+	public function setName(string $name): void
 	{
 		$this->name = $name;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getDate()
+	public function getDate(): string
 	{
 		return $this->date;
 	}
 
-	/**
-	 * @param string $date
-	 */
-	public function setDate($date)
+	public function setDate(string $date): void
 	{
 		$this->date = $date;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getUrl()
+	public function getUrl(): string
 	{
 		return $this->url;
 	}
 
-	/**
-	 * @param string $url
-	 */
-	public function setUrl($url)
+	public function setUrl(string $url): void
 	{
 		$this->url = $url;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getIcon()
+	public function getIcon(): string
 	{
 		return $this->icon;
 	}
 
-	/**
-	 * @param string $icon
-	 */
-	public function setIcon($icon)
+	public function setIcon(string $icon): void
 	{
 		$this->icon = $icon;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getDataUrl()
+	public function getDataUrl(): string
 	{
 		return $this->dataUrl;
 	}
 
-	/**
-	 * @param string $dataUrl
-	 */
-	public function setDataUrl($dataUrl)
+	public function setDataUrl(string $dataUrl): void
 	{
 		$this->dataUrl = $dataUrl;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getMessage()
+	public function getMessage(): string
 	{
 		return $this->message;
 	}
 
-	/**
-	 * @param string $message
-	 */
-	public function setMessage($message)
+	public function setMessage(string $message): void
 	{
 		$this->message = $message;
 	}
 
-	/**
-	 * @return boolean
-	 */
-	public function isHasTimetable()
+	public function isHasTimetable(): bool
 	{
 		return $this->hasTimetable;
 	}
 
-	/**
-	 * @param boolean $hasTimetable
-	 */
-	public function setHasTimetable($hasTimetable)
+	public function setHasTimetable(bool $hasTimetable): void
 	{
 		$this->hasTimetable = $hasTimetable;
 	}
 
-	/**
-	 * @return boolean
-	 */
-	public function isHasAnnotations()
+	public function isHasAnnotations(): bool
 	{
 		return $this->hasAnnotations;
 	}
 
-	/**
-	 * @param boolean $hasAnnotations
-	 */
-	public function setHasAnnotations($hasAnnotations)
+	public function setHasAnnotations(bool $hasAnnotations): void
 	{
 		$this->hasAnnotations = $hasAnnotations;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getLocationsFile()
+	public function getLocationsFile(): string
 	{
 		return $this->locationsFile;
 	}
 
-	/**
-	 * @param string $locationsFile
-	 */
-	public function setLocationsFile($locationsFile)
+	public function setLocationsFile(string $locationsFile): void
 	{
 		$this->locationsFile = $locationsFile;
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getCheckStart()
+	public function getCheckStart(): \DateTime
 	{
 		return $this->checkStart;
 	}
 
-	/**
-	 * @param \DateTime $checkStart
-	 */
-	public function setCheckStart($checkStart)
+	public function setCheckStart(\DateTime $checkStart): void
 	{
 		$this->checkStart = $checkStart;
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getCheckStop()
+	public function getCheckStop(): \DateTime
 	{
 		return $this->checkStop;
 	}
 
-	/**
-	 * @param \DateTime $checkStop
-	 */
-	public function setCheckStop($checkStop)
+	public function setCheckStop(\DateTime $checkStop): void
 	{
 		$this->checkStop = $checkStop;
 	}
 
 	/**
-	 * @return Annotation[]
+	 * @return \Model\Annotation[]
 	 */
-	public function getAnnotations()
+	public function getAnnotations(): array
 	{
 		return $this->annotations->toArray();
 	}
@@ -377,15 +296,15 @@ class Event extends BaseEntity
 	/**
 	 * @param mixed $annotations
 	 */
-	public function setAnnotations($annotations)
+	public function setAnnotations($annotations): void
 	{
 		$this->annotations = $annotations;
 	}
 
 	/**
-	 * @return ProgramLine[]
+	 * @return \Model\ProgramLine[]
 	 */
-	public function getProgramLines()
+	public function getProgramLines(): array
 	{
 		return $this->programLines->toArray();
 	}
@@ -393,7 +312,7 @@ class Event extends BaseEntity
 	/**
 	 * @param mixed $programLines
 	 */
-	public function setProgramLines($programLines)
+	public function setProgramLines($programLines): void
 	{
 		$this->programLines = $programLines;
 	}
@@ -409,7 +328,7 @@ class Event extends BaseEntity
 	/**
 	 * @param mixed $places
 	 */
-	public function setPlaces($places)
+	public function setPlaces($places): void
 	{
 		$this->places = $places;
 	}
@@ -425,7 +344,7 @@ class Event extends BaseEntity
 	/**
 	 * @param mixed $gps
 	 */
-	public function setGps($gps)
+	public function setGps($gps): void
 	{
 		$this->gps = $gps;
 	}

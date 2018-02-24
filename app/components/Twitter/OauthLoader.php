@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Components\Twitter;
 
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
-use Nette\Utils\JsonException;
 use Smasty\Components\Twitter\ILoader;
 use Smasty\Components\Twitter\TwitterException;
 use Twitter;
@@ -48,7 +47,7 @@ class OauthLoader implements ILoader
 	 * @param array $config Configuration options
 	 * @return array|null
 	 */
-	public function getTweets(array $config)
+	public function getTweets(array $config): ?array
 	{
 		$data = $this->cache->load('statuses');
 		if ($data === null) {
@@ -59,25 +58,21 @@ class OauthLoader implements ILoader
 				return $this->tweetCache[$path];
 			}
 
-			set_error_handler(function ($s, $m) {
+			set_error_handler(function ($s, $m): void {
 				restore_error_handler();
 				throw new TwitterException($m);
 			});
 			$content = $this->getStatuses();
 			restore_error_handler();
 
-			try {
-				$this->cache->save('statuses', $content, [
-					Cache::EXPIRATION => '+1h',
-				]);
+			$this->cache->save('statuses', $content, [
+				Cache::EXPIRATION => '+1h',
+			]);
 
-				return $this->tweetCache[$path] = $content;
-			} catch (JsonException $e) {
-				throw new TwitterException($e->getMessage(), $e->getCode(), $e);
-			}
-		} else {
-			return $data;
+			return $this->tweetCache[$path] = $content;
 		}
+
+		return $data;
 	}
 
 	/**

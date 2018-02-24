@@ -19,7 +19,7 @@ use Nette,
  *
  * @author Martin Srank, http://smasty.net
  */
-class StandardLoader extends Nette\Object implements ILoader {
+class StandardLoader implements ILoader {
 
     /** @var array */
     private $config = array();

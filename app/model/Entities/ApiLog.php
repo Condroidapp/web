@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Nette\Object;
 
 /**
  * Class ApiLog
@@ -22,149 +21,151 @@ use Nette\Object;
  *
  *
  */
-class ApiLog extends Object
+class ApiLog
 {
 
-	/** @ORM\Id @ORM\Column(type="string") */
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
 	private $device;
 
-	/** @ORM\Id @ORM\Column(type="string") */
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
 	private $serial;
 
-	/** @ORM\Column(type="string", length=100, nullable=true) */
+	/**
+	 * @var string|null
+	 * @ORM\Column(type="string", length=100, nullable=true)
+	 */
 	private $osVersion;
 
-	/** @ORM\Column(type="integer") */
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
 	private $conList = 0;
 
-	/** @ORM\Column(type="integer") */
+	/**
+	 * @var int
+	 * @ORM\Column(type="integer")
+	 */
 	private $annotationsFullDownload = 0;
 
-	/** @ORM\Column(type="integer") */
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
 	private $annotationsUpdate = 0;
 
-	/** @ORM\Column(type="integer") */
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
 	private $annotationsCheck = 0;
 
-	/** @ORM\Column(type="datetime") */
+	/**
+	 * @ORM\Column(type="datetime")
+	 * @var \DateTime
+	 */
 	private $lastContact;
 
-	/** @ORM\Column(type="string") */
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
 	private $lastIP;
 
-	public function getDevice()
+	public function getDevice(): string
 	{
 		return $this->device;
 	}
 
-	/**
-	 * @param string $device
-	 */
-	public function setDevice($device)
+	public function setDevice(string $device): void
 	{
 		$this->device = $device;
 	}
 
-	public function getSerial()
+	public function getSerial(): string
 	{
 		return $this->serial;
 	}
 
-	/**
-	 * @param string $serial
-	 */
-	public function setSerial($serial)
+	public function setSerial(string $serial): void
 	{
 		$this->serial = $serial;
 	}
 
-	public function getOsVersion()
+	public function getOsVersion(): ?string
 	{
 		return $this->osVersion;
 	}
 
-	/**
-	 * @param string $osVersion
-	 */
-	public function setOsVersion($osVersion)
+	public function setOsVersion(?string $osVersion): void
 	{
 		$this->osVersion = $osVersion;
 	}
 
-	public function getConList()
+	public function getConList(): int
 	{
 		return $this->conList;
 	}
 
-	/**
-	 * @param integer $conList
-	 */
-	public function setConList($conList)
+	public function setConList(int $conList): void
 	{
 		$this->conList = $conList;
 	}
 
-	public function getAnnotationsFullDownload()
+	public function getAnnotationsFullDownload(): int
 	{
 		return $this->annotationsFullDownload;
 	}
 
-	/**
-	 * @param integer $annotationsFullDownload
-	 */
-	public function setAnnotationsFullDownload($annotationsFullDownload)
+	public function setAnnotationsFullDownload(int $annotationsFullDownload): void
 	{
 		$this->annotationsFullDownload = $annotationsFullDownload;
 	}
 
-	public function getAnnotationsUpdate()
+	public function getAnnotationsUpdate(): int
 	{
 		return $this->annotationsUpdate;
 	}
 
-	/**
-	 * @param integer $annotationsUpdate
-	 */
-	public function setAnnotationsUpdate($annotationsUpdate)
+	public function setAnnotationsUpdate(int $annotationsUpdate): void
 	{
 		$this->annotationsUpdate = $annotationsUpdate;
 	}
 
-	public function getAnnotationsCheck()
+	public function getAnnotationsCheck(): int
 	{
 		return $this->annotationsCheck;
 	}
 
-	/**
-	 * @param integer $annotationsCheck
-	 */
-	public function setAnnotationsCheck($annotationsCheck)
+	public function setAnnotationsCheck(int $annotationsCheck): void
 	{
 		$this->annotationsCheck = $annotationsCheck;
 	}
 
-	public function getLastContact()
+	public function getLastContact(): \DateTime
 	{
 		return $this->lastContact;
 	}
 
-	/**
-	 * @param \DateTime $lastContact
-	 */
-	public function setLastContact($lastContact)
+	public function setLastContact(\DateTime $lastContact): void
 	{
 		$this->lastContact = $lastContact;
 	}
 
-	public function getLastIP()
+	public function getLastIP(): string
 	{
 		return $this->lastIP;
 	}
 
-	/**
-	 * @param string $lastIP
-	 */
-	public function setLastIP($lastIP)
+	public function setLastIP(string $lastIP): void
 	{
 		$this->lastIP = $lastIP;
 	}

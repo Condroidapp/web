@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model;
 
@@ -27,48 +27,36 @@ class ProgramLine extends BaseEntity
 	private $title;
 
 	/**
-	 * @var Event
+	 * @var \Model\Event
 	 *
 	 * @ORM\ManyToOne(targetEntity="Event", inversedBy="programLines")
 	 *
 	 */
 	private $event;
 
-	public function __construct($title, Event $event)
+	public function __construct(string $title, Event $event)
 	{
 		parent::__construct();
 		$this->title = $title;
 		$this->event = $event;
 	}
 
-	/**
-	 * @param \Model\Event $event
-	 */
-	public function setEvent($event)
+	public function setEvent(Event $event): void
 	{
 		$this->event = $event;
 	}
 
-	/**
-	 * @return \Model\Event
-	 */
-	public function getEvent()
+	public function getEvent(): Event
 	{
 		return $this->event;
 	}
 
-	/**
-	 * @param string $title
-	 */
-	public function setTitle($title)
+	public function setTitle(string $title): void
 	{
 		$this->title = $title;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getTitle()
+	public function getTitle(): string
 	{
 		return $this->title;
 	}

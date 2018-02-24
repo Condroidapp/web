@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $configurator = new \Nette\Configurator();
 
-if (PHP_SAPI === 'cli' && in_array('--debug', $_SERVER['argv'], true)) {
+if (\PHP_SAPI === 'cli' && in_array('--debug', $_SERVER['argv'], true)) {
 	unset($_SERVER['argv'][array_search('--debug', $_SERVER['argv'], true)]);
 	$configurator->setDebugMode(true);
 }

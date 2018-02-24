@@ -1,15 +1,17 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Components\Forms;
 
+use BS3FormRenderer\Bs3FormRenderer;
 use FrontModule\BasePresenter;
 use Nette\Application\UI\Form as AppForm;
 use Nette\Forms\Form as NForm;
+use Nette\Forms\Rules;
 use Nextras\Forms\Controls\DateTimePicker;
 
 //setup of default rule messages
 
-\Nette\Forms\Rules::$defaultMessages = [
+Rules::$defaultMessages = [
 	NForm::PROTECTION => 'Došlo k chybě při odesílání formuláře. Zkuste to prosím znovu.',
 	NForm::EQUAL => 'Prosím vložte %s.',
 	NForm::FILLED => 'Vyplňte prosím pole %label.',
@@ -38,19 +40,32 @@ class BaseForm extends AppForm
 	{
 		parent::__construct();
 		$this->addProtection();
-		$this->setRenderer(new \BS3FormRenderer\Bs3FormRenderer());
+		$this->setRenderer(new Bs3FormRenderer());
 	}
 
 	/**
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
 	 * @param string $message adds form error as flash message
+	 * @param bool $translate
 	 */
-	public function addError($message)
+	public function addError($message, $translate = true): void
 	{
-		if (trim($message) != '') {
-			$this->getPresenter()->flashMessage($message, BasePresenter::FLASH_ERROR);
+		if (trim($message) === '') {
+			return;
 		}
+
+		$this->getPresenter()->flashMessage($message, BasePresenter::FLASH_ERROR);
 	}
 
+	/**
+	 *
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+	 * @param string $name
+	 * @param string|null $caption
+	 * @return \Nette\Forms\Controls\SubmitButton
+	 */
 	public function addSubmit($name, $caption = null)
 	{
 		$component = parent::addSubmit($name, $caption);
@@ -59,7 +74,7 @@ class BaseForm extends AppForm
 		return $component;
 	}
 
-	public function addDatetime($name, $caption = null)
+	public function addDatetime(string $name, ?string $caption = null): DateTimePicker
 	{
 		return $this[$name] = new DateTimePicker($caption);
 	}
@@ -69,7 +84,6 @@ class BaseForm extends AppForm
 interface IBaseFormFactory
 {
 
-	/** @return BaseForm */
-	public function create();
+	public function create(): BaseForm;
 
 }

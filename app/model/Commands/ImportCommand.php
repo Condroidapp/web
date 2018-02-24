@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -36,22 +37,22 @@ class ImportCommand extends Command
 
 		$this->feedParser = $parser;
 		$this->logger = $logger;
-		$this->feedParser->onError[] = function ($message, $code) {
+		$this->feedParser->onError[] = function ($message, $code): void {
 			$this->logger->log("#$code: $message", ILogger::ERROR);
 		};
-		$this->feedParser->onLog[] = function ($message, $severity) {
+		$this->feedParser->onLog[] = function ($message, $severity): void {
 			$this->logger->log($message, $severity);
 		};
 		$this->entityManager = $entityManager;
 	}
 
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('import:parse')
 			->setDescription('Downloads and parses all active data feeds.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$events = $this->entityManager->createQueryBuilder()
 			->select('e')
@@ -67,7 +68,7 @@ class ImportCommand extends Command
 			->getQuery()
 			->getResult();
 
-		/** @var $event Event */
+		/** @var \Model\Event[] $events */
 		foreach ($events as $event) {
 			$this->logger->start($event->getName());
 			$data = $this->feedParser->parseXML($event->getDataUrl());
@@ -76,7 +77,11 @@ class ImportCommand extends Command
 		}
 	}
 
-	private function importData(Event $event, array $data)
+	/**
+	 * @param \Model\Event $event
+	 * @param mixed[] $data
+	 */
+	private function importData(Event $event, array $data): void
 	{
 		try {
 			$annotations = $event->getAnnotations();
@@ -89,24 +94,23 @@ class ImportCommand extends Command
 
 			$programLinesMap = $this->processProgramLines($data, $event);
 
-			/** @var $annotation Annotation */
 			foreach ($annotations as $id => $annotation) {
-				if ($annotation->getDeleted() && !isset($data[$annotation->pid])) {
+				if ($annotation->getDeleted() && !isset($data[$annotation->getPid()])) {
 					continue;
 				}
-				if (!isset($data[$annotation->pid])) {
+				if (!isset($data[$annotation->getPid()])) {
 					$annotation->setDeleted(true);
 					$annotation->setDeletedAt(new \DateTime());
 					$deletions++;
 					continue;
 				}
-				$newData = $data[$annotation->pid];
+				$newData = $data[$annotation->getPid()];
 				if ($this->isAnnotationChanged($newData, $annotation)) {
 					$changes++;
 					$this->hydrateAnnotation($newData, $annotation, $programLinesMap);
 				}
 
-				unset($data[$annotation->pid]);
+				unset($data[$annotation->getPid()]);
 			}
 
 			if ($data !== []) {
@@ -123,18 +127,18 @@ class ImportCommand extends Command
 			$this->entityManager->flush();
 
 			$this->logger->log('Successfully processed the feed.');
-		} catch (\Exception $e) {
+		} catch (\Throwable $e) {
 			Debugger::log($e);
 			$this->logger->log('Error during data processing. ' . $e->getMessage());
 		}
 	}
 
 	/**
-	 * @param array $data
+	 * @param mixed[] $data
 	 * @param \Model\Event $event
-	 * @return array
+	 * @return mixed[]
 	 */
-	private function processProgramLines(array $data, Event $event)
+	private function processProgramLines(array $data, Event $event): array
 	{
 		$programLines = array_column($data, 'program-line');
 		$programLines = array_unique($programLines);
@@ -143,7 +147,6 @@ class ImportCommand extends Command
 		$programLines = array_flip($programLines);
 		$map = [];
 
-		/** @var $line ProgramLine */
 		foreach ($lines as $line) {
 			if (isset($programLines[$line->getTitle()])) {
 				unset($programLines[$line->getTitle()]);
@@ -166,7 +169,7 @@ class ImportCommand extends Command
 	 * @param \Model\Annotation $annotation
 	 * @param mixed[] $programLinesMap
 	 */
-	private function hydrateAnnotation(array $newData, Annotation $annotation, array $programLinesMap)
+	private function hydrateAnnotation(array $newData, Annotation $annotation, array $programLinesMap): void
 	{
 		$annotation->setPid($newData['pid']);
 		if (isset($newData['author']) && $newData['author']) {
@@ -183,13 +186,18 @@ class ImportCommand extends Command
 		if (isset($newData['location']) && $newData['location']) {
 			$annotation->setLocation($newData['location']);
 		}
-		$annotation->setType(isset($newData['type']) ? $newData['type'] : 'P');
+		$annotation->setType($newData['type'] ?? 'P');
 		$annotation->setProgramLine($programLinesMap[$newData['program-line']]);
 		$annotation->setDeleted(false);
 		$annotation->setDeletedAt(null);
 	}
 
-	private function isAnnotationChanged($newData, $annotation)
+	/**
+	 * @param mixed[] $newData
+	 * @param \Model\Annotation $annotation
+	 * @return bool
+	 */
+	private function isAnnotationChanged(array $newData, Annotation $annotation): bool
 	{
 		foreach ($newData as $key => $item) {
 			if ($key === 'pid') {

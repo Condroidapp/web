@@ -1,6 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
+
 namespace Model;
 
+use Doctrine\ORM\Query;
 use Kdyby\Doctrine\QueryObject;
 use Kdyby\Persistence\Queryable;
 use Nette\Utils\Strings;
@@ -14,13 +16,13 @@ use Nette\Utils\Strings;
 class BasicFetchByQuery extends QueryObject
 {
 
-	/** @var array conditions */
+	/** @var mixed[] conditions */
 	private $conditions;
 
 	/**
 	 * @param mixed[] $conditions
 	 */
-	public function __construct($conditions)
+	public function __construct(array $conditions)
 	{
 		parent::__construct();
 		$this->conditions = $conditions;
@@ -28,9 +30,9 @@ class BasicFetchByQuery extends QueryObject
 
 	/**
 	 * @param \Kdyby\Doctrine\EntityRepository|\Kdyby\Persistence\Queryable $repository
-	 * @return self
+	 * @return \Doctrine\ORM\Query
 	 */
-	protected function doCreateQuery(Queryable $repository)
+	protected function doCreateQuery(Queryable $repository): Query
 	{
 		$where = [];
 		$params = [];
@@ -44,6 +46,7 @@ class BasicFetchByQuery extends QueryObject
 			$params[] = $value;
 		}
 		/** @var \Kdyby\Doctrine\EntityRepository $repository */
+		$repository = $repository;
 		$className = $repository->getClassName();
 		$q = $repository->createQuery('SELECT b FROM ' . $className . ' b ' . (!empty($where) ? ' WHERE ' . implode(' AND ', $where) : ''))
 			->setParameters($params);

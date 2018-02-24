@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace AdminModule;
 
@@ -10,11 +10,13 @@ use Nette\Security\AuthenticationException;
 class SignPresenter extends BasePresenter
 {
 
-	public function actionIn($key)
+	public function actionIn($key): void
 	{
-		if ($this->getUser()->isLoggedIn()) {
-			$this->redirect(':Admin:Dashboard:');
+		if (!$this->getUser()->isLoggedIn()) {
+			return;
 		}
+
+		$this->redirect(':Admin:Dashboard:');
 	}
 
 	protected function createComponentSignInForm(IBaseFormFactory $factory)
@@ -36,7 +38,7 @@ class SignPresenter extends BasePresenter
 		return $form;
 	}
 
-	public function signInFormSucceeded(BaseForm $form)
+	public function signInFormSucceeded(BaseForm $form): void
 	{
 		$values = $form->getValues();
 
@@ -59,7 +61,7 @@ class SignPresenter extends BasePresenter
 		$this->redirect(':Admin:Dashboard:');
 	}
 
-	public function actionOut()
+	public function actionOut(): void
 	{
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');

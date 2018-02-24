@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model;
 
@@ -41,66 +41,42 @@ class LogRecord extends BaseEntity
 	 */
 	private $time;
 
-	/**
-	 * @param string $message
-	 */
-	public function setMessage($message)
+	public function setMessage(string $message): void
 	{
 		$this->message = $message;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getMessage()
+	public function getMessage(): string
 	{
 		return $this->message;
 	}
 
-	/**
-	 * @param string $severity
-	 */
-	public function setSeverity($severity)
+	public function setSeverity(string $severity): void
 	{
 		$this->severity = $severity;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getSeverity()
+	public function getSeverity(): string
 	{
 		return $this->severity;
 	}
 
-	/**
-	 * @param string $tag
-	 */
-	public function setTag($tag)
+	public function setTag(string $tag): void
 	{
 		$this->tag = $tag;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getTag()
+	public function getTag(): string
 	{
 		return $this->tag;
 	}
 
-	/**
-	 * @param float $time
-	 */
-	public function setTime($time)
+	public function setTime(float $time): void
 	{
 		$this->time = $time;
 	}
 
-	/**
-	 * @return float
-	 */
-	public function getTime()
+	public function getTime(): float
 	{
 		return $this->time;
 	}

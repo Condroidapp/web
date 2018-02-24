@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -11,14 +12,14 @@ namespace Model\Commands;
 interface ILogger
 {
 
-	const INFO = 'INFO';
-	const WARNING = 'WARNING';
-	const ERROR = 'ERROR';
+	public const INFO = 'INFO';
+	public const WARNING = 'WARNING';
+	public const ERROR = 'ERROR';
 
-	public function start($message);
+	public function start(string $message): void;
 
-	public function end();
+	public function end(): void;
 
-	public function log($message, $severity = self::INFO);
+	public function log(string $message, string $severity = self::INFO): void;
 
 }

@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace FrontModule;
 
+use Smasty\Components\Twitter\Control;
 use Smasty\Components\Twitter\TwitterControlFactory;
 
 class HomepagePresenter extends BasePresenter
@@ -16,7 +17,7 @@ class HomepagePresenter extends BasePresenter
 		$this->twitterControlFactory = $twitterControlFactory;
 	}
 
-	public function createComponentTwitter()
+	public function createComponentTwitter(): Control
 	{
 		return $this->twitterControlFactory->create([
 			'screen_name' => 'Condroid_CZ',

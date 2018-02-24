@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App;
 
@@ -12,7 +12,7 @@ class ErrorPresenter extends BasePresenter
 	/**
 	 * @param mixed $exception
 	 */
-	public function renderDefault($exception)
+	public function renderDefault($exception): void
 	{
 		if ($this->isAjax()) { // AJAX request? Just note this error in payload.
 			$this->payload->error = true;

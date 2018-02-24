@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -11,7 +12,7 @@ namespace App\Components\Forms;
 class EventFormFactory
 {
 
-	public function create()
+	public function create(): EntityForm
 	{
 		$form = new EntityForm();
 

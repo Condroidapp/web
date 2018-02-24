@@ -1,23 +1,22 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Tools;
 
 use InvalidArgumentException;
-use Nette;
 use Nette\InvalidStateException;
 use Nette\StaticClassException;
 
-class Helpers extends Nette\Object
+class Helpers
 {
 
 	/**
 	 * Static class - cannot be instantiated.
 	 *
-	 * @throws StaticClassException
+	 * @throws \Nette\StaticClassException
 	 */
 	final public function __construct()
 	{
-		throw new StaticClassException;
+		throw new StaticClassException();
 	}
 
 	/**
@@ -27,7 +26,7 @@ class Helpers extends Nette\Object
 	 * @param string $key
 	 * @return array collection mapped with key
 	 */
-	public static function mapAssoc($collection, $key)
+	public static function mapAssoc(array $collection, string $key): array
 	{
 		$arr = [];
 		foreach ($collection as $item) {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace AdminModule;
 
@@ -8,7 +8,7 @@ use Nette\Application;
 class SecuredPresenter extends BasePresenter
 {
 
-	public function checkRequirements($element)
+	public function checkRequirements($element): void
 	{
 		try {
 			parent::checkRequirements($element);

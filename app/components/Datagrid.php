@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -11,7 +12,7 @@ namespace App;
 class Datagrid extends \Nextras\Datagrid\Datagrid
 {
 
-	protected function attached($presenter)
+	protected function attached($presenter): void
 	{
 		parent::attached($presenter);
 

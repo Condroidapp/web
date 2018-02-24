@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Components\Forms;
 
@@ -16,27 +16,33 @@ use Nette\Application\UI\Form;
 class EntityForm extends BaseForm
 {
 
+	/** @var \Model\BaseEntity */
 	private $entity;
 
+	/** @var string */
 	private $successFlashMessage = 'Data byla úspěšně uložena.';
 
+	/** @var mixed[] */
 	private $redirect;
 
+	/** @var \Closure[]|callable */
 	public $onBind = [];
 
+	/** @var \Closure[]|callable */
 	public $onHandle = [];
 
+	/** @var \Closure[]|callable */
 	public $onComplete = [];
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->onSuccess[] = function (Form $form) {
+		$this->onSuccess[] = function (Form $form): void {
 			$this->handler($form);
 		};
 	}
 
-	public function bindEntity($entity)
+	public function bindEntity(BaseEntity $entity): void
 	{
 		$this->entity = $entity;
 
@@ -67,17 +73,19 @@ class EntityForm extends BaseForm
 
 			$input->setDefaultValue($value);
 		}
-		if ($this->onBind) {
-			$this->onBind($entity);
+		if (!$this->onBind) {
+			return;
 		}
+
+		$this->onBind($entity);
 	}
 
-	public function getEntity()
+	public function getEntity(): BaseEntity
 	{
 		return $this->entity;
 	}
 
-	public function handler(Form $form)
+	public function handler(Form $form): void
 	{
 		if (!$form->isValid()) {
 			return;
@@ -100,17 +108,21 @@ class EntityForm extends BaseForm
 		}
 	}
 
-	public function setSuccessFlashMessage($successFlashMessage)
+	public function setSuccessFlashMessage(string $successFlashMessage): void
 	{
 		$this->successFlashMessage = $successFlashMessage;
 	}
 
-	public function setRedirect()
+	public function setRedirect(): void
 	{
 		$this->redirect = func_get_args();
 	}
 
-	public function processForm($entity, $values)
+	/**
+	 * @param \Model\BaseEntity $entity
+	 * @param iterable $values
+	 */
+	public function processForm(BaseEntity $entity, iterable $values): void
 	{
 		foreach ($values as $key => $value) {
 			$method = 'set' . ucfirst($key);
@@ -118,12 +130,9 @@ class EntityForm extends BaseForm
 		}
 	}
 
-	private function hasProperty($entity, $name)
+	private function hasProperty(BaseEntity $entity, string $name): bool
 	{
-		if ($entity instanceof \Kdyby\Doctrine\Entities\BaseEntity || $entity instanceof \Nette\Object) {
-			return isset($entity->$name);
-		}
-		return false;
+		return isset($entity->$name);
 	}
 
 }

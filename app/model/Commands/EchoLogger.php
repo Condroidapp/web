@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -11,7 +12,7 @@ namespace Model\Commands;
 class EchoLogger implements ILogger
 {
 
-	private function out($m)
+	private function out(string $m): void
 	{
 		if ($m === PHP_EOL) {
 			echo PHP_EOL;
@@ -21,7 +22,7 @@ class EchoLogger implements ILogger
 		echo '[' . date('Y-m-d H:i:s') . '] ' . $m . PHP_EOL;
 	}
 
-	public function start($message)
+	public function start(string $message): void
 	{
 		$this->out(PHP_EOL);
 		$this->out('****** STARTING ******');
@@ -31,13 +32,13 @@ class EchoLogger implements ILogger
 		$this->out('**********************');
 	}
 
-	public function end()
+	public function end(): void
 	{
 		$this->out('****** END ***********');
 		$this->out(PHP_EOL);
 	}
 
-	public function log($message, $severity = self::INFO)
+	public function log(string $message, string $severity = self::INFO): void
 	{
 		$this->out($severity . ': ' . $message);
 	}

@@ -11,15 +11,16 @@ use Nette,
 	Nette\Http\Url,
 	Nette\Utils\Html,
 	Nette\Utils\Strings;
-
+use Nette\SmartObject;
 
 /**
  * TwitterControl tweet loader interface.
  *
  * @author Martin Srank, http://smasty.net
  */
-class StandardFormatter extends Nette\Object implements IFormatter {
+class StandardFormatter implements IFormatter {
 
+	use SmartObject;
 
 	public function formatTweet(\stdClass $tweet){
 		if(!isset($tweet->entities))

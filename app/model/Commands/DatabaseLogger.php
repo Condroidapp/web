@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model\Commands;
 
@@ -8,6 +8,7 @@ use Model\LogRecord;
 class DatabaseLogger implements ILogger
 {
 
+	/** @var mixed[] */
 	private $records = [];
 
 	/** @var \Doctrine\ORM\EntityManager */
@@ -18,23 +19,23 @@ class DatabaseLogger implements ILogger
 		$this->entityManager = $entityManager;
 	}
 
-	public function start($message)
+	public function start(string $message): void
 	{
 		$this->addRecord($message, 'START', self::INFO);
 	}
 
-	public function end()
+	public function end(): void
 	{
 		$this->addRecord('End', 'END', self::INFO);
 		$this->entityManager->flush($this->records);
 	}
 
-	public function log($message, $severity = self::INFO)
+	public function log(string $message, string $severity = self::INFO): void
 	{
 		$this->addRecord($message, '', $severity);
 	}
 
-	private function addRecord($message, $tag, $severity)
+	private function addRecord(string $message, string $tag, string $severity): void
 	{
 		$record = new LogRecord();
 

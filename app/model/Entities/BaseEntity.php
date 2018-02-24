@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Nette\Object;
+use Nette\SmartObject;
 
 /**
  * Base Entity parent class
@@ -11,8 +11,10 @@ use Nette\Object;
  * @author Jan Langer <langeja1@fit.cvut.cz>
  * @property-read int $id
  */
-abstract class BaseEntity extends Object
+abstract class BaseEntity
 {
+
+	use SmartObject;
 
 	/**
 	 * @ORM\Id @ORM\Column(type="integer")
@@ -25,10 +27,7 @@ abstract class BaseEntity extends Object
 	{
 	}
 
-	/**
-	 * @return int
-	 */
-	final public function getId()
+	final public function getId(): int
 	{
 		return $this->id;
 	}

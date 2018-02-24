@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -23,7 +24,7 @@ class EventGridFactory
 		$this->em = $em;
 	}
 
-	public function create()
+	public function create(): Datagrid
 	{
 		$grid = new Datagrid();
 

@@ -1,19 +1,18 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Model\Commands;
 
 use App\InvalidProgramNodeException;
-use Nette\Object;
 use Nette\Utils\Strings;
 
-class FeedParser extends Object
+class FeedParser
 {
 
+	/** @var \Closure[] */
 	public $onError = [];
 
+	/** @var \Closure[] */
 	public $onLog = [];
-
-	private $programIds = [];
 
 	/** @var \Model\Commands\FileDownloader */
 	private $downloader;
@@ -23,9 +22,12 @@ class FeedParser extends Object
 		$this->downloader = $downloader;
 	}
 
-	public function parseXML($feedUrl)
+	/**
+	 * @param string $feedUrl
+	 * @return mixed[]
+	 */
+	public function parseXML(string $feedUrl): array
 	{
-		$this->programIds = [];
 		$dom = new \DOMDocument();
 		$file = $this->downloader->downloadFile($feedUrl);
 		$return = $dom->load($file);
@@ -34,14 +36,14 @@ class FeedParser extends Object
 			$this->log('Feed data source load failed!', ILogger::ERROR);
 			$this->onError('DOM Load Failed: ' . $error['message'], 1);
 
-			return;
+			return [];
 		}
 		$this->log('Feed data source loaded');
 		$this->log('Processing XML');
 		$feedData = [];
 		foreach ($dom->documentElement->childNodes as $node) {
 			try {
-				if ($node->nodeType == XML_ELEMENT_NODE) {
+				if ($node->nodeType === XML_ELEMENT_NODE) {
 					$feedData[] = $this->parseProgramNode($node);
 				}
 			} catch (InvalidProgramNodeException $e) {
@@ -55,32 +57,42 @@ class FeedParser extends Object
 		return $feedData;
 	}
 
-	private function parseProgramNode(\DOMNode $node)
+	/**
+	 * @param \DOMNode $node
+	 * @return mixed[]
+	 */
+	private function parseProgramNode(\DOMNode $node): array
 	{
 		$data = [];
 		foreach ($node->childNodes as $n) {
-			if ($n->nodeType == XML_ELEMENT_NODE) {
-				$value = $this->sanitizeValue($n->nodeValue, $n->nodeName);
-				if ($this->validateValue($n->nodeName, $value, $n)) {
-					$data[$n->nodeName] = $value;
-				}
+			if ($n->nodeType !== XML_ELEMENT_NODE) {
+				continue;
 			}
+
+			$value = $this->sanitizeValue($n->nodeValue, $n->nodeName);
+			if (!$this->validateValue($n->nodeName, $value, $n)) {
+				continue;
+			}
+
+			$data[$n->nodeName] = $value;
 		}
 		$this->validateNode($data);
 
 		return $data;
 	}
 
-	private function validateValue($name, $value, \DOMNode $node)
+	/**
+	 * @param string $name
+	 * @param mixed $value
+	 * @param \DOMNode $node
+	 * @return bool
+	 */
+	private function validateValue(string $name, $value, \DOMNode $node): bool
 	{
 		switch ($name) {
 			case 'pid':
 				if (!ctype_digit($value)) {
 					$this->onError(sprintf('Line %d - Expected PID value to be numeric, %s given.', $node->getLineNo(), $value), 101);
-				}
-				if (in_array($value, $this->programIds)) {
-					$this->onError(sprintf('Line %d - Program ID is not unique throughout the document.', $node->getLineNo()), 102);
-					throw new InvalidProgramNodeException();
 				}
 				break;
 			case 'author':
@@ -117,22 +129,27 @@ class FeedParser extends Object
 		return true;
 	}
 
-	private function validateNode($data)
+	/**
+	 * @param mixed[] $data
+	 */
+	private function validateNode(array $data): void
 	{
-		if ((isset($data['start-time']) || isset($data['end-time'])) && ($data['start-time'] === null || $data['end-time'] === null)) {
-			$this->onError('PID ' . $data['pid'] . ' - When you set start or end time, the other one has to be set too.', 107);
+		if (!(isset($data['start-time']) || isset($data['end-time'])) || ($data['start-time'] !== null || $data['end-time'] !== null)) {
+			return;
 		}
+
+		$this->onError('PID ' . $data['pid'] . ' - When you set start or end time, the other one has to be set too.', 107);
 	}
 
-	private function log($message, $severity = ILogger::INFO)
+	private function log(string $message, string $severity = ILogger::INFO): void
 	{
 		$this->onLog($message, $severity);
 	}
 
-	private function sanitizeValue($nodeValue, $name)
+	private function sanitizeValue(string $nodeValue, string $name): ?string
 	{
 		$value = Strings::trim($nodeValue);
-		if ($value == '') {
+		if ($value === '') {
 			return null;
 		}
 		if (in_array($name, ['start-time', 'end-time'])) {

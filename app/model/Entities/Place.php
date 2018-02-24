@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types = 1);
+
 /**
  * Created by PhpStorm.
  * User: Jan
@@ -29,49 +30,49 @@ class Place extends BaseEntity implements JsonSerializable
 
 	/**
 	 * @ORM\Column(nullable=true)
-	 * @var
+	 * @var string|null
 	 */
 	private $description;
 
 	/**
 	 * @ORM\Column(type="json_array", nullable=true)
-	 * @var string
+	 * @var string[]|null
 	 */
 	private $hours;
 
 	/**
 	 * @ORM\Column(type="integer", nullable=true)
-	 * @var int
+	 * @var int|null
 	 */
 	private $sort;
 
 	/**
 	 * @ORM\Column(nullable=true, nullable=true)
-	 * @var
+	 * @var string|null
 	 */
 	private $category;
 
 	/**
 	 * @ORM\Column(type="integer", nullable=true)
-	 * @var int
+	 * @var int|null
 	 */
 	private $categorySort;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="Event")
-	 * @var Event
+	 * @var \Model\Event
 	 */
 	private $event;
 
 	/**
 	 * @ORM\Column(type="simple_array", nullable=true)
-	 * @var
+	 * @var float[]|null
 	 */
 	private $gps;
 
 	/**
 	 * @ORM\Column(nullable=true)
-	 * @var
+	 * @var string|null
 	 */
 	private $address;
 
@@ -93,12 +94,15 @@ class Place extends BaseEntity implements JsonSerializable
 		$this->timestamp = new \DateTime();
 	}
 
-	public function jsonSerialize()
+	/**
+	 * @return mixed[]
+	 */
+	public function jsonSerialize(): array
 	{
 		$data = [
 			'name' => $this->name,
 			'description' => $this->description,
-			'gps' => $this->gps ? ['lat' => (float) $this->gps[0], 'lon' => (float) $this->gps[1]] : null,
+			'gps' => $this->gps ? ['lat' => $this->gps[0], 'lon' => $this->gps[1]] : null,
 			'sort' => $this->sort,
 			'category' => $this->category,
 			'categorySort' => $this->categorySort,
@@ -111,7 +115,11 @@ class Place extends BaseEntity implements JsonSerializable
 		return $data;
 	}
 
-	private function parseHours($hours)
+	/**
+	 * @param string[] $hours
+	 * @return string[]|null
+	 */
+	private function parseHours(array $hours): ?array
 	{
 		if (empty($hours['type'])) {
 			return null;
@@ -128,34 +136,25 @@ class Place extends BaseEntity implements JsonSerializable
 		return $hours;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getDescription()
+	public function getDescription(): string
 	{
 		return $this->description;
 	}
 
 	/**
-	 * @return string
+	 * @return string[]|null
 	 */
-	public function getHours()
+	public function getHours(): ?array
 	{
 		return $this->hours;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getSort()
+	public function getSort(): int
 	{
 		return $this->sort;
 	}
@@ -168,18 +167,12 @@ class Place extends BaseEntity implements JsonSerializable
 		return $this->category;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getCategorySort()
+	public function getCategorySort(): int
 	{
 		return $this->categorySort;
 	}
 
-	/**
-	 * @return Event
-	 */
-	public function getEvent()
+	public function getEvent(): Event
 	{
 		return $this->event;
 	}
@@ -200,26 +193,17 @@ class Place extends BaseEntity implements JsonSerializable
 		return $this->address;
 	}
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getTimestamp()
+	public function getTimestamp(): \DateTime
 	{
 		return $this->timestamp;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getUrl()
+	public function getUrl(): string
 	{
 		return $this->url;
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function setName($name)
+	public function setName(string $name): void
 	{
 		$this->name = $name;
 	}
@@ -227,23 +211,20 @@ class Place extends BaseEntity implements JsonSerializable
 	/**
 	 * @param mixed $description
 	 */
-	public function setDescription($description)
+	public function setDescription($description): void
 	{
 		$this->description = $description;
 	}
 
 	/**
-	 * @param string $hours
+	 * @param string[]|null $hours
 	 */
-	public function setHours($hours)
+	public function setHours(?array $hours): void
 	{
 		$this->hours = $hours;
 	}
 
-	/**
-	 * @param integer $sort
-	 */
-	public function setSort($sort)
+	public function setSort(int $sort): void
 	{
 		$this->sort = $sort;
 	}
@@ -251,23 +232,17 @@ class Place extends BaseEntity implements JsonSerializable
 	/**
 	 * @param mixed $category
 	 */
-	public function setCategory($category)
+	public function setCategory($category): void
 	{
 		$this->category = $category;
 	}
 
-	/**
-	 * @param integer $categorySort
-	 */
-	public function setCategorySort($categorySort)
+	public function setCategorySort(int $categorySort): void
 	{
 		$this->categorySort = $categorySort;
 	}
 
-	/**
-	 * @param Event $event
-	 */
-	public function setEvent($event)
+	public function setEvent(Event $event): void
 	{
 		$this->event = $event;
 	}
@@ -275,7 +250,7 @@ class Place extends BaseEntity implements JsonSerializable
 	/**
 	 * @param mixed $gps
 	 */
-	public function setGps($gps)
+	public function setGps($gps): void
 	{
 		$this->gps = $gps;
 	}
@@ -283,23 +258,17 @@ class Place extends BaseEntity implements JsonSerializable
 	/**
 	 * @param mixed $address
 	 */
-	public function setAddress($address)
+	public function setAddress($address): void
 	{
 		$this->address = $address;
 	}
 
-	/**
-	 * @param \DateTime $timestamp
-	 */
-	public function setTimestamp($timestamp)
+	public function setTimestamp(\DateTime $timestamp): void
 	{
 		$this->timestamp = $timestamp;
 	}
 
-	/**
-	 * @param string $url
-	 */
-	public function setUrl($url)
+	public function setUrl(string $url): void
 	{
 		$this->url = $url;
 	}

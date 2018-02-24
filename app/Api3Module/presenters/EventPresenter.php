@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Api3Module;
 
@@ -23,7 +23,7 @@ class EventPresenter extends BasePresenter
 		$this->apiLogger = $apiLogger;
 	}
 
-	public function actionDefault($id = null)
+	public function actionDefault($id = null): void
 	{
 		$condition = ['active' => 1];
 		if ($id) {
@@ -36,7 +36,7 @@ class EventPresenter extends BasePresenter
 		}
 
 		$data = [];
-		/** @var $event Event */
+		/** @var \Model\Event $event */
 		foreach ($events as $event) {
 			$gps = $event->getGps();
 			$data[] = [

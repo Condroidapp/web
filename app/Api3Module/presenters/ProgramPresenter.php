@@ -1,9 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Api3Module;
 
 use FrontModule\BasePresenter;
 use Kdyby\Doctrine\EntityManager;
+use Kdyby\Doctrine\ResultSet;
 use Model\Annotation;
 use Model\ApiLogger;
 use Model\BasicFetchByQuery;
@@ -36,7 +37,7 @@ class ProgramPresenter extends BasePresenter
 		$this->entityManager = $entityManager;
 	}
 
-	public function actionDefault($id)
+	public function actionDefault($id): void
 	{
 		if ($id <= 0) {
 			throw new BadRequestException('No id supplied', 404);
@@ -44,7 +45,7 @@ class ProgramPresenter extends BasePresenter
 
 		$clientLastMod = new \DateTime($this->httpRequest->getHeader('If-Modified-Since', 'Sun, 13 Mar 1988 17:00:00 +0100')); // :-)
 
-		/** @var $actualLastMod \DateTime */
+		/** @var \DateTime $actualLastMod */
 		$actualLastMod = $this->entityManager->getRepository(Annotation::class)->fetchOne(new AnnotationLastMod($id))['timestamp'];
 
 		$data = null;
@@ -73,18 +74,18 @@ class ProgramPresenter extends BasePresenter
 
 		$annotationRepository = $this->entityManager->getRepository(Annotation::class);
 		$data = [
-			'add' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['createdAt > ?' => $clientLastMod])))),
-			'change' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['createdAt <= ?' => $clientLastMod])))),
+			'add' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['deleted' => false, 'createdAt > ?' => $clientLastMod])))),
+			'change' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['deleted' => false, 'createdAt <= ?' => $clientLastMod])))),
 			'delete' => $this->getJsonData($annotationRepository->fetch(new BasicFetchByQuery(array_merge($query, ['deleted' => true, 'deletedAt > ?' => $clientLastMod])))),
 		];
 		$this->sendJson($data);
 	}
 
 	/**
-	 * @param Annotation[]|\Traversable $annotations
+	 * @param \Model\Annotation[]|\Kdyby\Doctrine\ResultSet $annotations
 	 * @return array
 	 */
-	private function getJsonData(\Traversable $annotations)
+	private function getJsonData(ResultSet $annotations): array
 	{
 		$data = [];
 

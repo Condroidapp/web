@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace App\Components\grids;
 
@@ -11,7 +11,7 @@ use Nette\Utils\Paginator;
 class LogGridFactory
 {
 
-	/** @var EntityManager */
+	/** @var \Doctrine\ORM\EntityManager */
 	protected $em;
 
 	public function __construct(EntityManager $em)
@@ -19,7 +19,7 @@ class LogGridFactory
 		$this->em = $em;
 	}
 
-	public function create()
+	public function create(): Datagrid
 	{
 		$grid = new Datagrid();
 
