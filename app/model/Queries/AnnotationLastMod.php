@@ -10,10 +10,10 @@ use Model\Event;
 class AnnotationLastMod extends QueryObject
 {
 
-	/** @var \Model\Event */
+	/** @var int */
 	private $event;
 
-	public function __construct(Event $event)
+	public function __construct(int $event)
 	{
 		parent::__construct();
 		$this->event = $event;

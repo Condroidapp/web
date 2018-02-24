@@ -46,7 +46,7 @@ class ProgramPresenter extends BasePresenter
 		$clientLastMod = new \DateTime($this->httpRequest->getHeader('If-Modified-Since', 'Sun, 13 Mar 1988 17:00:00 +0100')); // :-)
 
 		/** @var \DateTime $actualLastMod */
-		$actualLastMod = $this->entityManager->getRepository(Annotation::class)->fetchOne(new AnnotationLastMod($id))['timestamp'];
+		$actualLastMod = $this->entityManager->getRepository(Annotation::class)->fetchOne(new AnnotationLastMod((int) $id))['timestamp'];
 
 		$data = null;
 
