@@ -10,14 +10,10 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     events: Kdyby\Events\DI\EventsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
-    newrelic: Quinix\NewRelic\DI\Extension
     monolog: Kdyby\Monolog\DI\MonologExtension
 
 console:
     url: http://condroid.fan-project.com/
-
-newrelic:
-    appName: condroid.fan-project.com
 
 monolog:
     name: condroid.server
