@@ -136,17 +136,26 @@ class FeedParser
 			case 'author':
 				if ($value === '' || $value === null) {
 					$this->onError(sprintf('Line %d - Author should filled.', $node->getLineNo()), 103);
+				} elseif (Strings::length($value) > 255) {
+					$this->onCriticalError(sprintf('Line %d - Data too long for element author (max is 255). Entry ignored.', $node->getLineNo()), 105);
+					throw new InvalidProgramNodeException();
 				}
 				break;
 			case 'title':
 				if ($value === '' || $value === null) {
 					$this->onCriticalError(sprintf('Line %d - Title has to be filled. Entry ignored.', $node->getLineNo()), 104);
 					throw new InvalidProgramNodeException();
+				} elseif (Strings::length($value) > 255) {
+					$this->onCriticalError(sprintf('Line %d - Data too long for element title (max is 255). Entry ignored.', $node->getLineNo()), 105);
+					throw new InvalidProgramNodeException();
 				}
 				break;
 			case 'program-line':
 				if ($value === '' || $value === null) {
 					$this->onError(sprintf('Line %d - Program line should be filled.', $node->getLineNo()), 105);
+				} elseif (Strings::length($value) > 255) {
+					$this->onCriticalError(sprintf('Line %d - Data too long for element program-line (max is 255). Entry ignored.', $node->getLineNo()), 105);
+					throw new InvalidProgramNodeException();
 				}
 				break;
 			case 'start-time':
@@ -158,6 +167,11 @@ class FeedParser
 			case 'type':
 			case 'length':
 			case 'location':
+				if (Strings::length($value) > 255) {
+					$this->onCriticalError(sprintf('Line %d - Data too long for element %s (max is 255). Entry ignored.', $node->getLineNo(), $name), 105);
+					throw new InvalidProgramNodeException();
+				}
+				break;
 			case 'annotation':
 				break;
 			default:
