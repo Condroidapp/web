@@ -25,8 +25,8 @@ class ApiLogger
 	{
 		$this->entityManager = $entityManager;
 
-		$header = trim($httpRequest->getHeader('X-Device-Info', null));
-		if ($header === null) {
+		$header = trim($httpRequest->getHeader('X-Device-Info', ''));
+		if ($header === '') {
 			return;
 		}
 
@@ -97,7 +97,7 @@ class ApiLogger
 			$this->entityManager->persist($entity);
 		}
 		$entity->setLastContact(new \DateTime());
-		$entity->setLastIP($_SERVER['REMOTE_ADDR'] ?? null);
+		$entity->setLastIP($_SERVER['REMOTE_ADDR'] ?? '');
 
 		return $entity;
 	}
