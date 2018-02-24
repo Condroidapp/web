@@ -263,6 +263,10 @@ class Annotation extends BaseEntity
 		return $this->deleted;
 	}
 
+	/**
+	 * @ORM\PrePersist
+	 * @ORM\PreUpdate
+	 */
 	public function updateTimestamp(): void
 	{
 		$this->timestamp = new \DateTime();
