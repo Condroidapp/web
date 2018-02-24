@@ -55,7 +55,9 @@ class BaseForm extends AppForm
 			return;
 		}
 
-		$this->getPresenter()->flashMessage($message, BasePresenter::FLASH_ERROR);
+		/** @var \Nette\Application\UI\Presenter $presenter */
+		$presenter = $this->getPresenter();
+		$presenter->flashMessage($message, BasePresenter::FLASH_ERROR);
 	}
 
 	/**

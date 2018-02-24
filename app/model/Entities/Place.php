@@ -116,10 +116,10 @@ class Place extends BaseEntity implements JsonSerializable
 	}
 
 	/**
-	 * @param string[] $hours
-	 * @return string[]|null
+	 * @param string[]|null $hours
+	 * @return mixed[]|null
 	 */
-	private function parseHours(array $hours): ?array
+	private function parseHours(?array $hours): ?array
 	{
 		if (empty($hours['type'])) {
 			return null;
@@ -141,7 +141,7 @@ class Place extends BaseEntity implements JsonSerializable
 		return $this->name;
 	}
 
-	public function getDescription(): string
+	public function getDescription(): ?string
 	{
 		return $this->description;
 	}
@@ -154,7 +154,7 @@ class Place extends BaseEntity implements JsonSerializable
 		return $this->hours;
 	}
 
-	public function getSort(): int
+	public function getSort(): ?int
 	{
 		return $this->sort;
 	}
@@ -167,7 +167,7 @@ class Place extends BaseEntity implements JsonSerializable
 		return $this->category;
 	}
 
-	public function getCategorySort(): int
+	public function getCategorySort(): ?int
 	{
 		return $this->categorySort;
 	}

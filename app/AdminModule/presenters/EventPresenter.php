@@ -39,6 +39,7 @@ class EventPresenter extends SecuredPresenter
 
 	public function actionDelete($id): void
 	{
+		/** @var \Model\BaseEntity $entity */
 		$entity = $this->em->getReference(Event::class, $id);
 		$this->em->remove($entity);
 		$this->em->flush($entity);

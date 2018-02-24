@@ -65,7 +65,7 @@ class Event extends BaseEntity
 	private $icon;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 *
 	 * @ORM\Column(name="dataUrl", type="string", length=255, nullable=true)
 	 */
@@ -165,12 +165,12 @@ class Event extends BaseEntity
 		$this->process = $process;
 	}
 
-	public function getYear(): int
+	public function getYear(): ?int
 	{
 		return $this->year;
 	}
 
-	public function setYear(int $year): void
+	public function setYear(?int $year): void
 	{
 		$this->year = $year;
 	}
@@ -195,22 +195,22 @@ class Event extends BaseEntity
 		$this->date = $date;
 	}
 
-	public function getUrl(): string
+	public function getUrl(): ?string
 	{
 		return $this->url;
 	}
 
-	public function setUrl(string $url): void
+	public function setUrl(?string $url): void
 	{
 		$this->url = $url;
 	}
 
-	public function getIcon(): string
+	public function getIcon(): ?string
 	{
 		return $this->icon;
 	}
 
-	public function setIcon(string $icon): void
+	public function setIcon(?string $icon): void
 	{
 		$this->icon = $icon;
 	}
@@ -225,12 +225,12 @@ class Event extends BaseEntity
 		$this->dataUrl = $dataUrl;
 	}
 
-	public function getMessage(): string
+	public function getMessage(): ?string
 	{
 		return $this->message;
 	}
 
-	public function setMessage(string $message): void
+	public function setMessage(?string $message): void
 	{
 		$this->message = $message;
 	}
@@ -255,32 +255,32 @@ class Event extends BaseEntity
 		$this->hasAnnotations = $hasAnnotations;
 	}
 
-	public function getLocationsFile(): string
+	public function getLocationsFile(): ?string
 	{
 		return $this->locationsFile;
 	}
 
-	public function setLocationsFile(string $locationsFile): void
+	public function setLocationsFile(?string $locationsFile): void
 	{
 		$this->locationsFile = $locationsFile;
 	}
 
-	public function getCheckStart(): \DateTime
+	public function getCheckStart(): ?\DateTime
 	{
 		return $this->checkStart;
 	}
 
-	public function setCheckStart(\DateTime $checkStart): void
+	public function setCheckStart(?\DateTime $checkStart): void
 	{
 		$this->checkStart = $checkStart;
 	}
 
-	public function getCheckStop(): \DateTime
+	public function getCheckStop(): ?\DateTime
 	{
 		return $this->checkStop;
 	}
 
-	public function setCheckStop(\DateTime $checkStop): void
+	public function setCheckStop(?\DateTime $checkStop): void
 	{
 		$this->checkStop = $checkStop;
 	}

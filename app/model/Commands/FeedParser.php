@@ -195,7 +195,7 @@ class FeedParser
 		if ($value === '') {
 			return null;
 		}
-		if (in_array($name, ['start-time', 'end-time'])) {
+		if (in_array($name, ['start-time', 'end-time'], true)) {
 			$value = str_replace([' ', ';', ','], '', $value);
 		}
 

@@ -6,6 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Annotations
+ * @property string $pid
+ * @property Event $event
+ * @property string $author
+ * @property string $title
+ * @property string $annotation
+ * @property string $type
+ * @property \DateTime $startTime
+ * @property \DateTime $endTime
+ * @property \DateTime $timestamp
+ * @property string $location
+ * @property ProgramLine $programLine
+ * @property boolean $deleted
  *
  * @ORM\Table(name="annotations",
  *   indexes={
@@ -256,7 +268,7 @@ class Annotation extends BaseEntity
 		$this->timestamp = new \DateTime();
 	}
 
-	public function getDeletedAt(): \DateTime
+	public function getDeletedAt(): ?\DateTime
 	{
 		return $this->deletedAt;
 	}

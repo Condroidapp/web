@@ -95,6 +95,7 @@ class EntityForm extends BaseForm
 			$this->onHandle($this->getEntity(), $values);
 			$this->processForm($this->getEntity(), $values);
 
+			/** @var \Nette\Application\UI\Presenter $presenter */
 			$presenter = $this->getPresenter();
 			if ($this->successFlashMessage) {
 				$presenter->flashMessage($this->successFlashMessage, 'success');
