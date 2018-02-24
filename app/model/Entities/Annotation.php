@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @property \DateTime $endTime
  * @property \DateTime $timestamp
  * @property string $location
- * @property ProgramLine $programLine
+ * @property ProgramLine|null $programLine
  * @property boolean $deleted
  *
  * @ORM\Table(name="annotations",
@@ -102,7 +102,7 @@ class Annotation extends BaseEntity
 	private $location;
 
 	/**
-	 * @var \Model\ProgramLine
+	 * @var \Model\ProgramLine|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="ProgramLine", fetch="EAGER", cascade={"persist"})
 	 */
@@ -203,12 +203,12 @@ class Annotation extends BaseEntity
 		return $this->pid;
 	}
 
-	public function setProgramLine(ProgramLine $programLine): void
+	public function setProgramLine(?ProgramLine $programLine): void
 	{
 		$this->programLine = $programLine;
 	}
 
-	public function getProgramLine(): ProgramLine
+	public function getProgramLine(): ?ProgramLine
 	{
 		return $this->programLine;
 	}
