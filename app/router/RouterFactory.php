@@ -22,6 +22,10 @@ class RouterFactory
 			'presenter' => 'Dashboard',
 			'action' => 'default',
 			'id' => null]);
+		$router[] = new Route('validator', [
+			'module' => 'Front',
+			'presenter' => 'Validator',
+			'action' => 'default']);
 
 		$router[] = new Route('<action>/[<id>]', [
 			'module' => 'Front',

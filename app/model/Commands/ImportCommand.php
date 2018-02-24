@@ -40,6 +40,9 @@ class ImportCommand extends Command
 		$this->feedParser->onError[] = function ($message, $code): void {
 			$this->logger->log("#$code: $message", ILogger::ERROR);
 		};
+		$this->feedParser->onCriticalError[] = function ($message, $code): void {
+			$this->logger->log("#$code: $message", ILogger::ERROR);
+		};
 		$this->feedParser->onLog[] = function ($message, $severity): void {
 			$this->logger->log($message, $severity);
 		};
@@ -71,7 +74,7 @@ class ImportCommand extends Command
 		/** @var \Model\Event[] $events */
 		foreach ($events as $event) {
 			$this->logger->start($event->getName());
-			$data = $this->feedParser->parseXML($event->getDataUrl());
+			$data = $this->feedParser->downloadAndParseXml($event->getDataUrl());
 			$this->importData($event, $data);
 			$this->logger->end();
 		}

@@ -11,7 +11,7 @@ use Nextras\Forms\Controls\DateTimePicker;
 
 //setup of default rule messages
 
-Rules::$defaultMessages = [
+Rules::$defaultMessages += [
 	NForm::PROTECTION => 'Došlo k chybě při odesílání formuláře. Zkuste to prosím znovu.',
 	NForm::EQUAL => 'Prosím vložte %s.',
 	NForm::FILLED => 'Vyplňte prosím pole %label.',

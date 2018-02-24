@@ -1,4 +1,4 @@
-/* 
+/*
   Document: style.css
   Created on: 2.6.2011, 21:58:04
   Author: Honza
@@ -12,7 +12,7 @@
 	src: local('Open Sans'), local('OpenSans'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
 }*/
 }
-/*    
+/*
   todo customize this sample style   syntax recommendation http://www.w3.org/tr/rec-css2
 */
 
@@ -75,7 +75,7 @@ a:hover {
 	float: right;
 	width: 600px;
 	margin: 95px 50px 0 0;
-        
+
 }
 .c-box {
 	overflow: hidden;
@@ -303,4 +303,10 @@ a[rel=clickable] {
 	margin: 5px 0;
 	padding: 0;
 	line-height: 34px;
+}
+input[type=submit] {
+	padding: 5px 10px;
+}
+input[type=file] {
+	padding: 5px 0px;
 }

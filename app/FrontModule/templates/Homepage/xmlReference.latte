@@ -34,12 +34,12 @@
 					<ul>
 						<li><code>&lt;programme&gt;</code> - element obalující jednotlivé pořady
 							<ul>
-								<li><code>&lt;pid&gt;</code> - ID programu. Musí zůstat unikátní i po aktualizacích.
-									Povinné.
+								<li><code>&lt;pid&gt;</code> - ID programu. Musí být unikátní v rámci akce a pro jeden pořad zůstat stejné i po změně souboru (kvůli rozpoznání změn).
+									<b>Povinné</b>.
 								</li>
-								<li><code>&lt;author&gt;</code> - Autor, Jméno, nick, cokoliv. Povinné. Obsah musí být
+								<li><code>&lt;author&gt;</code> - Autor, Jméno, nick, cokoliv. <b>Povinné.</b> Obsah musí být
 									obalený v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
-								<li><code>&lt;title&gt;</code> - Název pořadu. Povinné. Obsah musí být obalený
+								<li><code>&lt;title&gt;</code> - Název pořadu. <b>Povinné.</b> Obsah musí být obalený
 									v&nbsp;<code>&lt;![CDATA[ ]]&gt;</code></li>
 								<li><code>&lt;type&gt;</code> - Typ pořadu. Viz níže. Povinné.</li>
 								<li><code>&lt;program-line&gt;</code> - Název programové linie. Povinné. Obsah musí být
@@ -90,6 +90,8 @@
 			<p>Obsah XML zdroje není neměnný a lze nějaké smysluplné informace přidat (ubrat většinou moc ne). V případě
 				dotazů či nesnází napište :-)</p>
 
+			<h3>Kontrola XML</h3>
+			<p><a n:href=":Front:Test:default">Vámi vyrobené XML si můžete otestovat.</a></p>
 
 			<a href="#top" rel="top">nahoru &uarr;</a>
 		</div>

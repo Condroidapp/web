@@ -1,0 +1,44 @@
+{block js}
+	<script type="text/javascript">
+
+		/* $(window).load(function() {
+		 $('.sidebar').css({'position' : 'fixed', 'margin-top' : '120px'});
+		 });      */
+
+	</script>
+{/block}
+{block content}
+<div class="content">
+
+	<div class="c-box" id="add">
+		<h2>Validátor XML pro Condroid</h2>
+
+		<p>Datovým zdrojem pro Condroid je vždy XML obsahující komplatní program.
+			Jeho přesnou strukturu a význam jednotlivých prvků naleznete <a n:href=":Front:Homepage:xmlReference">na této stránce.</a></p>
+		<p>Na této stránce si můžete vámi vytvořené XML zkontrolovat před jeho zasláním.</p>
+	</div>
+	<div n:if="isset($resultCount)" class="c-box">
+		<h3>Výsledek validace</h3>
+		<p>Nalezeno {$resultCount} pořadů.</p>
+		{ifset $criticalErrors}
+			<h3>Kritické chyby</h3>
+			<p>Tyto chyby způsobí že část, nebo celý, program uvedený v XML nebude v aplikaci zobrazena.</p>
+			<ul n:inner-foreach="$criticalErrors as $m">
+				<li>{$m}</li>
+			</ul>
+		{/ifset}
+		{ifset $errors}
+		<h3>Méně závažné chyby</h3>
+		<p>Tyto chyby se týkají špatného formátování dat, neuvedení některých důležitých dat o pořadech nebo dalších informacích o testovaném souboru.</p>
+		<ul n:inner-foreach="$errors as $m">
+			<li>{$m}</li>
+		</ul>
+		{/ifset}
+	</div>
+
+	<div class="c-box">
+		{control validatorForm}
+	</div>
+
+
+</div>

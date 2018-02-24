@@ -6,7 +6,7 @@ use Nette\Application\Application;
 use Nette\Application\Request;
 use Tracy\Debugger;
 
-class ProfilingListener extends Nette\Object implements Kdyby\Events\Subscriber {
+class ProfilingListener implements Kdyby\Events\Subscriber {
     public function getSubscribedEvents() {
         return array(
             'Nette\\Application\\Application::onStartup',
