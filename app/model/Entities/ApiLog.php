@@ -3,6 +3,7 @@
 namespace Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Nette\SmartObject;
 
 /**
  * Class ApiLog
@@ -23,6 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ApiLog
 {
+	use SmartObject;
 
 	/**
 	 * @ORM\Id
